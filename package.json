@@ -1,0 +1,25 @@
+{
+  "name": "expo-three",
+  "version": "1.0.0",
+  "description": "Utilities for using THREE.js on Expo",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "github.com/expo/expo-three"
+  },
+  "keywords": [
+    "expo",
+    "three.js",
+    "graphics",
+    "opengl",
+    "gl"
+  ],
+  "author": "Nikhilesh Sigatapu",
+  "license": "MIT",
+  "peerDependencies": {
+    "three": "*"
+  }
+}
