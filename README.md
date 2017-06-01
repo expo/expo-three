@@ -36,7 +36,7 @@ a
 run `npm i -S three expo-three` to install THREE and ExpoTHREE. Then replace
 `main.js` with the following:
 
-```
+```js
 import Expo from 'expo';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
