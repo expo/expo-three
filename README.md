@@ -21,8 +21,11 @@ that draws into it.
 ### `ExpoTHREE.createTextureAsync({ asset })`
 
 Given an [`Expo.Asset`](https://docs.expo.io/versions/latest/sdk/asset.html),
-return a [`THREE.Texture`](https://threejs.org/docs/#api/textures/Texture)
-backed by that asset as an image.
+return a
+([`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) that
+will resolve with
+a) [`THREE.Texture`](https://threejs.org/docs/#api/textures/Texture) backed by
+that asset as an image.
 
 ## Example
 
