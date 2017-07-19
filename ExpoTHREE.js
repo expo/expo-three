@@ -8,7 +8,9 @@ YellowBox.ignoreWarnings(['THREE']);
 // THREE.js tries to add some event listeners to the window, for now
 // just ignore them.
 
-window.addEventListener = () => {};
+if (!window.addEventListener) {
+  window.addEventListener = () => {};
+}
 
 
 const THREE = require('three');
