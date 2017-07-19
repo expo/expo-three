@@ -1,3 +1,6 @@
+import YellowBox from 'react-native/Libraries/ReactNative/YellowBox';
+YellowBox.ignoreWarnings(['THREE']);
+
 const THREE = require('three');
 
 export const createRenderer = ({ gl, ...extra }) =>
