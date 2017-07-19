@@ -47,11 +47,6 @@ import { StyleSheet, Text, View } from 'react-native';
 const THREE = require('three');
 import ExpoTHREE from 'expo-three';
 
-// THREE warns us about some GL extensions that `Expo.GLView` doesn't support
-// yet. This is ok, most things will still work, and we'll support those
-// extensions hopefully soon.
-console.disableYellowBox = true;
-
 class App extends React.Component {
   render() {
     // Create an `Expo.GLView` covering the whole screen, tell it to call our
