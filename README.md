@@ -44,10 +44,10 @@ import Expo from 'expo';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-const THREE = require('three');
+import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
 
-class App extends React.Component {
+export default class App extends React.Component {
   render() {
     // Create an `Expo.GLView` covering the whole screen, tell it to call our
     // `_onGLContextCreate` function once it's initialized.
@@ -78,7 +78,7 @@ class App extends React.Component {
     const material = new THREE.MeshBasicMaterial({
       // NOTE: How to create an Expo-compatible THREE texture
       map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('./assets/icons/app.png')),
+        asset: Expo.Asset.fromModule(require('./assets/icons/app-icon.png')),
       }),
     });
     const cube = new THREE.Mesh(geometry, material);
@@ -100,6 +100,4 @@ class App extends React.Component {
     render();
   }
 }
-
-Expo.registerRootComponent(App);
 ````
