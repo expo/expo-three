@@ -27,6 +27,30 @@ will resolve with
 a) [`THREE.Texture`](https://threejs.org/docs/#api/textures/Texture) backed by
 that asset as an image.
 
+### `ExpoTHREE.createARCamera(arSession, width, height, near, far)`
+
+Given an `arSession` from
+`NativeModules.ExponentGLViewManager.startARSession`, return
+a
+[`THREE.PerspectiveCamera`](https://threejs.org/docs/#api/cameras/PerspectiveCamera) that
+automatically updates its view and projection matrices to reflect the AR session
+camera. `width, height` specify the dimensions of the target viewport to render
+to and `near, far` specify the near and far clipping distances respectively. The
+`THREE.PerspectiveCamera` returned has its `updateMatrixWorld` and
+`updateProjectionMatrix` methods overriden to update to the AR session's state
+automatically.
+
+### `ExpoTHREE.createARBackgroundTexture(arSession, renderer)`
+
+Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`
+and a
+`THREE.WebGLRenderer`(https://threejs.org/docs/#api/renderers/WebGLRenderer),
+return a `THREE.Texture`(https://threejs.org/docs/#api/textures/Texture) that
+reflects the live video feed of the AR session. Usually this is set as the
+`.background` property of a
+`THREE.Scene`(https://threejs.org/docs/#api/scenes/Scene) to render the video
+feed behind the scene's objects.
+
 ## Example
 
 This is based

@@ -1,6 +1,6 @@
 {
   "name": "expo-three",
-  "version": "1.0.4",
+  "version": "2.0.1",
   "description": "Utilities for using THREE.js on Expo",
   "main": "index.js",
   "scripts": {
@@ -20,6 +20,7 @@
   "author": "Nikhilesh Sigatapu",
   "license": "MIT",
   "peerDependencies": {
-    "three": "*"
+    "three": "*",
+    "react-native": "*"
   }
 }
