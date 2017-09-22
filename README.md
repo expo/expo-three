@@ -44,11 +44,11 @@ automatically.
 
 Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`
 and a
-`THREE.WebGLRenderer`(https://threejs.org/docs/#api/renderers/WebGLRenderer),
-return a `THREE.Texture`(https://threejs.org/docs/#api/textures/Texture) that
+[`THREE.WebGLRenderer`](https://threejs.org/docs/#api/renderers/WebGLRenderer),
+return a [`THREE.Texture`](https://threejs.org/docs/#api/textures/Texture) that
 reflects the live video feed of the AR session. Usually this is set as the
 `.background` property of a
-`THREE.Scene`(https://threejs.org/docs/#api/scenes/Scene) to render the video
+[`THREE.Scene`](https://threejs.org/docs/#api/scenes/Scene) to render the video
 feed behind the scene's objects.
 
 ## Example
