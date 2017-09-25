@@ -3,8 +3,8 @@ import { NativeModules } from 'react-native';
 // Ignore yellow box warnings for now since they often have to do
 // with GL extensions that we know we don't support.
 
-import YellowBox from 'react-native/Libraries/ReactNative/YellowBox';
-YellowBox.ignoreWarnings(['THREE']);
+// import YellowBox from 'react-native/Libraries/ReactNative/YellowBox';
+// YellowBox.ignoreWarnings(['THREE']);
 
 
 // THREE.js tries to add some event listeners to the window, for now
