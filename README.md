@@ -51,6 +51,16 @@ reflects the live video feed of the AR session. Usually this is set as the
 [`THREE.Scene`](https://threejs.org/docs/#api/scenes/Scene) to render the video
 feed behind the scene's objects.
 
+### `ExpoTHREE.getARLightEstimation()`
+
+Given an `arSession` from
+`NativeModules.ExponentGLViewManager.getARLightEstimation`, return a
+(`object`) the shape of which looks like:
+* [ambientIntensity](https://developer.apple.com/documentation/arkit/arlightestimate/2878308-ambientintensity): number
+ * This value ranges from 0 - 2000. 0 being very dark and 2000 being very bright.
+* [ambientColorTemperature](https://developer.apple.com/documentation/arkit/arlightestimate/2921629-ambientcolortemperature): number
+ * This value ranges from 0 - 6500. This value is in kelvins and 6500 is white.
+
 ## Example
 
 This is based

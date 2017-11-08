@@ -1,11 +1,10 @@
-import { NativeModules } from 'react-native';
+import { NativeModules } from "react-native";
 
 // Ignore yellow box warnings for now since they often have to do
 // with GL extensions that we know we don't support.
 
 // import YellowBox from 'react-native/Libraries/ReactNative/YellowBox';
 // YellowBox.ignoreWarnings(['THREE']);
-
 
 // THREE.js tries to add some event listeners to the window, for now
 // just ignore them.
@@ -14,8 +13,7 @@ if (!window.addEventListener) {
   window.addEventListener = () => {};
 }
 
-
-const THREE = require('three');
+const THREE = require("three");
 
 export const createRenderer = ({ gl, ...extra }) =>
   new THREE.WebGLRenderer({
@@ -26,9 +24,9 @@ export const createRenderer = ({ gl, ...extra }) =>
       style: {},
       addEventListener: () => {},
       removeEventListener: () => {},
-      clientHeight: gl.drawingBufferHeight,
+      clientHeight: gl.drawingBufferHeight
     },
-    context: gl,
+    context: gl
   });
 
 export const createTextureAsync = async ({ asset }) => {
@@ -39,7 +37,7 @@ export const createTextureAsync = async ({ asset }) => {
   texture.image = {
     data: asset,
     width: asset.width,
-    height: asset.height,
+    height: asset.height
   };
   texture.needsUpdate = true;
   texture.isDataTexture = true; // Forces passing to `gl.texImage2D(...)` verbatim
@@ -84,4 +82,19 @@ export const createARBackgroundTexture = (arSession, renderer) => {
   properties.__webglInit = true;
   properties.__webglTexture = new WebGLTexture(arSession.capturedImageTexture);
   return texture;
+};
+
+/** 
+ * ambientIntensity: number
+ Ambient intensity of the lighting.
+In a well lit environment, this value is close to 1000. It typically ranges from 0 (very dark) to around 2000 (very bright).
+
+ * ambientColorTemperature: number
+ The ambient color temperature of the lighting.
+ This specifies the ambient color temperature of the lighting in Kelvin (6500 corresponds to pure white).
+*/
+export const getARLightEstimation = arSession => {
+  return NativeModules.ExponentGLViewManager.getARLightEstimation(
+    arSession.sessionId
+  );
 };
