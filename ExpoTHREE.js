@@ -52,22 +52,24 @@ export const createARCamera = (arSession, width, height, near, far) => {
 
   camera.width = width;
   camera.height = height;
-  camera.aspect = width / height;
+  camera.aspect = height > 0 ? width / height : 0;
   camera.near = near;
   camera.far = far;
 
   camera.updateMatrixWorld = () => {
-    const matrices = NativeModules.ExponentGLViewManager.getARMatrices(
-      arSession.sessionId,
-      camera.width,
-      camera.height,
-      camera.near,
-      camera.far
-    );
-    if (matrices && matrices.viewMatrix) {
-      camera.matrixWorldInverse.fromArray(matrices.viewMatrix);
-      camera.matrixWorld.getInverse(camera.matrixWorldInverse);
-      camera.projectionMatrix.fromArray(matrices.projectionMatrix);
+    if (width > 0 && height > 0) {
+      const matrices = NativeModules.ExponentGLViewManager.getARMatrices(
+        arSession.sessionId,
+        camera.width,
+        camera.height,
+        camera.near,
+        camera.far
+      );
+      if (matrices && matrices.viewMatrix) {
+        camera.matrixWorldInverse.fromArray(matrices.viewMatrix);
+        camera.matrixWorld.getInverse(camera.matrixWorldInverse);
+        camera.projectionMatrix.fromArray(matrices.projectionMatrix);
+      }
     }
   };
 
