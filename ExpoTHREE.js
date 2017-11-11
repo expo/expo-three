@@ -98,3 +98,40 @@ export const getARLightEstimation = arSession => {
     arSession.sessionId
   );
 };
+
+/**
+ Feature points in the scene with respect to the frame’s origin.
+ @discussion The feature points are only provided for configurations using world tracking.
+ */
+export const getRawFeaturePoints = arSession => {
+  return NativeModules.ExponentGLViewManager.getRawFeaturePoints(
+    arSession.sessionId
+  );
+};
+
+/**
+ Enable or disable light estimation.
+ @discussion Enabled by default.
+
+ isLightEstimationEnabled
+ */
+export const enableLightEstimation = (arSession, enable) => {
+  return NativeModules.ExponentGLViewManager.enableLightEstimation(
+    arSession.sessionId,
+    enable
+  );
+};
+
+/**
+ Type of planes to detect in the scene.
+ @discussion If set, new planes will continue to be detected and updated over time. Detected planes will be added to the session as
+ ARPlaneAnchor objects. In the event that two planes are merged, the newer plane will be removed. Defaults to ARPlaneDetectionNone.
+
+ ARPlaneDetection planeDetection
+ */
+export const enablePlaneDetection = (arSession, enable) => {
+  return NativeModules.ExponentGLViewManager.enablePlaneDetection(
+    arSession.sessionId,
+    enable
+  );
+};
