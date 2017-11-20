@@ -1,0 +1,15 @@
+{
+  "name": "simple",
+  "version": "0.0.0",
+  "description": "expo-three simple example",
+  "author": "expo",
+  "private": true,
+  "main": "node_modules/expo/AppEntry.js",
+  "dependencies": {
+    "expo": "^23.0.0",
+    "react": "16.0.0",
+    "react-native":
+      "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
+    "expo-three": "file:../../"
+  }
+}
