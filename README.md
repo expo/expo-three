@@ -1,4 +1,4 @@
-![demo](demo.gif "demo")
+![demo](examples/simple/demo.gif "demo")
 
 *NOTE: GIF above looks choppy because it's a GIF, the real thing is smooth, I promise...*
 

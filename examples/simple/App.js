@@ -1,43 +1,64 @@
-import React, { Component } from 'react';
-import { Text, View, StyleSheet } from 'react-native';
-import { Constants } from 'expo';
+import Expo from 'expo';
+import React from 'react';
+import { StyleSheet, Text, View } from 'react-native';
 
+import * as THREE from 'three';
+import ExpoTHREE from 'expo-three';
 
-// You can import from local files
-import AssetExample from './components/AssetExample';
-
-// or any pure javascript modules available in npm
-import { Card } from 'react-native-elements'; // 0.17.0
-
-export default class App extends Component {
+export default class App extends React.Component {
   render() {
+    // Create an `Expo.GLView` covering the whole screen, tell it to call our
+    // `_onGLContextCreate` function once it's initialized.
     return (
-      <View style={styles.container}>
-        <Text style={styles.paragraph}>
-          Change code in the editor and watch it change on your phone!
-          Save to get a shareable url.
-        </Text>
-        <Card title="Local Modules">
-          <AssetExample />
-        </Card>
-      </View>
+      <Expo.GLView
+        style={{ flex: 1, backgroundColor: 'green' }}
+        onContextCreate={this._onGLContextCreate}
+      />
     );
   }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
-  },
-  paragraph: {
-    margin: 24,
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
-    color: '#34495e',
-  },
-});
+  // This is called by the `Expo.GLView` once it's initialized
+  _onGLContextCreate = async gl => {
+    // Based on https://threejs.org/docs/#manual/introduction/Creating-a-scene
+    // In this case we instead use a texture for the material (because textures
+    // are cool!). All differences from the normal THREE.js example are
+    // indicated with a `NOTE:` comment.
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(
+      75,
+      gl.drawingBufferWidth / gl.drawingBufferHeight,
+      0.1,
+      1000
+    );
+
+    // NOTE: How to create an `Expo.GLView`-compatible THREE renderer
+    const renderer = ExpoTHREE.createRenderer({ gl });
+    renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
+
+    const geometry = new THREE.BoxGeometry(1, 1, 1);
+    const material = new THREE.MeshBasicMaterial({
+      // NOTE: How to create an Expo-compatible THREE texture
+      map: await ExpoTHREE.createTextureAsync({
+        asset: Expo.Asset.fromModule(require('./assets/icons/app-icon.png')),
+      }),
+    });
+    const cube = new THREE.Mesh(geometry, material);
+    scene.add(cube);
+
+    camera.position.z = 5;
+
+    const render = () => {
+      requestAnimationFrame(render);
+
+      cube.rotation.x += 0.07;
+      cube.rotation.y += 0.04;
+
+      renderer.render(scene, camera);
+
+      // NOTE: At the end of each frame, notify `Expo.GLView` with the below
+      gl.endFrameEXP();
+    };
+    render();
+  };
+}
