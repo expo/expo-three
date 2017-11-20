@@ -9,12 +9,7 @@ export default class App extends React.Component {
   render() {
     // Create an `Expo.GLView` covering the whole screen, tell it to call our
     // `_onGLContextCreate` function once it's initialized.
-    return (
-      <Expo.GLView
-        style={{ flex: 1, backgroundColor: 'green' }}
-        onContextCreate={this._onGLContextCreate}
-      />
-    );
+    return <Expo.GLView style={{ flex: 1 }} onContextCreate={this._onGLContextCreate} />;
   }
 
   // This is called by the `Expo.GLView` once it's initialized
