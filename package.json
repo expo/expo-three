@@ -2,9 +2,7 @@
   "name": "expo-three",
   "version": "2.0.5",
   "description": "Utilities for using THREE.js on Expo",
-  "files": [
-    "lib"
-  ],
+  "files": ["lib"],
   "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,27 +11,19 @@
     "type": "git",
     "url": "github.com/expo/expo-three"
   },
-  "keywords": [
-    "expo",
-    "three.js",
-    "graphics",
-    "opengl",
-    "gl"
-  ],
+  "keywords": ["expo", "three.js", "graphics", "opengl", "gl"],
   "author": "Nikhilesh Sigatapu",
   "license": "MIT",
   "peerDependencies": {
     "expo": "*",
     "react": "*",
     "react-native": "*",
-    "react-native-console-time-polyfill": "^0.0.6",
-    "text-encoding": "^0.6.4",
-    "three": "^0.88.0",
-    "xmldom-qsa": "^1.0.3"
+    "three": "^0.88.0"
   },
   "devDependencies": {
     "react-native-console-time-polyfill": "^0.0.6",
     "text-encoding": "^0.6.4",
-    "three": "^0.88.0"
+    "three": "^0.88.0",
+    "xmldom-qsa": "^1.0.3"
   }
 }
