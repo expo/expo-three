@@ -3,6 +3,21 @@
 A single loader for handling three.js assets. This function wraps three.js loaders and provides a
 callback for getting Expo Assets.
 
+> **Notice**: Remember to update your `app.json` to support obscure file types!
+
+```json
+"packagerOpts": {
+  "assetExts": [
+    "dae",
+    "obj",
+    "amf"
+  ]
+}
+```
+
+----
+
+
 **Example:**
 
 ```js
