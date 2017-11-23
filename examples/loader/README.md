@@ -1,3 +1,5 @@
+![demo](./demo.gif "demo")
+
 ## expo-three loader example
 
 A single loader for handling three.js assets. This function wraps three.js loaders and provides a
