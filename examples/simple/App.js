@@ -2,8 +2,10 @@ import Expo from 'expo';
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 
-import * as THREE from 'three';
 import ExpoTHREE from 'expo-three';
+/// Import THREE without destroying global instance.
+const THREE = global.THREE || require('three');
+global.THREE = THREE;
 
 export default class App extends React.Component {
   render() {
@@ -34,9 +36,7 @@ export default class App extends React.Component {
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({
       // NOTE: How to create an Expo-compatible THREE texture
-      map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('./assets/icons/app-icon.png')),
-      }),
+      map: await ExpoTHREE.loadAsync(require('./assets/icons/app-icon.png')),
     });
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);

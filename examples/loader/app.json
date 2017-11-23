@@ -1,0 +1,43 @@
+{
+  "expo": {
+    "name": "loader",
+    "description": "expo-three loader example",
+    "slug": "expo-three-loader",
+    "sdkVersion": "23.0.0",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "primaryColor": "#cccccc",
+    "icon": "./assets/icons/app-icon.png",
+    "loading": {
+      "icon": "./assets/icons/app-icon.png",
+      "hideExponentText": false
+    },
+    "ios": {
+      "supportsTablet": true
+    },
+    "packagerOpts": {
+      "assetExts": [
+        "dae",
+        "obj",
+        "amf",
+        "3mf",
+        "3ds",
+        "jpg",
+        "assimp",
+        "fbx",
+        "pmd",
+        "vmd",
+        "ply",
+        "stl",
+        "vtk",
+        "vtp",
+        "babylon",
+        "drc",
+        "pcd",
+        "pack",
+        "bvh",
+        "x"
+      ]
+    }
+  }
+}
