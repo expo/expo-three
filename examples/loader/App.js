@@ -1,8 +1,6 @@
 import Expo from 'expo';
 import React from 'react';
 
-// import Spinner from 'react-native-loading-spinner-overlay';
-
 const THREE = global.THREE || require('three');
 global.THREE = THREE;
 
@@ -11,8 +9,6 @@ import ExpoGraphics from 'expo-graphics';
 import { Dimensions, View, Picker, PixelRatio } from 'react-native';
 
 const { scaleLongestSideToSize, alignMesh } = ExpoTHREE.utils;
-// ExpoTHREE.utils.scaleLongestSideToSize
-// ExpoTHREE.utils.alignMesh
 
 const onProgress = function(xhr) {
   if (xhr.lengthComputable) {
@@ -144,7 +140,6 @@ async function loadX() {
       }
     }
   }
-  // object = null;
 
   return { models, animates, skeletons, actions };
 }
@@ -504,33 +499,6 @@ const options = [
     },
   },
   {
-    title: 'BVH',
-    description: '',
-    extensions: ['bvh'],
-    onLoad: async ({ scene }) => {
-      const { clip, skeleton } = await loadBVH();
-      const skeletonHelper = new THREE.SkeletonHelper(skeleton.bones[0]);
-      skeletonHelper.skeleton = skeleton; // allow animation mixer to bind to SkeletonHelper directly
-
-      const boneContainer = new THREE.Group();
-      boneContainer.add(skeleton.bones[0]);
-
-      scene.add(skeletonHelper);
-      scene.add(boneContainer);
-
-      this.mixer = new THREE.AnimationMixer(skeletonHelper);
-      this.mixer
-        .clipAction(clip)
-        .setEffectiveWeight(1.0)
-        .play();
-    },
-    onRender: ({ delta }) => {
-      if (this.mixer) {
-        this.mixer.update(delta);
-      }
-    },
-  },
-  {
     title: 'OBJ with images',
     description: '',
     extensions: ['obj', 'jpg'],
@@ -695,9 +663,36 @@ const options = [
       if (this.mesh) this.mesh.rotation.y += 0.4 * delta;
     },
   },
+  {
+    title: 'BVH',
+    description: '',
+    extensions: ['bvh'],
+    onLoad: async ({ scene }) => {
+      const { clip, skeleton } = await loadBVH();
+      const skeletonHelper = new THREE.SkeletonHelper(skeleton.bones[0]);
+      skeletonHelper.skeleton = skeleton; // allow animation mixer to bind to SkeletonHelper directly
+
+      const boneContainer = new THREE.Group();
+      boneContainer.add(skeleton.bones[0]);
+
+      scene.add(skeletonHelper);
+      scene.add(boneContainer);
+
+      this.mixer = new THREE.AnimationMixer(skeletonHelper);
+      this.mixer
+        .clipAction(clip)
+        .setEffectiveWeight(1.0)
+        .play();
+    },
+    onRender: ({ delta }) => {
+      if (this.mixer) {
+        this.mixer.update(delta);
+      }
+    },
+  },
 ];
 
-class Scene extends React.Component {
+export default class Scene extends React.Component {
   loadingScene = false;
   state = {
     index: 0,
@@ -711,9 +706,7 @@ class Scene extends React.Component {
           return;
         }
 
-        this.setState({ index: itemIndex }, () => {
-          this.updateScene();
-        });
+        this.setState({ index: itemIndex }, () => this.updateScene());
       }}
     >
       {options.map((val, index) => <Picker.Item label={val.title} key={index} value={index} />)}
@@ -748,10 +741,8 @@ class Scene extends React.Component {
     // renderer
     this.renderer = ExpoTHREE.createRenderer({
       gl,
-      // precision: 'highp',
     });
     this.renderer.capabilities.maxVertexUniforms = 52502;
-
     this.renderer.setPixelRatio(scale);
     this.renderer.setSize(width / scale, height / scale);
     this.renderer.setClearColor(0x000000, 1.0);
@@ -772,11 +763,7 @@ class Scene extends React.Component {
     this.scene.background = new THREE.Color(0x999999);
     this.scene.fog = new THREE.FogExp2(0xcccccc, 0.002);
 
-    // controls
-    // this.controls = new THREE.OrbitControls(this.camera);
-
-    const grid = new THREE.GridHelper(50, 50, 0xffffff, 0x555555);
-    this.scene.add(grid);
+    this.scene.add(new THREE.GridHelper(50, 50, 0xffffff, 0x555555));
 
     this.setupLights();
   };
@@ -821,22 +808,20 @@ class Scene extends React.Component {
   };
 }
 
-export default Scene;
-
 function splitAnimation(_baseAnime, _name, _beginTime, _endTime) {
-  var animation = {};
+  let animation = {};
   animation.fps = _baseAnime.fps;
   animation.name = _name;
   animation.length = _endTime - _beginTime;
   animation.hierarchy = [];
-  for (var i = 0; i < _baseAnime.hierarchy.length; i++) {
-    var firstKey = -1;
-    var lastKey = -1;
-    var frame = {};
+  for (let i = 0; i < _baseAnime.hierarchy.length; i++) {
+    let firstKey = -1;
+    let lastKey = -1;
+    let frame = {};
     frame.name = _baseAnime.hierarchy[i].name;
     frame.parent = _baseAnime.hierarchy[i].parent;
     frame.keys = [];
-    for (var m = 1; m < _baseAnime.hierarchy[i].keys.length; m++) {
+    for (let m = 1; m < _baseAnime.hierarchy[i].keys.length; m++) {
       if (_baseAnime.hierarchy[i].keys[m].time > _beginTime) {
         if (firstKey === -1) {
           firstKey = m - 1;
@@ -851,7 +836,7 @@ function splitAnimation(_baseAnime, _name, _beginTime, _endTime) {
         break;
       }
     }
-    for (var m = 0; m < frame.keys.length; m++) {
+    for (let m = 0; m < frame.keys.length; m++) {
       frame.keys[m].time -= _beginTime;
     }
     animation.hierarchy.push(frame);
