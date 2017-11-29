@@ -198,6 +198,62 @@ async function load3DS() {
 }
 
 /// Working!
+async function loadOBJMTL() {
+ 
+  const model = {
+    'B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_D.png': require('./models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_D.png'),
+    'B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_N.png': require('./models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_N.png'),
+    'B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_S.png': require('./models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_S.png'),
+    'B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_SP.png': require('./models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_SP.png'),
+    'B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_DM_ENV.png': require('./models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_DM_ENV.png'),
+    'B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins.mtl': require('./models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins.mtl'),
+    'B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins.obj': require('./models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins.obj'),
+  };
+
+  const mesh = await ExpoTHREE.loadAsync(
+    [
+      model['B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins.obj'],
+      model['B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins.mtl'],
+    ],
+    () => {},
+    name => model[name],
+  );
+
+  mesh.traverse(async child => {
+    if (child instanceof THREE.Mesh) {
+      console.warn('child', child);
+
+      /// Smooth geometry
+      const tempGeo = new THREE.Geometry().fromBufferGeometry(child.geometry);
+      tempGeo.mergeVertices();
+      // after only mergeVertices my textrues were turning black so this fixed normals issues
+      tempGeo.computeVertexNormals();
+      tempGeo.computeFaceNormals();
+
+      child.geometry = new THREE.BufferGeometry().fromGeometry(tempGeo);
+
+      child.material.shading = THREE.SmoothShading;
+      child.material.side = THREE.FrontSide;
+ 
+
+      /// Apply other maps - maybe this is supposed to be automatic :[
+      child.material.normalMap = await ExpoTHREE.loadAsync(
+        model['B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_N.png'],
+      );
+      child.material.specularMap = await ExpoTHREE.loadAsync(
+        model['B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_S.png'],
+      );
+      child.material.envMap = await ExpoTHREE.loadAsync(
+        model['B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_DM_ENV.png'],
+      );
+    }
+  });
+
+  return mesh;
+}
+
+
+/// Working!
 async function loadObjImages() {
   //https://github.com/mrdoob/three.js/blob/4e8a8c113eedc5402445de0e90cc6226c458dd01/examples/webgl_materials_channels.html
   const obj = {
@@ -489,6 +545,22 @@ const options = [
     onLoad: async ({ scene }) => {
       const mesh = await load3DS();
       scaleLongestSideToSize(mesh, 3);
+      alignMesh(mesh, { y: 1 });
+      scene.add(mesh);
+
+      this.mesh = mesh; // Save reference for rotation
+    },
+    onRender: ({ delta }) => {
+      if (this.mesh) this.mesh.rotation.y += 0.4 * delta;
+    },
+  },
+  {
+    title: 'OBJ MTL N/S/D/ENV',
+    description: '',
+    extensions: ['obj', 'jpg', 'mtl'],
+    onLoad: async ({ scene }) => {
+      const mesh = await loadOBJMTL();
+      scaleLongestSideToSize(mesh, 1);
       alignMesh(mesh, { y: 1 });
       scene.add(mesh);
 

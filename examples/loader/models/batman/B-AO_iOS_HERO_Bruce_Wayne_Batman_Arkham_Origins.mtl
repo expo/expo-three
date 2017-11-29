@@ -1,0 +1,13 @@
+# Blender3D MTL File: 
+# Material Count: 1
+newmtl BAO_iOS_HER_BWA_ORI_B
+Ns 92.156863
+Ka 0.000000 0.000000 0.000000
+Kd 0.512000 0.512000 0.512000
+Ks 0.012500 0.012500 0.012500
+Ni 1.000000
+d 1.000000
+illum 2
+map_Kd B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_D.png
+
+
