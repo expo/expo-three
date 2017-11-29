@@ -1,11 +1,6 @@
 import Expo from 'expo';
+import ExpoTHREE, { THREE } from 'expo-three';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
-import ExpoTHREE from 'expo-three';
-/// Import THREE without destroying global instance.
-const THREE = global.THREE || require('three');
-global.THREE = THREE;
 
 export default class App extends React.Component {
   render() {

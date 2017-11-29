@@ -1,12 +1,7 @@
-import Expo from 'expo';
-import React from 'react';
-
-const THREE = global.THREE || require('three');
-global.THREE = THREE;
-
-import ExpoTHREE from 'expo-three';
 import ExpoGraphics from 'expo-graphics';
-import { Dimensions, View, Picker, PixelRatio } from 'react-native';
+import ExpoTHREE, { THREE } from 'expo-three';
+import React from 'react';
+import { Dimensions, Picker, PixelRatio, View } from 'react-native';
 
 const { scaleLongestSideToSize, alignMesh } = ExpoTHREE.utils;
 
@@ -199,7 +194,6 @@ async function load3DS() {
 
 /// Working!
 async function loadOBJMTL() {
- 
   const model = {
     'B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_D.png': require('./models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_D.png'),
     'B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_N.png': require('./models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_N.png'),
@@ -216,7 +210,7 @@ async function loadOBJMTL() {
       model['B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins.mtl'],
     ],
     () => {},
-    name => model[name],
+    name => model[name]
   );
 
   mesh.traverse(async child => {
@@ -234,24 +228,22 @@ async function loadOBJMTL() {
 
       child.material.shading = THREE.SmoothShading;
       child.material.side = THREE.FrontSide;
- 
 
       /// Apply other maps - maybe this is supposed to be automatic :[
       child.material.normalMap = await ExpoTHREE.loadAsync(
-        model['B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_N.png'],
+        model['B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_N.png']
       );
       child.material.specularMap = await ExpoTHREE.loadAsync(
-        model['B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_S.png'],
+        model['B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_S.png']
       );
       child.material.envMap = await ExpoTHREE.loadAsync(
-        model['B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_DM_ENV.png'],
+        model['B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_DM_ENV.png']
       );
     }
   });
 
   return mesh;
 }
-
 
 /// Working!
 async function loadObjImages() {
