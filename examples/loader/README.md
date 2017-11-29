@@ -47,7 +47,8 @@ const geometry = await ExpoTHREE.loadAsync(file, onProgress, assetProvider);
 
 * `ExpoTHREE.loadAsync`
   * obj
-  * ~~mtl~~
+  * mtl
+    * Problem: Some models appear to automatically reference D/N/S/ENV maps automatically - this isn't supported yet!
   * dae
   * 3ds
   * ~~3mf~~: Needs support for `JSZip`
