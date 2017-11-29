@@ -72,13 +72,13 @@ A function that will asynchronously load files based on their extension.
 - `res`: The file to load
   - `number`: Static file reference `require('./model.*')`
   - `Array<number>`: Collection of static file references `[require('./model.*')]`
-  - `string`: The Expo Asset [`localUri`](https://docs.expo.io/versions/latest/sdk/asset.html#localuri)
-  - `Array<string>`: Collection of Expo Asset [`localUri`](https://docs.expo.io/versions/latest/sdk/asset.html#localuri)s
+  - `string`: The Expo.Asset [`localUri`](https://docs.expo.io/versions/latest/sdk/asset.html#localuri)
+  - `Array<string>`: Collection of Expo.Asset [`localUri`](https://docs.expo.io/versions/latest/sdk/asset.html#localuri)s
   - ~~`Expo.Asset`~~: Not yet supported!
 
 - `onProgress`: A callback `Function` that will return a `xhr` object
 - `assetProvider`: A callback `Function` that is used to request static assets required by the model 
-  - `(assetName: string) => (Promise<number> | Promise<Expo.Asset>)`: The async `Function` should return a static asset `require('./texture.*')` or an expo asset `Expo.Asset.fromModule(require('./texture.*'))`
+  - `(assetName: string) => (Promise<number> | Promise<Expo.Asset>)`: The async `Function` should return a static asset `require('./texture.*')` or an Expo.Asset `Expo.Asset.fromModule(require('./texture.*'))`
 
 #### Supported Formats
 
