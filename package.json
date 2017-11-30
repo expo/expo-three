@@ -1,6 +1,6 @@
 {
   "name": "expo-three",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "description": "Utilities for using THREE.js on Expo",
   "files": ["lib"],
   "main": "lib/index.js",
@@ -28,6 +28,11 @@
     "react-native-console-time-polyfill": "^0.0.6",
     "text-encoding": "^0.6.4",
     "three": "^0.88.0",
+    "xmldom-qsa": "^1.0.3"
+  },
+  "dependencies": {
+    "react-native-console-time-polyfill": "^0.0.6",
+    "text-encoding": "^0.6.4",
     "xmldom-qsa": "^1.0.3"
   }
 }
