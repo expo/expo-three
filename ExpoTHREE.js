@@ -1,4 +1,4 @@
-import { NativeModules } from "react-native";
+import { NativeModules } from 'react-native';
 
 // Ignore yellow box warnings for now since they often have to do
 // with GL extensions that we know we don't support.
@@ -13,7 +13,7 @@ if (!window.addEventListener) {
   window.addEventListener = () => {};
 }
 
-const THREE = require("three");
+const THREE = require('three');
 
 export const createRenderer = ({ gl, ...extra }) =>
   new THREE.WebGLRenderer({
@@ -24,9 +24,9 @@ export const createRenderer = ({ gl, ...extra }) =>
       style: {},
       addEventListener: () => {},
       removeEventListener: () => {},
-      clientHeight: gl.drawingBufferHeight
+      clientHeight: gl.drawingBufferHeight,
     },
-    context: gl
+    context: gl,
   });
 
 export const createTextureAsync = async ({ asset }) => {
@@ -37,7 +37,7 @@ export const createTextureAsync = async ({ asset }) => {
   texture.image = {
     data: asset,
     width: asset.width,
-    height: asset.height
+    height: asset.height,
   };
   texture.needsUpdate = true;
   texture.isDataTexture = true; // Forces passing to `gl.texImage2D(...)` verbatim
@@ -61,7 +61,7 @@ export const createARCamera = (arSession, width, height, near, far) => {
         camera.width,
         camera.height,
         camera.near,
-        camera.far
+        camera.far,
       );
       if (matrices && matrices.viewMatrix) {
         camera.matrixWorldInverse.fromArray(matrices.viewMatrix);
@@ -97,7 +97,7 @@ In a well lit environment, this value is close to 1000. It typically ranges from
 */
 export const getARLightEstimation = arSession => {
   return NativeModules.ExponentGLViewManager.getARLightEstimation(
-    arSession.sessionId
+    arSession.sessionId,
   );
 };
 
@@ -107,7 +107,7 @@ export const getARLightEstimation = arSession => {
  */
 export const getRawFeaturePoints = arSession => {
   return NativeModules.ExponentGLViewManager.getRawFeaturePoints(
-    arSession.sessionId
+    arSession.sessionId,
   );
 };
 
@@ -117,10 +117,10 @@ export const getRawFeaturePoints = arSession => {
 
  isLightEstimationEnabled
  */
-export const enableLightEstimation = (arSession, enable) => {
-  return NativeModules.ExponentGLViewManager.enableLightEstimation(
+export const setIsLightEstimationEnabled = (arSession, isEnabled) => {
+  return NativeModules.ExponentGLViewManager.setIsLightEstimationEnabled(
     arSession.sessionId,
-    enable
+    isEnabled,
   );
 };
 
@@ -131,9 +131,9 @@ export const enableLightEstimation = (arSession, enable) => {
 
  ARPlaneDetection planeDetection
  */
-export const enablePlaneDetection = (arSession, enable) => {
-  return NativeModules.ExponentGLViewManager.enablePlaneDetection(
+export const setIsPlaneDetectionEnabled = (arSession, isEnabled) => {
+  return NativeModules.ExponentGLViewManager.setIsPlaneDetectionEnabled(
     arSession.sessionId,
-    enable
+    isEnabled,
   );
 };
