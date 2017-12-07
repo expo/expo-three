@@ -1,8 +1,9 @@
 {
   "name": "expo-three",
-  "version": "2.0.3",
+  "version": "2.0.6",
   "description": "Utilities for using THREE.js on Expo",
-  "main": "index.js",
+  "files": ["lib"],
+  "main": "lib/index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -14,7 +15,23 @@
   "author": "Nikhilesh Sigatapu",
   "license": "MIT",
   "peerDependencies": {
-    "three": "*",
-    "react-native": "*"
+    "expo": "*",
+    "react": "*",
+    "react-native": "*",
+    "three": "^0.88.0",
+    "react-native-console-time-polyfill": "^0.0.6",
+    "text-encoding": "^0.6.4",
+    "xmldom-qsa": "^1.0.3"
+  },
+  "devDependencies": {
+    "react-native-console-time-polyfill": "^0.0.6",
+    "text-encoding": "^0.6.4",
+    "three": "^0.88.0",
+    "xmldom-qsa": "^1.0.3"
+  },
+  "dependencies": {
+    "react-native-console-time-polyfill": "^0.0.6",
+    "text-encoding": "^0.6.4",
+    "xmldom-qsa": "^1.0.3"
   }
 }

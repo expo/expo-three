@@ -1,4 +1,8 @@
-![demo](demo.gif "demo")
+[![NPM](https://nodei.co/npm/expo-three.png)](https://nodei.co/npm/expo-three/)
+
+---
+
+![demo](examples/simple/demo.gif "demo")
 
 _NOTE: GIF above looks choppy because it's a GIF, the real thing is smooth, I
 promise..._
@@ -82,6 +86,60 @@ and a `bool`, Enable or disable light estimation.
 Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`
 and a `bool`, sets the type of planes to detect in the scene.
 
+### `ExpoTHREE.utils`
+
+* **`ExpoTHREE.utils.alignMesh`**: A function that requires a `THREE.Mesh`, an
+  optional object containing `x`, `y`, `z` axis values relative to the model.
+* **`ExpoTHREE.utils.scaleLongestSideToSize`**: Given a `THREE.Mesh` and a
+  `number`, this will find the longest side and scale it to the provided model.
+* **`ExpoTHREE.utils.computeMeshNormals`**: Used for smoothing imported
+  geometry, specifically when imported from `.obj` models.
+
+### `ExpoTHREE.loadAsync`
+
+A function that will asynchronously load files based on their extension.
+
+#### Props
+
+* `res`: The file to load
+
+  * `number`: Static file reference `require('./model.*')`
+  * `Array<number>`: Collection of static file references
+    `[require('./model.*')]`
+  * `string`: The Expo.Asset
+    [`localUri`](https://docs.expo.io/versions/latest/sdk/asset.html#localuri)
+  * `Array<string>`: Collection of Expo.Asset
+    [`localUri`](https://docs.expo.io/versions/latest/sdk/asset.html#localuri)s
+  * ~~`Expo.Asset`~~: Not yet supported!
+
+* `onProgress`: A callback `Function` that will return a `xhr` object
+* `assetProvider`: A callback `Function` that is used to request static assets
+  required by the model
+  * `(assetName: string) => (Promise<number> | Promise<Expo.Asset>)`: The async
+    `Function` should return a static asset `require('./texture.*')` or an
+    Expo.Asset `Expo.Asset.fromModule(require('./texture.*'))`
+
+#### Supported Formats
+
+A list of supported formats can be found [here](/examples/loader)
+
+## THREE Extensions
+
+### `THREE.suppressExpoWarnings`
+
+A function that suppresses EXGL compatibility warnings and logs them instead.
+You will need to import the `ExpoTHREE.THREE` global instance to use this. By
+default this function will be activated on import.
+
+* `shouldSuppress`: boolean
+
+```js
+import { THREE } from 'expo-three';
+THREE.suppressExpoWarnings(true);
+```
+
+---
+
 ## Example
 
 This is based on
@@ -124,7 +182,11 @@ export default class App extends React.Component {
       75,
       gl.drawingBufferWidth / gl.drawingBufferHeight,
       0.1,
+<<<<<<< HEAD
       1000,
+=======
+      1000
+>>>>>>> master
     );
 
     // NOTE: How to create an `Expo.GLView`-compatible THREE renderer
