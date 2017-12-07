@@ -1,32 +1,51 @@
 import Expo from 'expo';
 import ExpoTHREE, { THREE } from 'expo-three';
 import React from 'react';
+import ExpoGraphics from 'expo-graphics'; // 0.0.1
+import {PixelRatio} from 'react-native'; 
+
 
 export default class App extends React.Component {
   render() {
-    // Create an `Expo.GLView` covering the whole screen, tell it to call our
-    // `_onGLContextCreate` function once it's initialized.
-    return <Expo.GLView style={{ flex: 1 }} onContextCreate={this._onGLContextCreate} />;
+    return (
+        <ExpoGraphics.View
+          style={{ flex: 1 }}
+          onContextCreate={this.onContextCreate}
+          onRender={this.onRender}
+          onResize={this.onResize}
+        />
+    );
   }
 
-  // This is called by the `Expo.GLView` once it's initialized
-  _onGLContextCreate = async gl => {
-    // Based on https://threejs.org/docs/#manual/introduction/Creating-a-scene
-    // In this case we instead use a texture for the material (because textures
-    // are cool!). All differences from the normal THREE.js example are
-    // indicated with a `NOTE:` comment.
+  onContextCreate = async (gl) => {
+    const { drawingBufferWidth: width, drawingBufferHeight: height } = gl;
+    const scale = PixelRatio.get();
 
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(
-      75,
-      gl.drawingBufferWidth / gl.drawingBufferHeight,
-      0.1,
-      1000
-    );
+    // renderer
+    this.renderer = ExpoTHREE.createRenderer({
+      gl,
+    });
+    this.renderer.setPixelRatio(scale);
+    this.renderer.setSize(width / scale, height / scale);
+    this.renderer.setClearColor(0x000000, 1.0);
 
-    // NOTE: How to create an `Expo.GLView`-compatible THREE renderer
-    const renderer = ExpoTHREE.createRenderer({ gl });
-    renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
+    /// Standard Camera
+    this.camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 10000);
+    this.camera.position.set(5, 5, -5);
+    this.camera.lookAt(0, 0, 0);
+
+    await this.setupScene();
+  };
+
+  setupScene = () => {
+    // scene
+    this.scene = new THREE.Scene();
+
+    // Standard Background
+    this.scene.background = new THREE.Color(0x999999);
+    this.scene.fog = new THREE.FogExp2(0xcccccc, 0.002);
+
+    this.scene.add(new THREE.GridHelper(5, 6, 0xffffff, 0x555555));
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
     const material = new THREE.MeshBasicMaterial({
@@ -34,21 +53,41 @@ export default class App extends React.Component {
       map: await ExpoTHREE.loadAsync(require('./assets/icons/app-icon.png')),
     });
     const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+    this.scene.add(cube);
 
-    camera.position.z = 5;
+    this.setupLights();
+  };
 
-    const render = () => {
-      requestAnimationFrame(render);
+  setupLights = () => {
+    // lights
+    const directionalLightA = new THREE.DirectionalLight(0xffffff);
+    directionalLightA.position.set(1, 1, 1);
+    this.scene.add(directionalLightA);
 
-      cube.rotation.x += 0.07;
-      cube.rotation.y += 0.04;
+    const directionalLightB = new THREE.DirectionalLight(0xffeedd);
+    directionalLightB.position.set(-1, -1, -1);
+    this.scene.add(directionalLightB);
 
-      renderer.render(scene, camera);
+    const ambientLight = new THREE.AmbientLight(0x222222);
+    this.scene.add(ambientLight);
+  };
 
-      // NOTE: At the end of each frame, notify `Expo.GLView` with the below
-      gl.endFrameEXP();
-    };
-    render();
+  onResize = ({ width, height }) => {
+    const scale = PixelRatio.get();
+
+    this.camera.aspect = width / height;
+    this.camera.updateProjectionMatrix();
+    this.renderer.setPixelRatio(scale);
+    this.renderer.setSize(width, height);
+  };
+
+  onRender = (delta) => {
+    this.cube.rotation.x += 0.7 * delta;
+    this.cube.rotation.y += 0.4 * delta;
+
+
+    const { scene, renderer, camera } = this;
+    renderer.render(scene, camera);
   };
 }
+
