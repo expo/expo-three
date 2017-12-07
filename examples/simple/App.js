@@ -1,8 +1,7 @@
-import Expo from 'expo';
+import ExpoGraphics from 'expo-graphics';
 import ExpoTHREE, { THREE } from 'expo-three';
 import React from 'react';
-import ExpoGraphics from 'expo-graphics'; // 0.0.1
-import {PixelRatio} from 'react-native'; 
+import { PixelRatio } from 'react-native';
 
 
 export default class App extends React.Component {
