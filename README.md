@@ -83,9 +83,9 @@ A function that will asynchronously load files based on their extension.
 * `onProgress`: A callback `Function` that will return a `xhr` object
 * `assetProvider`: A callback `Function` that is used to request static assets
   required by the model
-  * `(assetName: string) => (Promise<number> | Promise<Expo.Asset>)`: The async
-    `Function` should return a static asset `require('./texture.*')` or an
-    Expo.Asset `Expo.Asset.fromModule(require('./texture.*'))`
+  * `(assetName: string)`: The async `Function` should return a static asset
+    `require('./texture.*')` or an Expo.Asset
+    `Expo.Asset.fromModule(require('./texture.*'))`
 
 #### Supported Formats
 
@@ -93,7 +93,7 @@ A list of supported formats can be found [here](/examples/loader)
 
 ## THREE Extensions
 
-### `THREE.suppressExpoWarnings`
+### `suppressExpoWarnings`
 
 A function that suppresses EXGL compatibility warnings and logs them instead.
 You will need to import the `ExpoTHREE.THREE` global instance to use this. By
@@ -104,6 +104,34 @@ default this function will be activated on import.
 ```js
 import { THREE } from 'expo-three';
 THREE.suppressExpoWarnings(true);
+```
+
+### [`loadCubeTextureAsync`](https://snack.expo.io/@bacon/three-skybox)
+
+Used to load in a texture cube or skybox.
+
+* `assetForDirection`: This function will be called for each of the 6
+  directions.
+  * `({ direction })`: A direction string will be passed back looking for the
+    corresponding image. You can send back: `static resource`, `localUri`,
+    `Expo.Asset`, `remote image url`
+* `directions`: The order that image will be requested in. The default value is:
+  `['px', 'nx', 'py', 'ny', 'pz', 'nz']`
+
+Example:
+
+```js
+const skybox = {
+	nx: require('./nx.jpg'),
+	ny: require('./ny.jpg'),
+	nz: require('./nz.jpg'),
+	px: require('./px.jpg'),
+	py: require('./py.jpg'),
+	pz: require('./pz.jpg')
+}
+scene.background = await loadCubeTextureAsync({
+  assetForDirection: ({ direction }) => skybox[direction],
+})
 ```
 
 ---
@@ -150,7 +178,7 @@ export default class App extends React.Component {
       75,
       gl.drawingBufferWidth / gl.drawingBufferHeight,
       0.1,
-      1000
+      1000,
     );
 
     // NOTE: How to create an `Expo.GLView`-compatible THREE renderer
