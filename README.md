@@ -182,11 +182,7 @@ export default class App extends React.Component {
       75,
       gl.drawingBufferWidth / gl.drawingBufferHeight,
       0.1,
-<<<<<<< HEAD
       1000,
-=======
-      1000
->>>>>>> master
     );
 
     // NOTE: How to create an `Expo.GLView`-compatible THREE renderer
