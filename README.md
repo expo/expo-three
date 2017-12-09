@@ -106,7 +106,7 @@ import { THREE } from 'expo-three';
 THREE.suppressExpoWarnings(true);
 ```
 
-### [`loadCubeTextureAsync`](https://snack.expo.io/@bacon/three-skybox)
+### [`loadCubeTextureAsync`](https://snack.expo.io/@bacon/expo-three-loadcubetextureasync)
 
 Used to load in a texture cube or skybox.
 
