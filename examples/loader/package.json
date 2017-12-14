@@ -6,10 +6,10 @@
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
-    "expo": "^23.0.0",
+    "expo": "^24.0.0",
     "expo-graphics": "^0.0.1",
     "react": "16.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-23.0.0.tar.gz",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
     "text-encoding": "^0.6.4",
     "three": "^0.88.0"
   },
