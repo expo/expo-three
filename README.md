@@ -54,6 +54,38 @@ reflects the live video feed of the AR session. Usually this is set as the
 [`THREE.Scene`](https://threejs.org/docs/#api/scenes/Scene) to render the video
 feed behind the scene's objects.
 
+### `ExpoTHREE.getARLightEstimation()`
+
+Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`,
+return a (`object`) the shape of which looks like:
+
+* [ambientIntensity](https://developer.apple.com/documentation/arkit/arlightestimate/2878308-ambientintensity):
+  number
+* This value ranges from 0 - 2000. 0 being very dark and 2000 being very bright.
+* [ambientColorTemperature](https://developer.apple.com/documentation/arkit/arlightestimate/2921629-ambientcolortemperature):
+  number
+* This value ranges from 0 - 6500. This value is in kelvins and 6500 is white.
+
+### `ExpoTHREE.getRawFeaturePoints()`
+
+Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`,
+return an (`array`) of points:
+
+* x
+* y
+* z
+* id
+
+### `ExpoTHREE.setIsLightEstimationEnabled()`
+
+Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`
+and a `bool`, Enable or disable light estimation.
+
+### `ExpoTHREE.setIsPlaneDetectionEnabled()`
+
+Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`
+and a `bool`, sets the type of planes to detect in the scene.
+
 ### `ExpoTHREE.utils`
 
 * **`ExpoTHREE.utils.alignMesh`**: A function that requires a `THREE.Mesh`, an
