@@ -2,7 +2,7 @@
 
 ---
 
-![demo](examples/simple/demo.gif "demo")
+![demo](https://raw.githubusercontent.com/expo/expo-three/master/examples/simple/demo.gif "demo")
 
 _NOTE: GIF above looks choppy because it's a GIF, the real thing is smooth, I
 promise..._
