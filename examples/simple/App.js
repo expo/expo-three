@@ -33,10 +33,10 @@ export default class App extends React.Component {
     this.camera.position.set(5, 5, -5);
     this.camera.lookAt(0, 0, 0);
 
-    await this.setupScene();
+    await this.setupSceneAsync();
   };
 
-  setupScene = () => {
+  setupSceneAsync = async () => {
     // scene
     this.scene = new THREE.Scene();
 
