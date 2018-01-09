@@ -9,7 +9,7 @@
     "expo": "^24.0.0",
     "react": "16.0.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
-    "expo-three": "../../",
+    "expo-three": "../../expo-three-2.1.1.tgz",
     "three": "*",
     "expo-graphics": "^0.0.1"
   },
