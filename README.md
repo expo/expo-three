@@ -76,6 +76,16 @@ return an (`array`) of points:
 * z
 * id
 
+### `ExpoTHREE.getPlanes()`
+
+Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`,
+return an (`array`) of horizontal planes:
+
+* center (x,y,z)
+* extent (width, length)
+* transform (4x4 matrix)
+* id
+
 ### `ExpoTHREE.setIsLightEstimationEnabled()`
 
 Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`
@@ -85,6 +95,11 @@ and a `bool`, Enable or disable light estimation.
 
 Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`
 and a `bool`, sets the type of planes to detect in the scene.
+
+### `ExpoTHREE.setWorldAlignment()`
+
+Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`
+and one of `ExpoTHREE.WorldAlignment.Gravity`, `ExpoTHREE.WorldAlignment.GravityAndHeading`, `ExpoTHREE.WorldAlignment.Camera`, sets the world alignment.
 
 ### `ExpoTHREE.utils`
 
