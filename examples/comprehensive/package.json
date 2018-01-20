@@ -1,0 +1,27 @@
+{
+  "name": "comprehensive",
+  "version": "0.0.0",
+  "description": "expo-pixi comprehensive example",
+  "author": "support@expo.io",
+  "private": true,
+  "main": "node_modules/expo/AppEntry.js",
+  "dependencies": {
+    "EventEmitter": "^1.0.0",
+    "expo": "^24.0.0",
+    "expo-asset-utils": "^0.0.0",
+    "expo-pixi": "../../expo-pixi-0.1.1.tgz",
+    "expo-three": "^2.1.1",
+    "path": "^0.12.7",
+    "pixi-filters": "*",
+    "pixi.js": "^4.6.2",
+    "react": "16.0.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-24.0.0.tar.gz",
+    "react-navigation": "^1.0.0-beta.22",
+    "url": "^0.11.0"
+  },
+  "devDependencies": {
+    "eslint": "^4.9.0",
+    "eslint-config-universe": "^1.0.6",
+    "prettier": "^1.7.4"
+  }
+}
