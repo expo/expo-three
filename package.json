@@ -15,17 +15,15 @@
   "author": "Nikhilesh Sigatapu",
   "license": "MIT",
   "peerDependencies": {
-    "expo-asset-utils": "^0.0.0",
-    "expo": "^24.0.0",
-    "react": "*",
+    "expo-asset-utils": "^0.0.2",
     "react-native": "*",
-    "three": "^0.88.0",
+    "three": "*",
     "react-native-console-time-polyfill": "^0.0.6",
     "text-encoding": "^0.6.4",
     "xmldom-qsa": "^1.0.3"
   },
   "devDependencies": {
-    "three": "^0.88.0",
+    "three": "*",
     "react-native-console-time-polyfill": "^0.0.6",
     "text-encoding": "^0.6.4",
     "xmldom-qsa": "^1.0.3"

@@ -1,22 +1,14 @@
 import ExpoGraphics from 'expo-graphics';
 import ExpoTHREE, { THREE } from 'expo-three';
 import React from 'react';
-import { PixelRatio } from 'react-native';
-
+import { PixelRatio, View } from 'react-native';
 
 export default class App extends React.Component {
   render() {
-    return (
-        <ExpoGraphics.View
-          style={{ flex: 1 }}
-          onContextCreate={this.onContextCreate}
-          onRender={this.onRender}
-          onResize={this.onResize}
-        />
-    );
+    return <View style={{ flex: 1, backgroundColor: 'orange' }} />;
   }
 
-  onContextCreate = async (gl) => {
+  onContextCreate = async gl => {
     const { drawingBufferWidth: width, drawingBufferHeight: height } = gl;
     const scale = PixelRatio.get();
 
@@ -80,13 +72,11 @@ export default class App extends React.Component {
     this.renderer.setSize(width, height);
   };
 
-  onRender = (delta) => {
+  onRender = delta => {
     this.cube.rotation.x += 0.7 * delta;
     this.cube.rotation.y += 0.4 * delta;
-
 
     const { scene, renderer, camera } = this;
     renderer.render(scene, camera);
   };
 }
-
