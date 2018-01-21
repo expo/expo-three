@@ -1,22 +1,34 @@
 import ExpoGraphics from 'expo-graphics';
 import ExpoTHREE, { THREE } from 'expo-three';
 import React from 'react';
-import { PixelRatio } from 'react-native';
-
+import { PixelRatio, Platform } from 'react-native';
 
 export default class App extends React.Component {
+  componentWillMount() {
+    THREE.suppressExpoWarnings(true);
+  }
+  componentWillUnmount() {
+    THREE.suppressExpoWarnings(false);
+  }
   render() {
+    // Create an `ExpoGraphics.View` covering the whole screen, tell it to call our
+    // `onContextCreate` function once it's initialized.
     return (
-        <ExpoGraphics.View
-          style={{ flex: 1 }}
-          onContextCreate={this.onContextCreate}
-          onRender={this.onRender}
-          onResize={this.onResize}
-        />
+      <ExpoGraphics.View
+        style={{ flex: 1 }}
+        onContextCreate={this.onContextCreate}
+        onRender={this.onRender}
+        onResize={this.onResize}
+        onShouldReloadContext={this.onShouldReloadContext}
+      />
     );
   }
+  onShouldReloadContext = () => {
+    /// The Android OS loses gl context on background, so we should reload it.
+    return Platform.OS === 'android';
+  };
 
-  onContextCreate = async (gl) => {
+  onContextCreate = async gl => {
     const { drawingBufferWidth: width, drawingBufferHeight: height } = gl;
     const scale = PixelRatio.get();
 
@@ -71,22 +83,18 @@ export default class App extends React.Component {
     this.scene.add(ambientLight);
   };
 
-  onResize = ({ width, height }) => {
-    const scale = PixelRatio.get();
-
+  onResize = ({ width, height, scale }) => {
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
     this.renderer.setPixelRatio(scale);
     this.renderer.setSize(width, height);
   };
 
-  onRender = (delta) => {
+  onRender = delta => {
     this.cube.rotation.x += 0.7 * delta;
     this.cube.rotation.y += 0.4 * delta;
-
 
     const { scene, renderer, camera } = this;
     renderer.render(scene, camera);
   };
 }
-
