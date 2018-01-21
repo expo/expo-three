@@ -16,7 +16,7 @@
   "license": "MIT",
   "peerDependencies": {
     "expo-asset-utils": "^0.0.0",
-    "expo": "^25.0.0",
+    "expo": "^24.0.0",
     "react": "*",
     "react-native": "*",
     "three": "^0.88.0",
