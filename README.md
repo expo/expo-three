@@ -41,6 +41,8 @@ const renderer = ExpoTHREE.renderer({
 });
 ```
 
+---
+
 ### `ExpoTHREE.loadAsync()`
 
 A function that will asynchronously load files based on their extension.
@@ -84,6 +86,8 @@ A list of supported formats can be found [here](/examples/loader)
 const texture = await ExpoTHREE.loadAsync('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
 ```
 
+---
+
 ### `ExpoTHREE.createARCamera()`
 
 Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`,
@@ -124,6 +128,8 @@ const camera = ExpoTHREE.createARCamera(
 );
 ```
 
+---
+
 ### `ExpoTHREE.createARBackgroundTexture()`
 
 Returns a [`THREE.Texture`](https://threejs.org/docs/#api/textures/Texture) that
@@ -151,6 +157,8 @@ feed behind the scene's objects.
 scene.background = ExpoTHREE.createARBackgroundTexture(arSession, renderer);
 ```
 
+---
+
 ### `ExpoTHREE.getARLightEstimation()`
 
 #### Props
@@ -174,6 +182,8 @@ const {
   ambientColorTemperature,
 } = ExpoTHREE.getARLightEstimation(arSession);
 ```
+
+---
 
 ### `ExpoTHREE.getRawFeaturePoints()`
 
@@ -204,6 +214,8 @@ type Anchor = {
 const points = ExpoTHREE.getRawFeaturePoints(arSession);
 points.forEach(({ x, y, z, id }) => {});
 ```
+
+---
 
 ### `ExpoTHREE.getPlanes()`
 
@@ -250,6 +262,8 @@ planes.forEach(
 );
 ```
 
+---
+
 ### `ExpoTHREE.setIsLightEstimationEnabled()`
 
 #### Props
@@ -265,6 +279,8 @@ planes.forEach(
 ExpoTHREE.setIsLightEstimationEnabled(arSession, true);
 ```
 
+---
+
 ### `ExpoTHREE.setIsPlaneDetectionEnabled()`
 
 #### Props
@@ -279,6 +295,8 @@ ExpoTHREE.setIsLightEstimationEnabled(arSession, true);
 ```js
 ExpoTHREE.setIsPlaneDetectionEnabled(arSession, true);
 ```
+
+---
 
 ### `ExpoTHREE.setWorldAlignment()`
 
@@ -302,6 +320,8 @@ ExpoTHREE.WorldAlignment = {
 ```js
 ExpoTHREE.setWorldAlignment(arSession, ExpoTHREE.WorldAlignment.Gravity);
 ```
+
+---
 
 ## `ExpoTHREE.utils`
 
@@ -328,6 +348,8 @@ type Axis = {
 ExpoTHREE.utils.alignMesh(mesh, { x: 0.0, y: 0.5 });
 ```
 
+---
+
 ### `ExpoTHREE.utils.scaleLongestSideToSize()`
 
 #### Props
@@ -342,6 +364,8 @@ ExpoTHREE.utils.alignMesh(mesh, { x: 0.0, y: 0.5 });
 ```js
 ExpoTHREE.utils.scaleLongestSideToSize(mesh, 3.2);
 ```
+
+---
 
 ### `ExpoTHREE.utils.computeMeshNormals()`
 
@@ -359,6 +383,7 @@ Used for smoothing imported geometry, specifically when imported from `.obj` mod
 ExpoTHREE.utils.computeMeshNormals(mesh);
 ```
 
+---
 
 ## THREE Extensions
 
