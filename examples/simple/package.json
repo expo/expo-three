@@ -7,15 +7,10 @@
   "main": "node_modules/expo/AppEntry.js",
   "dependencies": {
     "expo": "^25.0.0",
-    "expo-asset-utils": "^0.0.1",
     "expo-graphics": "^0.0.1",
-    "expo-three": "../../expo-three-2.2.0.tgz",
+    "expo-three": "../../expo-three-2.2.1.tgz",
     "react": "16.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
-    "react-native-console-time-polyfill": "^0.0.6",
-    "text-encoding": "^0.6.4",
-    "three": "*",
-    "xmldom-qsa": "^1.0.3"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz"
   },
   "devDependencies": {
     "eslint": "^4.9.0",

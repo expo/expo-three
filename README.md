@@ -1,37 +1,90 @@
 [![NPM](https://nodei.co/npm/expo-three.png)](https://nodei.co/npm/expo-three/)
 
----
-
-![demo](https://raw.githubusercontent.com/expo/expo-three/master/examples/simple/demo.gif "demo")
-
-_NOTE: GIF above looks choppy because it's a GIF, the real thing is smooth, I
-promise..._
-
 # expo-three
 
-Use [THREE](https://threejs.org) on [Expo](https://expo.io)! Just `npm i -S
-three expo-three` in your Expo project and import it with `import ExpoTHREE from
-'expo-three';`.
+Tools for using three.js to build native 3D experiences 💙
+
+### Installation
+
+```bash
+yarn add three expo-three
+```
+
+### Usage
+
+Import the library into your JavaScript file:
+
+```bash
+import ExpoTHREE, { THREE } from 'expo-three';
+```
 
 ## Functions
 
-### `ExpoTHREE.createRenderer({ gl, ...extras })`
+### `ExpoTHREE.renderer({ gl: WebGLRenderingContext, ...extras })`
 
 Given a `gl` from an
 [`Expo.GLView`](https://docs.expo.io/versions/latest/sdk/gl-view.html), return a
 [`THREE.WebGLRenderer`](https://threejs.org/docs/#api/renderers/WebGLRenderer)
 that draws into it.
 
-### `ExpoTHREE.createTextureAsync({ asset })`
+#### Returns
 
-Given an [`Expo.Asset`](https://docs.expo.io/versions/latest/sdk/asset.html),
-return a
-([`Promise`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise)
-that will resolve with a)
-[`THREE.Texture`](https://threejs.org/docs/#api/textures/Texture) backed by that
-asset as an image.
+| Property |                                      Type                                      | Description                                              |
+| -------- | :----------------------------------------------------------------------------: | -------------------------------------------------------- |
+| renderer | [`THREE.WebGLRenderer`](https://threejs.org/docs/#api/renderers/WebGLRenderer) | The Three.js renderer used for drawing to the GL Context |
 
-### `ExpoTHREE.createARCamera(arSession, width, height, near, far)`
+#### Example
+
+```js
+const renderer = ExpoTHREE.renderer({
+  gl,
+});
+```
+
+### `ExpoTHREE.loadAsync()`
+
+A function that will asynchronously load files based on their extension.
+
+#### Props
+
+**Image Format**
+
+* `number`: Static file reference `require('./model.*')`
+* `Array<number>`: Collection of static file references
+  `[require('./model.*')]`
+* `string`: The Expo.Asset
+  [`localUri`](https://docs.expo.io/versions/latest/sdk/asset.html#localuri)
+* `Array<string>`: Collection of Expo.Asset
+  [`localUri`](https://docs.expo.io/versions/latest/sdk/asset.html#localuri)s
+* `Expo.Asset`
+* `Array<Expo.Asset>`
+
+```js
+type ImageFormat = {
+  uri: string,
+};
+export type WildCard = Expo.Asset | number | string | ImageFormat;
+```
+
+| Property      |           Type            | Description                                                      |
+| ------------- | :-----------------------: | ---------------------------------------------------------------- |
+| resource      |         WildCard          | The asset that will be parsed asynchornously                     |
+| onProgress    |       (xhr) => void       | A function that is called with an xhr event                      |
+| assetProvider | () => Promise<Expo.Asset> | A function that is called whenever an unknown asset is requested |
+
+#### Returns
+
+This returns many different things, based on the input file 😅
+
+#### Example
+
+A list of supported formats can be found [here](/examples/loader)
+
+```js
+const texture = await ExpoTHREE.loadAsync('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
+```
+
+### `ExpoTHREE.createARCamera()`
 
 Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`,
 return a
@@ -43,100 +96,269 @@ respectively. The `THREE.PerspectiveCamera` returned has its `updateMatrixWorld`
 and `updateProjectionMatrix` methods overriden to update to the AR session's
 state automatically.
 
-### `ExpoTHREE.createARBackgroundTexture(arSession, renderer)`
+#### Props
 
-Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`
-and a
-[`THREE.WebGLRenderer`](https://threejs.org/docs/#api/renderers/WebGLRenderer),
-return a [`THREE.Texture`](https://threejs.org/docs/#api/textures/Texture) that
+| Property  |  Type  | Description                                                           |
+| --------- | :----: | --------------------------------------------------------------------- |
+| arSession | number | ID returned from `NativeModules.ExponentGLViewManager.startARSession` |
+| width     | number | Width of the gl context                                               |
+| height    | number | Height of the gl context                                              |
+| near      | number | The near clipping plane of the camera                                 |
+| far       | number | The far clipping plane of the camera                                  |
+
+#### Returns
+
+| Property |                                         Type                                         | Description                                                                                                                                                                                                                                                                                                                                                                                                                      |
+| -------- | :----------------------------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| camera   | [`THREE.PerspectiveCamera`](https://threejs.org/docs/#api/cameras/PerspectiveCamera) | A camera that automatically updates its view and projection matrices to reflect the AR session camera. `width, height` specify the dimensions of the target viewport to render to and `near, far` specify the near and far clipping distances respectively. The `THREE.PerspectiveCamera` returned has its `updateMatrixWorld` and `updateProjectionMatrix` methods overriden to update to the AR session's state automatically. |
+
+#### Example
+
+```js
+const camera = ExpoTHREE.createARCamera(
+  arSession,
+  gl.drawingBufferWidth,
+  gl.drawingBufferHeight,
+  0.01,
+  1000,
+);
+```
+
+### `ExpoTHREE.createARBackgroundTexture()`
+
+Returns a [`THREE.Texture`](https://threejs.org/docs/#api/textures/Texture) that
 reflects the live video feed of the AR session. Usually this is set as the
 `.background` property of a
 [`THREE.Scene`](https://threejs.org/docs/#api/scenes/Scene) to render the video
 feed behind the scene's objects.
 
+#### Props
+
+| Property  |                                      Type                                      | Description                                                           |
+| --------- | :----------------------------------------------------------------------------: | --------------------------------------------------------------------- |
+| arSession |                                     number                                     | ID returned from `NativeModules.ExponentGLViewManager.startARSession` |
+| renderer  | [`THREE.WebGLRenderer`](https://threejs.org/docs/#api/renderers/WebGLRenderer) | The current renderer used with the GL context                         |
+
+#### Returns
+
+| Property |                               Type                                | Description                                                                                                    |
+| -------- | :---------------------------------------------------------------: | -------------------------------------------------------------------------------------------------------------- |
+| texture  | [`THREE.Texture`](https://threejs.org/docs/#api/textures/Texture) | A GL Texture of the camera stream for use with the [`THREE.Scene`](https://threejs.org/docs/#api/scenes/Scene) |
+
+#### Example
+
+```js
+scene.background = ExpoTHREE.createARBackgroundTexture(arSession, renderer);
+```
+
 ### `ExpoTHREE.getARLightEstimation()`
-
-Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`,
-return a (`object`) the shape of which looks like:
-
-* [ambientIntensity](https://developer.apple.com/documentation/arkit/arlightestimate/2878308-ambientintensity):
-  number
-* This value ranges from 0 - 2000. 0 being very dark and 2000 being very bright.
-* [ambientColorTemperature](https://developer.apple.com/documentation/arkit/arlightestimate/2921629-ambientcolortemperature):
-  number
-* This value ranges from 0 - 6500. This value is in kelvins and 6500 is white.
-
-### `ExpoTHREE.getRawFeaturePoints()`
-
-Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`,
-return an (`array`) of points:
-
-* x
-* y
-* z
-* id
-
-### `ExpoTHREE.getPlanes()`
-
-Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`,
-return an (`array`) of horizontal planes:
-
-* center (x,y,z)
-* extent (width, length)
-* transform (4x4 matrix)
-* id
-
-### `ExpoTHREE.setIsLightEstimationEnabled()`
-
-Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`
-and a `bool`, Enable or disable light estimation.
-
-### `ExpoTHREE.setIsPlaneDetectionEnabled()`
-
-Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`
-and a `bool`, sets the type of planes to detect in the scene.
-
-### `ExpoTHREE.setWorldAlignment()`
-
-Given an `arSession` from `NativeModules.ExponentGLViewManager.startARSession`
-and one of `ExpoTHREE.WorldAlignment.Gravity`, `ExpoTHREE.WorldAlignment.GravityAndHeading`, `ExpoTHREE.WorldAlignment.Camera`, sets the world alignment.
-
-### `ExpoTHREE.utils`
-
-* **`ExpoTHREE.utils.alignMesh`**: A function that requires a `THREE.Mesh`, an
-  optional object containing `x`, `y`, `z` axis values relative to the model.
-* **`ExpoTHREE.utils.scaleLongestSideToSize`**: Given a `THREE.Mesh` and a
-  `number`, this will find the longest side and scale it to the provided model.
-* **`ExpoTHREE.utils.computeMeshNormals`**: Used for smoothing imported
-  geometry, specifically when imported from `.obj` models.
-
-### `ExpoTHREE.loadAsync`
-
-A function that will asynchronously load files based on their extension.
 
 #### Props
 
-* `res`: The file to load
+| Property  |  Type  | Description                                                           |
+| --------- | :----: | --------------------------------------------------------------------- |
+| arSession | number | ID returned from `NativeModules.ExponentGLViewManager.startARSession` |
 
-  * `number`: Static file reference `require('./model.*')`
-  * `Array<number>`: Collection of static file references
-    `[require('./model.*')]`
-  * `string`: The Expo.Asset
-    [`localUri`](https://docs.expo.io/versions/latest/sdk/asset.html#localuri)
-  * `Array<string>`: Collection of Expo.Asset
-    [`localUri`](https://docs.expo.io/versions/latest/sdk/asset.html#localuri)s
-  * ~~`Expo.Asset`~~: Not yet supported!
+#### Returns
 
-* `onProgress`: A callback `Function` that will return a `xhr` object
-* `assetProvider`: A callback `Function` that is used to request static assets
-  required by the model
-  * `(assetName: string)`: The async `Function` should return a static asset
-    `require('./texture.*')` or an Expo.Asset
-    `Expo.Asset.fromModule(require('./texture.*'))`
+| Property                                                                                                                   |  Type  | Description                                                                   |
+| -------------------------------------------------------------------------------------------------------------------------- | :----: | ----------------------------------------------------------------------------- |
+| [ambientIntensity](https://developer.apple.com/documentation/arkit/arlightestimate/2878308-ambientintensity)               | number | This value ranges from 0 - 2000. 0 being very dark and 2000 being very bright |
+| [ambientColorTemperature](https://developer.apple.com/documentation/arkit/arlightestimate/2921629-ambientcolortemperature) | number | This value ranges from 0 - 6500. This value is in kelvins and 6500 is white   |
 
-#### Supported Formats
+#### Example
 
-A list of supported formats can be found [here](/examples/loader)
+```js
+const {
+  ambientIntensity,
+  ambientColorTemperature,
+} = ExpoTHREE.getARLightEstimation(arSession);
+```
+
+### `ExpoTHREE.getRawFeaturePoints()`
+
+#### Props
+
+| Property  |  Type  | Description                                                           |
+| --------- | :----: | --------------------------------------------------------------------- |
+| arSession | number | ID returned from `NativeModules.ExponentGLViewManager.startARSession` |
+
+#### Returns
+
+```js
+type Anchor = {
+  x: number,
+  y: number,
+  z: number,
+  id: number,
+};
+```
+
+| Property |     Type      | Description                                  |
+| -------- | :-----------: | -------------------------------------------- |
+| points   | Array<Anchor> | An array of anchor positions and identifiers |
+
+#### Example
+
+```js
+const points = ExpoTHREE.getRawFeaturePoints(arSession);
+points.forEach(({ x, y, z, id }) => {});
+```
+
+### `ExpoTHREE.getPlanes()`
+
+#### Props
+
+| Property  |  Type  | Description                                                           |
+| --------- | :----: | --------------------------------------------------------------------- |
+| arSession | number | ID returned from `NativeModules.ExponentGLViewManager.startARSession` |
+
+#### Returns
+
+```js
+type Point = {
+  x: number,
+  y: number,
+  z: number,
+};
+
+type Extent = {
+  width: number,
+  height: number,
+};
+
+type Matrix = Array<number>;
+
+type Plane = {
+  center: Point,
+  extent: Extent,
+  transform: Matrix,
+  id: number,
+};
+```
+
+| Property |     Type     | Description                                   |
+| -------- | :----------: | --------------------------------------------- |
+| planes   | Array<Plane> | An array of horizontal planes and identifiers |
+
+#### Example
+
+```js
+const planes = ExpoTHREE.getPlanes(arSession);
+planes.forEach(
+  ({ center: { x, y, z }, extent: { width, height }, transform, id }) => {},
+);
+```
+
+### `ExpoTHREE.setIsLightEstimationEnabled()`
+
+#### Props
+
+| Property                 |  Type  | Description                                                           |
+| ------------------------ | :----: | --------------------------------------------------------------------- |
+| arSession                | number | ID returned from `NativeModules.ExponentGLViewManager.startARSession` |
+| isLightEstimationEnabled |  bool  | Enable or disable light estimation                                    |
+
+#### Example
+
+```js
+ExpoTHREE.setIsLightEstimationEnabled(arSession, true);
+```
+
+### `ExpoTHREE.setIsPlaneDetectionEnabled()`
+
+#### Props
+
+| Property                |  Type  | Description                                                           |
+| ----------------------- | :----: | --------------------------------------------------------------------- |
+| arSession               | number | ID returned from `NativeModules.ExponentGLViewManager.startARSession` |
+| isPlaneDetectionEnabled |  bool  | Enable or disable plane detection                                     |
+
+#### Example
+
+```js
+ExpoTHREE.setIsPlaneDetectionEnabled(arSession, true);
+```
+
+### `ExpoTHREE.setWorldAlignment()`
+
+#### Props
+
+```js
+ExpoTHREE.WorldAlignment = {
+  Gravity: 0,
+  GravityAndHeading: 1,
+  Camera: 2,
+};
+```
+
+| Property       |           Type           | Description                                                           |
+| -------------- | :----------------------: | --------------------------------------------------------------------- |
+| arSession      |          number          | ID returned from `NativeModules.ExponentGLViewManager.startARSession` |
+| worldAlignment | ExpoTHREE.WorldAlignment | Set the world alignment                                               |
+
+#### Example
+
+```js
+ExpoTHREE.setWorldAlignment(arSession, ExpoTHREE.WorldAlignment.Gravity);
+```
+
+## `ExpoTHREE.utils`
+
+### `ExpoTHREE.utils.alignMesh()`
+
+#### Props
+
+```js
+type Axis = {
+  x?: number,
+  y?: number,
+  z?: number,
+};
+```
+
+| Property |    Type     | Description                       |
+| -------- | :---------: | --------------------------------- |
+| mesh     | &THREE.Mesh | The mesh that will be manipulated |
+| axis     |    ?Axis    | Set the relative center axis      |
+
+#### Example
+
+```js
+ExpoTHREE.utils.alignMesh(mesh, { x: 0.0, y: 0.5 });
+```
+
+### `ExpoTHREE.utils.scaleLongestSideToSize()`
+
+#### Props
+
+| Property |    Type     | Description                                                  |
+| -------- | :---------: | ------------------------------------------------------------ |
+| mesh     | &THREE.Mesh | The mesh that will be manipulated                            |
+| size     |   number    | The size that the longest side of the mesh will be scaled to |
+
+#### Example
+
+```js
+ExpoTHREE.utils.scaleLongestSideToSize(mesh, 3.2);
+```
+
+### `ExpoTHREE.utils.computeMeshNormals()`
+
+Used for smoothing imported geometry, specifically when imported from `.obj` models.
+
+#### Props
+
+| Property |    Type     | Description                       |
+| -------- | :---------: | --------------------------------- |
+| mesh     | &THREE.Mesh | The mesh that will be manipulated |
+
+#### Example
+
+````js
+ExpoTHREE.utils.computeMeshNormals(mesh);
+```
+
 
 ## THREE Extensions
 
@@ -151,7 +373,7 @@ default this function will be activated on import.
 ```js
 import { THREE } from 'expo-three';
 THREE.suppressExpoWarnings(true);
-```
+````
 
 ### [`loadCubeTextureAsync`](https://snack.expo.io/@bacon/expo-three-loadcubetextureasync)
 
@@ -187,11 +409,6 @@ scene.background = await loadCubeTextureAsync({
 
 This is based on
 [https://threejs.org/docs/#manual/introduction/Creating-a-scene](https://threejs.org/docs/#manual/introduction/Creating-a-scene).
-
-In a
-[new blank Expo project](https://docs.expo.io/versions/v17.0.0/guides/up-and-running.html),
-run `npm i -S three expo-three` to install THREE and ExpoTHREE. Then replace
-`main.js` with the following:
 
 ```js
 import Expo from 'expo';

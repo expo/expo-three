@@ -3,9 +3,8 @@
     "name": "simple",
     "description": "expo-three simple example",
     "slug": "expo-three-simple",
-    "sdkVersion": "24.0.0",
+    "sdkVersion": "25.0.0",
     "version": "1.0.0",
-    "orientation": "portrait",
     "primaryColor": "#cccccc",
     "icon": "./assets/icons/app-icon.png",
     "loading": {
