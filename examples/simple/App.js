@@ -31,7 +31,6 @@ export default class App extends React.Component {
   onContextCreate = async gl => {
     const { drawingBufferWidth: width, drawingBufferHeight: height } = gl;
     const scale = PixelRatio.get();
-
     // renderer
     this.renderer = ExpoTHREE.createRenderer({
       gl,

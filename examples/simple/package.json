@@ -8,9 +8,10 @@
   "dependencies": {
     "expo": "^25.0.0",
     "expo-graphics": "^0.0.1",
-    "expo-three": "../../expo-three-v2.2.2-alpha.0.tgz",
+    "expo-three": "../../expo-three-v2.2.2-alpha.1.tgz",
     "react": "16.0.0",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-25.0.0.tar.gz",
+    "three": "^0.89.0"
   },
   "devDependencies": {
     "eslint": "^4.9.0",
