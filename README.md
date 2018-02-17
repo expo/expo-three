@@ -4,6 +4,8 @@
 
 Tools for using three.js to build native 3D experiences 💙
 
+[ARKit Example](https://snack.expo.io/@bacon/arkit-example)
+
 ### Installation
 
 ```bash
@@ -204,15 +206,15 @@ type Anchor = {
 };
 ```
 
-| Property |     Type      | Description                                  |
-| -------- | :-----------: | -------------------------------------------- |
-| points   | Array<Anchor> | An array of anchor positions and identifiers |
+| Property        |     Type      | Description                                  |
+| --------------- | :-----------: | -------------------------------------------- |
+| featurePoints   | Array<Anchor> | An array of anchor positions and identifiers |
 
 #### Example
 
 ```js
-const points = ExpoTHREE.getRawFeaturePoints(arSession);
-points.forEach(({ x, y, z, id }) => {});
+const { featurePoints } = ExpoTHREE.getRawFeaturePoints(arSession);
+featurePoints.forEach(({ x, y, z, id }) => {});
 ```
 
 ---
@@ -256,7 +258,7 @@ type Plane = {
 #### Example
 
 ```js
-const planes = ExpoTHREE.getPlanes(arSession);
+const { planes } = ExpoTHREE.getPlanes(arSession);
 planes.forEach(
   ({ center: { x, y, z }, extent: { width, height }, transform, id }) => {},
 );
