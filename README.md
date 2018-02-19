@@ -506,6 +506,8 @@ export default class App extends React.Component {
 
 * [Loading Text](https://github.com/EvanBacon/expo-three-text)
 * [ARKit Tutorial](https://blog.expo.io/introducing-expo-ar-mobile-augmented-reality-with-javascript-powered-by-arkit-b0d5a02ff23)
+* [ARKit Example](https://snack.expo.io/@bacon/arkit-example)
+
 * [three.js docs](https://threejs.org/docs/)
 
 * [Random Demos](https://github.com/EvanBacon/expo-three-demo)
