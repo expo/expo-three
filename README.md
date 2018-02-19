@@ -503,3 +503,16 @@ export default class App extends React.Component {
   };
 }
 ```
+
+## Links
+
+* [Loading Text](https://github.com/EvanBacon/expo-three-text)
+* [ARKit Tutorial](https://blog.expo.io/introducing-expo-ar-mobile-augmented-reality-with-javascript-powered-by-arkit-b0d5a02ff23)
+* [three.js docs](https://threejs.org/docs/)
+
+* [Random Demos](https://github.com/EvanBacon/expo-three-demo)
+* [Game: Expo Sunset Cyberspace](https://github.com/EvanBacon/Sunset-Cyberspace)
+* [Game: Crossy Road](https://github.com/EvanBacon/Expo-Crossy-Road)
+* [Game: Nitro Roll](https://github.com/EvanBacon/Expo-Nitro-Roll)
+* [Game: Pillar Valley](https://github.com/EvanBacon/Expo-Pillar-Valley)
+* [Voxel Terrain](https://github.com/EvanBacon/Expo-Voxel)
