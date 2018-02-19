@@ -16,7 +16,7 @@ yarn add three expo-three
 
 Import the library into your JavaScript file:
 
-```bash
+```js
 import ExpoTHREE, { THREE } from 'expo-three';
 ```
 
@@ -440,10 +440,8 @@ This is based on
 ```js
 import Expo from 'expo';
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
-
 import * as THREE from 'three';
-import ExpoTHREE from 'expo-three';
+import ExpoTHREE from 'expo-three'; // 2.2.2-alpha.1
 
 export default class App extends React.Component {
   render() {
@@ -469,7 +467,7 @@ export default class App extends React.Component {
       75,
       gl.drawingBufferWidth / gl.drawingBufferHeight,
       0.1,
-      1000,
+      1000
     );
 
     // NOTE: How to create an `Expo.GLView`-compatible THREE renderer
@@ -477,12 +475,11 @@ export default class App extends React.Component {
     renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const material = new THREE.MeshBasicMaterial({
-      // NOTE: How to create an Expo-compatible THREE texture
-      map: await ExpoTHREE.createTextureAsync({
-        asset: Expo.Asset.fromModule(require('./assets/icons/app-icon.png')),
-      }),
-    });
+    //  NOTE: How to create an Expo-compatible THREE texture
+    const texture = await ExpoTHREE.loadAsync(
+      require('./assets/icons/app-icon.png')
+    );
+    const material = new THREE.MeshBasicMaterial({ map: texture });
     const cube = new THREE.Mesh(geometry, material);
     scene.add(cube);
 
@@ -502,6 +499,7 @@ export default class App extends React.Component {
     render();
   };
 }
+
 ```
 
 ## Links
