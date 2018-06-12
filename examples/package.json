@@ -12,7 +12,7 @@
   "dependencies": {
     "@expo/browser-polyfill": "^0.0.0-alpha.8",
     "expo": "^28.0.0-rc.1",
-    "expo-three": "../../expo-three-v3.0.0.tgz",
+    "expo-three": "../expo-three-v3.0.0.tgz",
     "react": "16.4.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-28.0.0.tar.gz",
     "react-navigation": "^2.3.0"

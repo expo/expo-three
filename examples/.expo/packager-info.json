@@ -1,3 +1,8 @@
 {
-  "expoServerPort": null
+  "expoServerPort": 19003,
+  "packagerPort": 19004,
+  "packagerPid": 94842,
+  "expoServerNgrokUrl": "https://9h-hcy.bacon.comprehensive.exp.direct",
+  "packagerNgrokUrl": "https://packager.9h-hcy.bacon.comprehensive.exp.direct",
+  "ngrokPid": 94872
 }
