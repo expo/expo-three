@@ -96,9 +96,9 @@ export default class App extends React.Component {
 
   loadModel = async () => {
     const model = await ExpoTHREE.loadAsync(
-      Assets.stormtrooper['stormtrooper.dae'],
+      Assets.models.collada.stormtrooper['stormtrooper.dae'],
       null,
-      name => Assets.stormtrooper[name]
+      name => Assets.models.collada.stormtrooper[name]
     );
     const { scene: mesh, animations } = model;
     mesh.traverse(child => {

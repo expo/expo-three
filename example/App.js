@@ -5,7 +5,6 @@ import { Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 
 import Page from './components/Page';
-import DebugScreen from './screens/AR/Model';
 
 const Navigator = createStackNavigator({
   Page: {
@@ -19,7 +18,7 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
-    ThreeAR.suppressWarnings(true);
+    ThreeAR.suppressWarnings();
     THREE.suppressExpoWarnings(true);
     ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
     this._setupAsync();
@@ -50,12 +49,14 @@ export default class App extends React.Component {
           <Text>Waiting for camera permission</Text>
         </View>
       );
-    } else if (!AR.isAvailable()) {
-      return <ErrorView>{AR.getUnavailabilityReason()}</ErrorView>;
-    } else if (hasCameraPermission === false) {
+    }
+    // else if (!AR.isAvailable()) {
+    //   return <ErrorView>{AR.getUnavailabilityReason()}</ErrorView>;
+    // }
+    else if (hasCameraPermission === false) {
       return <ErrorView>No access to camera</ErrorView>;
     } else {
-      return <DebugScreen />; //<Navigator />;
+      return <Navigator />;
     }
   }
 }

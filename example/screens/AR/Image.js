@@ -68,7 +68,7 @@ class ImageExample extends React.Component {
   onContextCreate = async ({ gl, scale: pixelRatio, width, height }) => {
     AR.setPlaneDetection(AR.PlaneDetectionTypes.Horizontal);
 
-    await this.addDetectionImageAsync(require('../../assets/marker.jpg'));
+    await this.addDetectionImageAsync(Assets['marker.jpg']);
 
     this.renderer = new ExpoTHREE.Renderer({ gl, pixelRatio, width, height });
     this.renderer.gammaInput = this.renderer.gammaOutput = true;
@@ -89,9 +89,9 @@ class ImageExample extends React.Component {
 
   loadModel = async () => {
     const model = await ExpoTHREE.loadAsync(
-      Assets.stormtrooper['stormtrooper.dae'],
+      Assets.models.collada.stormtrooper['stormtrooper.dae'],
       null,
-      name => Assets.stormtrooper[name]
+      name => Assets.models.collada.stormtrooper[name]
     );
     const { scene: mesh, animations } = model;
     mesh.traverse(child => {

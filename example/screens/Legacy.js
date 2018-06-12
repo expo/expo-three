@@ -3,7 +3,7 @@ import ExpoTHREE, { THREE } from 'expo-three';
 import React from 'react';
 import { Platform } from 'react-native';
 import Assets from '../Assets';
-
+import { Asset } from 'expo';
 export default class App extends React.Component {
   componentDidMount() {
     THREE.suppressExpoWarnings(true);
@@ -37,7 +37,7 @@ export default class App extends React.Component {
     height,
     scale: pixelRatio,
   }) => {
-    this.renderer = new ExpoTHREE.Renderer({
+    this.renderer = ExpoTHREE.createRenderer({
       gl,
       canvas,
       width,
@@ -48,7 +48,10 @@ export default class App extends React.Component {
     this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     this.camera.position.z = 5;
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const map = await ExpoTHREE.loadAsync(Assets['icon.png']);
+
+    const asset = Asset.fromModule(Assets['icon.png']);
+    await asset.downloadAsync();
+    const map = await ExpoTHREE.createTextureAsync({ asset });
 
     const material = new THREE.MeshBasicMaterial({
       // NOTE: How to create an Expo-compatible THREE texture

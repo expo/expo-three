@@ -91,6 +91,7 @@ class App extends React.Component {
       <View style={{ flex: 1 }}>
         <GraphicsView
           style={{ flex: 1 }}
+          shouldIgnoreSafeGaurds
           onContextCreate={this.onContextCreate}
           onRender={this.onRender}
           onResize={this.onResize}

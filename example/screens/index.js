@@ -1,8 +1,11 @@
-import * as AR from './AR';
+import AR from './AR';
 import Simple from './Simple';
-import Loader from './Loader';
+import Loaders from './Loaders';
+import Legacy from './Legacy';
+
 export default {
   AR,
-  Loader,
+  Loaders,
   Simple,
+  Legacy,
 };

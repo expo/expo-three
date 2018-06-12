@@ -5,7 +5,7 @@ import List from './List';
 
 class Page extends React.Component {
   static navigationOptions = ({ navigation }) => ({
-    title: (navigation.state.params || {}).title || 'Expo AR',
+    title: (navigation.state.params || {}).title || 'Expo Three',
   });
 
   render() {

@@ -1,7 +1,14 @@
 // @flow
 import Expo, { AR, GLView as EXGLView } from 'expo';
 import React from 'react';
-import { AppState, PixelRatio, findNodeHandle, StyleSheet, Text, View } from 'react-native';
+import {
+  AppState,
+  PixelRatio,
+  findNodeHandle,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 
 import CameraInfo from './CameraInfo';
 import PlayStateView from './PlayStateView';
@@ -127,20 +134,25 @@ export default class GraphicsView extends React.Component<Props> {
       }
     }
 
-    return (
-      <PlayStateView>
-        <CameraInfo style={{ flex: 1 }}>
-          <GLView
-            key={this.state.id}
-            onLayout={this._onLayout}
-            nativeRef_EXPERIMENTAL={ref => (this.nativeRef = ref)}
-            style={[styles.container, this.props.style]}
-            onContextCreate={this._onContextCreate}
-          />
-        </CameraInfo>
-      </PlayStateView>
-    );
+    if (this.props.arEnabled) {
+      return (
+        <PlayStateView>
+          <CameraInfo style={{ flex: 1 }}>{this.renderGLView()}</CameraInfo>
+        </PlayStateView>
+      );
+    }
+    return this.renderGLView();
   }
+
+  renderGLView = () => (
+    <GLView
+      key={this.state.id}
+      onLayout={this._onLayout}
+      nativeRef_EXPERIMENTAL={ref => (this.nativeRef = ref)}
+      style={[styles.container, this.props.style]}
+      onContextCreate={this._onContextCreate}
+    />
+  );
 
   _onLayout = ({
     nativeEvent: {

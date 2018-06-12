@@ -31,7 +31,6 @@ export default {
       'pirouette.bvh': require(`./assets/models/bvh/pirouette.bvh`),
     },
     pack: {
-      'robo_pigeon.js': require(`./assets/models/pack/robo_pigeon.js`),
       'robo_pigeon.pack': require(`./assets/models/pack/robo_pigeon.pack`),
     },
     vtk: {
