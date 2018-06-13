@@ -134,6 +134,8 @@ const { scene } = await ExpoTHREE.loadAsync(
 
 ### loadObjAsync({ asset, mtlAsset, materials, onAssetRequested, onMtlAssetRequested })
 
+**Props:**
+
 - `asset`: a `obj` model reference that will be evaluated using `AssetUtils.uriAsync`
 - `mtlAsset`: an optional prop that will be loaded using `loadMtlAsync()`
 - `onAssetRequested`: A callback that is used to evaluate urls found within the `asset` and optionally the `mtlAsset`. You can also just pass in a dictionary of key values if you know the assets required ahead of time.
@@ -149,7 +151,9 @@ const mesh = await loadObjAsync({ asset: 'https://www.members.com/chef.obj' })
 
 See: [MTL Loader Demo](/example/screens/Loaders/MtlLoaderExample.js)
 
-### loadMtlAsync()
+### loadMtlAsync({ asset, onAssetRequested })
+
+**Props:**
 
 - `asset`: a `mtl` material reference that will be evaluated using `AssetUtils.uriAsync`
 - `onAssetRequested`: A callback that is used to evaluate urls found within the `asset`, optionally you can just pass in a dictionary of key values if you know the assets required ahead of time.
@@ -165,6 +169,8 @@ const materials = await loadMtlAsync({
 See: [MTL Loader Demo](/example/screens/Loaders/MtlLoaderExample.js)
 
 ### loadDaeAsync({ asset, onAssetRequested, onProgress })
+
+**Props:**
 
 - `asset`: a reference to a `dae` scene that will be evaluated using `AssetUtils.uriAsync`
 - `onAssetRequested`: A callback that is used to evaluate urls found within the `asset`, optionally you can just pass in a dictionary of key values if you know the assets required ahead of time.
@@ -184,7 +190,7 @@ See: [Collada Loader Demo](/example/screens/Loaders/DaeLoaderExample.js)
 
 Tools and utilites for working with ARKit in Expo.
 
-### `new ExpoTHREE.AR.BackgroundTexture()`
+### `new ExpoTHREE.AR.BackgroundTexture(renderer: WebGLRenderingContext)`
 
 extends a [`THREE.Texture`](https://threejs.org/docs/#api/textures/Texture) that
 reflects the live video feed of the AR session. Usually this is set as the
@@ -199,7 +205,7 @@ scene.background = new ExpoTHREE.AR.BackgroundTexture(renderer);
 
 See: [Basic Demo](/example/screens/AR/Basic.js)
 
-### `new ExpoTHREE.AR.Camera()`
+### `new ExpoTHREE.AR.Camera(width: number, height: number, zNear: number, zFar: number)`
 
 extends a [`THREE.PerspectiveCamera`](https://threejs.org/docs/#api/cameras/PerspectiveCamera)
 that automatically updates its view and projection matrices to reflect the AR
@@ -225,16 +231,20 @@ See: [Basic Demo](/example/screens/AR/Basic.js)
 renderer.physicallyCorrectLights = true;
 renderer.toneMapping = THREE.ReinhardToneMapping;
 
-const ambient = new ExpoTHREE.AR.Light();
-ambient.position.y = 2;
-scene.add(this.ambient);
+const arPointLight = new ExpoTHREE.AR.Light();
+arPointLight.position.y = 2;
+scene.add(arPointLight);
 
 // You should also add a Directional for shadows
 const shadowLight = new THREE.DirectionalLight();
 scene.add(shadowLight);
 // If you would like to move the light (you would) then you will need to add the lights `target` to the scene.
 // The shadowLight.position adjusts one side of the light vector, and the target.position represents the other.
-scene.add(this.shadowLight.target);
+scene.add(shadowLight.target);
+
+...
+// Call this every frame:
+arPointLight.update()
 ```
 
 See: [Model Demo](/example/screens/AR/Model.js)
@@ -248,8 +258,13 @@ Use this as a parent to models that you want to attach to surfaces.
 const magneticObject = new ExpoTHREE.AR.MagneticObject();
 magneticObject.maintainScale = false; // This will scale the mesh up/down to preserve it's size regardless of distance.
 magneticObject.maintainRotation = true; // When true the mesh will orient itself to face the camera.
+
+// screenCenter is a normalized value = { 0.5, 0.5 }
+const screenCenter = new THREE.Vector2(0.5, 0.5);
+...
+
 // Call this every frame to update the position.
-magneticObject.update(this.camera, this.screenCenter); // screenCenter is a normalized value = { 0.5, 0.5 }
+magneticObject.update(camera, screenCenter);
 ```
 
 See: [Model Demo](/example/screens/AR/Model.js)

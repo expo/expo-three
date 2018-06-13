@@ -63,12 +63,12 @@ export default class App extends React.Component {
     this.camera = new ThreeAR.Camera(width, height, 0.01, 1000);
 
     // Create ARKit lighting
-    this.ambient = new ThreeAR.Light();
-    this.ambient.position.y = 2;
+    this.arPointLight = new ThreeAR.Light();
+    this.arPointLight.position.y = 2;
 
     this.mesh = new THREE.Object3D();
 
-    this.scene.add(this.ambient);
+    this.scene.add(this.arPointLight);
     this.shadowLight = this.getShadowLight();
     this.scene.add(this.shadowLight);
     this.scene.add(this.shadowLight.target);
@@ -134,9 +134,9 @@ export default class App extends React.Component {
     if (this.mixer && this.mesh.visible) {
       this.mixer.update(delta);
     }
-    this.ambient.update();
+    this.arPointLight.update();
 
-    this.shadowFloor.opacity = this.ambient.intensity;
+    this.shadowFloor.opacity = this.arPointLight.intensity;
 
     this.shadowLight.target.position.copy(this.magneticObject.position);
     this.shadowLight.position.copy(this.shadowLight.target.position);
