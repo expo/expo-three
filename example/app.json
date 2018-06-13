@@ -1,0 +1,47 @@
+{
+  "expo": {
+    "name": "Expo Three",
+    "description": "A collection of expo-three example",
+    "slug": "expo-three-example",
+    "sdkVersion": "28.0.0",
+    "version": "1.0.0",
+    "privacy": "public",
+    "primaryColor": "#E44262",
+    "icon": "./assets/icon.png",
+    "loading": {
+      "icon": "./assets/icon.png",
+      "hideExponentText": false
+    },
+    "packagerOpts": {
+      "assetExts": [
+        "ttf",
+        "mp4",
+        "otf",
+        "dae",
+        "obj",
+        "mtl",
+        "amf",
+        "3mf",
+        "3ds",
+        "jpg",
+        "assimp",
+        "fbx",
+        "pmd",
+        "vmd",
+        "ply",
+        "stl",
+        "vtk",
+        "vtp",
+        "babylon",
+        "drc",
+        "pcd",
+        "pack",
+        "bvh",
+        "x"
+      ]
+    },
+    "ios": {
+      "supportsTablet": true
+    }
+  }
+}

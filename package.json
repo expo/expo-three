@@ -1,33 +1,60 @@
 {
   "name": "expo-three",
-  "version": "2.2.2-alpha.1",
+  "version": "3.0.0-alpha.1",
   "description": "Utilities for using THREE.js on Expo",
-  "files": ["lib"],
-  "main": "lib/index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
+  "files": [
+    "lib"
+  ],
+  "homepage": "https://github.com/expo/expo-three#readme",
   "repository": {
     "type": "git",
-    "url": "https://github.com/expo/expo-three.git"
+    "url": "git+https://github.com/expo/expo-three.git"
   },
-  "keywords": ["expo", "three.js", "graphics", "opengl", "gl", "arkit"],
+  "bugs": {
+    "url": "https://github.com/expo/expo-three/issues"
+  },
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint .",
+    "prettier": "eslint . --fix"
+  },
+  "directories": {
+    "example": "examples",
+    "lib": "lib"
+  },
+  "keywords": [
+    "expo",
+    "three.js",
+    "graphics",
+    "opengl",
+    "gl",
+    "arkit"
+  ],
   "author": "Nikhilesh Sigatapu",
   "license": "MIT",
   "dependencies": {
-    "expo-asset-utils": "^0.0.3",
-    "react-native-console-time-polyfill": "^0.0.6",
-    "text-encoding": "^0.6.4",
-    "xmldom-qsa": "^1.0.3"
+    "@expo/browser-polyfill": "^0.0.0-alpha.4",
+    "color-temperature": "0.2.7",
+    "expo-asset-utils": "^0.0.4-alpha.2",
+    "three": "^0.93.0"
   },
   "peerDependencies": {
     "react-native": "*",
-    "three": "*"
+    "three": "^0.93.0",
+    "expo": "^28.0.0"
   },
   "devDependencies": {
-    "three": "*",
-    "react-native-console-time-polyfill": "^0.0.6",
-    "text-encoding": "^0.6.4",
-    "xmldom-qsa": "^1.0.3"
+    "babel-jest": "^23.0.1",
+    "babel-preset-expo": "^4.0.0",
+    "babel-preset-react-native": "^4.0.0",
+    "eslint": "^4.19.1",
+    "eslint-config-react-native-prettier": "^1.0.1",
+    "flow-bin": "^0.26.0",
+    "jest": "^23.1.0",
+    "prettier": "^1.13.5"
+  },
+  "eslintConfig": {
+    "extends": "expo"
   }
 }
