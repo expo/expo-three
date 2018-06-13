@@ -2,7 +2,7 @@ import { AR } from 'expo';
 import ExpoTHREE, { THREE, AR as ThreeAR } from 'expo-three';
 import React from 'react';
 
-import GraphicsView from '../../components/GraphicsView';
+import { View as GraphicsView } from 'expo-graphics';
 
 export default class App extends React.Component {
   render() {
@@ -12,8 +12,10 @@ export default class App extends React.Component {
         onContextCreate={this.onContextCreate}
         onRender={this.onRender}
         onResize={this.onResize}
-        trackingConfiguration={AR.TrackingConfigurations.World}
-        arEnabled
+        arTrackingConfiguration={AR.TrackingConfigurations.World}
+        isArEnabled
+        isArRunningStateEnabled
+        isArCameraStateEnabled
       />
     );
   }

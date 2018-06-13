@@ -3,7 +3,7 @@ import ExpoTHREE, { THREE, AR as ThreeAR } from 'expo-three';
 import React from 'react';
 import { Text, View, StyleSheet } from 'react-native';
 
-import GraphicsView from '../../components/GraphicsView';
+import { View as GraphicsView } from 'expo-graphics';
 
 let messages = [
   'Lower your eyebrows to start...',
@@ -91,12 +91,11 @@ class App extends React.Component {
       <View style={{ flex: 1 }}>
         <GraphicsView
           style={{ flex: 1 }}
-          shouldIgnoreSafeGaurds
           onContextCreate={this.onContextCreate}
           onRender={this.onRender}
           onResize={this.onResize}
-          trackingConfiguration={config}
-          arEnabled
+          isArEnabled
+          arTrackingConfiguration={config}
         />
         <View style={styles.infoContainer}>
           <InfoBox title="Left EyeBrow">{leftEyebrow}</InfoBox>

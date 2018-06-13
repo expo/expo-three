@@ -3,7 +3,7 @@ import ExpoTHREE, { AR as ThreeAR, THREE } from 'expo-three';
 import React from 'react';
 import { Text, View } from 'react-native';
 
-import GraphicsView from '../../components/GraphicsView';
+import { View as GraphicsView } from 'expo-graphics';
 
 export default class App extends React.Component {
   render() {
@@ -14,8 +14,10 @@ export default class App extends React.Component {
           onContextCreate={this.onContextCreate}
           onRender={this.onRender}
           onResize={this.onResize}
-          trackingConfiguration={AR.TrackingConfigurations.World}
-          arEnabled
+          isArEnabled
+          isArRunningStateEnabled
+          isArCameraStateEnabled
+          arTrackingConfiguration={AR.TrackingConfigurations.World}
         />
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>

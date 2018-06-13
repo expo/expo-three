@@ -3,7 +3,7 @@ import ExpoTHREE, { THREE, AR as ThreeAR } from 'expo-three';
 import React from 'react';
 
 import Assets from '../../Assets';
-import GraphicsView from '../../components/GraphicsView';
+import { View as GraphicsView } from 'expo-graphics';
 
 class ImageExample extends React.Component {
   componentWillMount() {
@@ -60,8 +60,10 @@ class ImageExample extends React.Component {
         onContextCreate={this.onContextCreate}
         onRender={this.onRender}
         onResize={this.onResize}
-        trackingConfiguration={AR.TrackingConfigurations.World}
-        arEnabled
+        arTrackingConfiguration={AR.TrackingConfigurations.World}
+        isArEnabled
+        isArRunningStateEnabled
+        isArCameraStateEnabled
       />
     );
   }

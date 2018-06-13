@@ -3,7 +3,7 @@ import ExpoTHREE, { THREE, AR as ThreeAR } from 'expo-three';
 import React from 'react';
 import { NativeModules } from 'react-native';
 
-import GraphicsView from '../../components/GraphicsView';
+import { View as GraphicsView } from 'expo-graphics';
 
 const { ExponentAR } = NativeModules;
 
@@ -156,15 +156,16 @@ class RawData extends React.Component {
         onContextCreate={this.onContextCreate}
         onRender={this.onRender}
         onResize={this.onResize}
-        trackingConfiguration={AR.TrackingConfigurations.World}
-        arEnabled
+        arTrackingConfiguration={AR.TrackingConfigurations.World}
+        isArEnabled
+        isArRunningStateEnabled
+        isArCameraStateEnabled
       />
     );
   }
 
   onContextCreate = async ({
     gl,
-    arSession,
     scale: pixelRatio,
     width,
     height,

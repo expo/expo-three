@@ -5,7 +5,7 @@ import React from 'react';
 import { Dimensions, LayoutAnimation, StyleSheet, View } from 'react-native';
 import { State, TapGestureHandler } from 'react-native-gesture-handler';
 
-import GraphicsView from '../../../components/GraphicsView';
+import { View as GraphicsView } from 'expo-graphics';
 import SizeText from './SizeText';
 
 const { width, height } = Dimensions.get('window');

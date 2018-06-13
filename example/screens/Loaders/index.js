@@ -1,5 +1,5 @@
 import React from 'react';
-import GraphicsView from '../../components/GraphicsView';
+import { View as GraphicsView } from 'expo-graphics';
 import TouchableView from '../../components/TouchableView';
 
 function sceneWithExample(example) {
