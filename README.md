@@ -54,8 +54,6 @@ const renderer = ExpoTHREE.createRenderer(props);
 
 A function that will asynchronously load files based on their extension.
 
-#### Props
-
 **Image Format**
 
 - `number`: Static file reference `require('./model.*')`
@@ -105,8 +103,19 @@ Optionally more specific loaders are provided with less complexity.
 ```js
 // A THREE.Texture from a static resource.
 const texture = await ExpoTHREE.loadAsync(require('./icon.png'));
-const obj = await ExpoTHREE.loadAsync([require('./cartman.obj'), require('./cartman.mtl')], null, (imageName) => resources[imageName]);
-const { scene } = await ExpoTHREE.loadAsync(resources['./kenny.dae'], onProgress, resources);
+const obj = await ExpoTHREE.loadAsync(
+  [
+    require('./cartman.obj'),
+    require('./cartman.mtl')
+  ],
+  null,
+  (imageName) => resources[imageName]
+);
+const { scene } = await ExpoTHREE.loadAsync(
+  resources['./kenny.dae'],
+  onProgress,
+  resources
+);
 ```
 
 ### loadObjAsync({ asset, mtlAsset, materials, onAssetRequested, onMtlAssetRequested })
@@ -132,7 +141,11 @@ See: [MTL Loader Demo](/example/screens/Loaders/MtlLoaderExample.js)
 - `onAssetRequested`: A callback that is used to evaluate urls found within the `asset`, optionally you can just pass in a dictionary of key values if you know the assets required ahead of time.
 
 ```js
-const materials = await loadMtlAsync({ asset: require('chef.mtl'), onAssetRequested: modelAssets })
+const materials = await loadMtlAsync({
+  asset: require('chef.mtl'),
+  onAssetRequested:
+  modelAssets
+})
 ```
 
 See: [MTL Loader Demo](/example/screens/Loaders/MtlLoaderExample.js)
@@ -144,7 +157,11 @@ See: [MTL Loader Demo](/example/screens/Loaders/MtlLoaderExample.js)
 - `onProgress`: An experimental callback used to track loading progress.
 
 ```js
-const { scene } = await loadDaeAsync({ asset: require('chef.dae'), onAssetRequested: modelAssets, onProgress: () => {} })
+const { scene } = await loadDaeAsync({
+  asset: require('chef.dae'),
+  onAssetRequested: modelAssets,
+  onProgress: () => {}
+})
 ```
 
 See: [Collada Loader Demo](/example/screens/Loaders/DaeLoaderExample.js)
@@ -237,6 +254,34 @@ const shadowFloor = new ExpoTHREE.AR.ShadowFloor({ width: 1, height: 1, opacity:
 
 See: [Model Demo](/example/screens/AR/Model.js)
 
+### `new CubeTexture()`
+
+Used to load in a texture cube or skybox.
+
+- `assetForDirection`: This function will be called for each of the 6
+  directions.
+  - `({ direction })`: A direction string will be passed back looking for the
+    corresponding image. You can send back: `static resource`, `localUri`,
+    `Expo.Asset`, `remote image url`
+- `directions`: The order that image will be requested in. The default value is:
+  `['px', 'nx', 'py', 'ny', 'pz', 'nz']`
+
+Example:
+
+```js
+const skybox = {
+	nx: require('./nx.jpg'),
+	ny: require('./ny.jpg'),
+	nz: require('./nz.jpg'),
+	px: require('./px.jpg'),
+	py: require('./py.jpg'),
+	pz: require('./pz.jpg')
+}
+const cubeTexture = new CubeTexture()
+await cubeTexture.loadAsync({assetForDirection: ({ direction }) => skybox[direction]})
+scene.background = cubeTexture
+```
+
 ### `new Points()`
 
 A utility object that renders all the raw feature points.
@@ -274,7 +319,7 @@ converts AR warnings to logs, this prevents the console from jamming up
 
 ### hitTestWithFeatures(...)
 
-Props:
+**Props:**
 
 - camera: THREE.Camera
 - point: { x: number, y: number }
@@ -285,28 +330,28 @@ Props:
 
 ### hitTestWithPoint(...)
 
-Props:
+**Props:**
 
 - camera: THREE.Camera
 - point: { x: number, y: number }
 
 ### unprojectPoint(...)
 
-Props:
+**Props:**
 
 - camera: THREE.Camera
 - point: { x: number, y: number }
 
 ### hitTestRayFromScreenPos(...)
 
-Props:
+**Props:**
 
 - camera: THREE.Camera
 - point: { x: number, y: number }
 
 ### hitTestFromOrigin(...)
 
-Props:
+**Props:**
 
 - origin: Vector
 - direction: Vector
@@ -314,7 +359,7 @@ Props:
 
 ### hitTestWithInfiniteHorizontalPlane(...)
 
-Props:
+**Props:**
 
 - camera: THREE.Camera
 - point: Point
@@ -322,7 +367,7 @@ Props:
 
 ### rayIntersectionWithHorizontalPlane(...)
 
-Props:
+**Props:**
 
 - rayOrigin: THREE.Vector3
 - direction: THREE.Vector3
@@ -330,19 +375,19 @@ Props:
 
 ### convertTransformArray(transform: Array<number>): THREE.Matrix4
 
-Props:
+**Props:**
 
 - transform: Array<number>
 
 ### positionFromTransform(transform: THREE.Matrix4): THREE.Vector3
 
-Props:
+**Props:**
 
 - transform: THREE.Matrix4
 
 ### worldPositionFromScreenPosition(...): { worldPosition: THREE.Vector3, planeAnchor: ARPlaneAnchor, hitAPlane: boolean }
 
-Props:
+**Props:**
 
 - camera: THREE.Camera
 - position: Point
@@ -353,13 +398,13 @@ Props:
 
 ### positionFromAnchor(anchor: ARAnchor): THREE.Vector3
 
-Props:
+**Props:**
 
 - anchor: { worldTransform: Matrix4 }
 
 ### improviseHitTest(point, camera: THREE.Camera): ?THREE.Vector3
 
-Props:
+**Props:**
 
 - point: {x:number, y:number}
 - camera: THREE.Camera
@@ -442,34 +487,6 @@ default this function will be activated on import.
 import { THREE } from 'expo-three';
 THREE.suppressExpoWarnings(true);
 ````
-
-### [`loadCubeTextureAsync`](https://snack.expo.io/@bacon/expo-three-loadcubetextureasync)
-
-Used to load in a texture cube or skybox.
-
-- `assetForDirection`: This function will be called for each of the 6
-  directions.
-  - `({ direction })`: A direction string will be passed back looking for the
-    corresponding image. You can send back: `static resource`, `localUri`,
-    `Expo.Asset`, `remote image url`
-- `directions`: The order that image will be requested in. The default value is:
-  `['px', 'nx', 'py', 'ny', 'pz', 'nz']`
-
-Example:
-
-```js
-const skybox = {
-	nx: require('./nx.jpg'),
-	ny: require('./ny.jpg'),
-	nz: require('./nz.jpg'),
-	px: require('./px.jpg'),
-	py: require('./py.jpg'),
-	pz: require('./pz.jpg')
-}
-const cubeTexture = new CubeTexture()
-await cubeTexture.loadAsync({assetForDirection: ({ direction }) => skybox[direction]})
-scene.background = cubeTexture
-```
 
 ---
 
