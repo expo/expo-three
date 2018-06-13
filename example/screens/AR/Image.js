@@ -1,7 +1,7 @@
 import Expo, { AR } from 'expo';
 import ExpoTHREE, { THREE, AR as ThreeAR } from 'expo-three';
 import React from 'react';
-
+import { View, Linking, TouchableOpacity, Text, Image } from 'react-native';
 import Assets from '../../Assets';
 import { View as GraphicsView } from 'expo-graphics';
 
@@ -53,18 +53,44 @@ class ImageExample extends React.Component {
     });
   };
 
+  openLink = () => {
+    Linking.openURL(
+      'https://github.com/expo/expo-three/blob/master/example/assets/marker.jpg'
+    );
+  };
+
   render() {
     return (
-      <GraphicsView
-        style={{ flex: 1 }}
-        onContextCreate={this.onContextCreate}
-        onRender={this.onRender}
-        onResize={this.onResize}
-        arTrackingConfiguration={AR.TrackingConfigurations.World}
-        isArEnabled
-        isArRunningStateEnabled
-        isArCameraStateEnabled
-      />
+      <View style={{ flex: 1 }}>
+        <GraphicsView
+          style={{ flex: 1 }}
+          onContextCreate={this.onContextCreate}
+          onRender={this.onRender}
+          onResize={this.onResize}
+          arTrackingConfiguration={AR.TrackingConfigurations.World}
+          isArEnabled
+          isArRunningStateEnabled
+          isArCameraStateEnabled
+        />
+        <View
+          style={{
+            position: 'absolute',
+            alignItems: 'stretch',
+            justifyContent: 'flex-end',
+            bottom: 12,
+            right: 12,
+            opacity: 0.5,
+            width: '30%',
+          }}>
+          <Text>Point the camera at this image.</Text>
+          <TouchableOpacity onPress={this.openLink}>
+            <Image
+              source={Assets['marker.jpg']}
+              style={{ maxWidth: '100%', height: 100, resizeMode: 'contain' }}
+            />
+          </TouchableOpacity>
+        </View>
+      </View>
     );
   }
 
