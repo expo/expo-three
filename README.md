@@ -225,7 +225,7 @@ scene.add(this.shadowLight.target);
 
 See: [Model Demo](/example/screens/AR/Model.js)
 
-### `new MagneticObject()`
+### `new ExpoTHREE.AR.MagneticObject()`
 
 A `THREE.Mesh` that sticks to surfaces.
 Use this as a parent to models that you want to attach to surfaces.
@@ -240,7 +240,7 @@ magneticObject.update(this.camera, this.screenCenter); // screenCenter is a norm
 
 See: [Model Demo](/example/screens/AR/Model.js)
 
-### `new ShadowFloor()`
+### `new ExpoTHREE.AR.ShadowFloor()`
 
 A transparent plane that extends `THREE.Mesh` and receives shadows from other meshes.
 This is used to render shadows on real world surfaces.
@@ -254,7 +254,7 @@ const shadowFloor = new ExpoTHREE.AR.ShadowFloor({ width: 1, height: 1, opacity:
 
 See: [Model Demo](/example/screens/AR/Model.js)
 
-### `new CubeTexture()`
+### `new ExpoTHREE.AR.CubeTexture()`
 
 Used to load in a texture cube or skybox.
 
@@ -282,7 +282,7 @@ await cubeTexture.loadAsync({assetForDirection: ({ direction }) => skybox[direct
 scene.background = cubeTexture
 ```
 
-### `new Points()`
+### `new ExpoTHREE.AR.Points()`
 
 A utility object that renders all the raw feature points.
 
@@ -294,7 +294,7 @@ points.update();
 
 See: [Points Demo](/example/screens/AR/Points.js)
 
-### `new Planes()`
+### `new ExpoTHREE.AR.Planes()`
 
 A utility object that renders all the ARPlaneAnchors
 
