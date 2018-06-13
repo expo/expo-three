@@ -1,7 +1,7 @@
 import ExpoTHREE, { THREE } from 'expo-three';
 
 import Assets from '../../Assets';
-import ThreeStage from './ThreeStage';
+import ThreeStage from '../ThreeStage';
 
 /// Long form general purpose loading with ExpoTHREE.loadAsync
 async function loading_method_1() {

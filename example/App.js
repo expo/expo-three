@@ -4,6 +4,7 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import Page from './components/Page';
+import 'three/examples/js/controls/OrbitControls';
 
 const Navigator = createStackNavigator({
   Page: {

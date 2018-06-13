@@ -3,6 +3,7 @@ import ExpoTHREE, { THREE } from 'expo-three';
 class ThreeStage {
   constructor() {
     this.onRender = this.onRender.bind(this);
+    this.setupControls = this.setupControls.bind(this);
   }
   onContextCreate = async ({
     gl,
@@ -26,7 +27,12 @@ class ThreeStage {
     await this.setupCamera({ width, height });
     await this.setupLights();
     await this.setupModels();
+    await this.setupControls();
   };
+
+  setupControls() {
+    new THREE.OrbitControls(this.camera);
+  }
 
   setupRenderer = props => {
     this.renderer = new ExpoTHREE.Renderer(props);

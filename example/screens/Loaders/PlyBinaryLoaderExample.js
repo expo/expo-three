@@ -1,7 +1,7 @@
 import ExpoTHREE, { THREE } from 'expo-three';
 
 import Assets from '../../Assets';
-import ThreeStage from './ThreeStage';
+import ThreeStage from '../ThreeStage';
 
 class PlyBinaryLoaderExample extends ThreeStage {
   async setupModels() {

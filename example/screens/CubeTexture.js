@@ -4,15 +4,8 @@ import React from 'react';
 import { Platform } from 'react-native';
 import Assets from '../Assets';
 import TouchableView from '../components/TouchableView';
-import 'three/examples/js/controls/OrbitControls';
 
 export default class App extends React.Component {
-  componentDidMount() {
-    THREE.suppressExpoWarnings(true);
-  }
-  componentWillUnmount() {
-    THREE.suppressExpoWarnings(false);
-  }
   onShouldReloadContext = () => {
     /// The Android OS loses gl context on background, so we should reload it.
     return Platform.OS === 'android';
@@ -22,10 +15,7 @@ export default class App extends React.Component {
     // Create an `ExpoGraphics.View` covering the whole screen, tell it to call our
     // `onContextCreate` function once it's initialized.
     return (
-      <TouchableView
-        style={{ flex: 1 }}
-        shouldCancelWhenOutside={false}
-        onTouchesBegan={this.onTouchesBegan}>
+      <TouchableView style={{ flex: 1 }} shouldCancelWhenOutside={false}>
         <GraphicsView
           onContextCreate={this.onContextCreate}
           onRender={this.onRender}

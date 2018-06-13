@@ -1,6 +1,6 @@
 import ExpoTHREE, { THREE } from 'expo-three';
 import Assets from '../../Assets';
-import ThreeStage from './ThreeStage';
+import ThreeStage from '../ThreeStage';
 
 class ObjLoaderExample extends ThreeStage {
   async setupModels() {

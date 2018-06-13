@@ -1,7 +1,7 @@
 import ExpoTHREE, { THREE } from 'expo-three';
 
 import Assets from '../../Assets';
-import ThreeStage from './ThreeStage';
+import ThreeStage from '../ThreeStage';
 
 class TdfLoaderExample extends ThreeStage {
   async setupModels() {

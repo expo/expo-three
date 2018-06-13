@@ -1,6 +1,6 @@
 import ExpoTHREE, { THREE } from 'expo-three';
 import Assets from '../../Assets';
-import ThreeStage from './ThreeStage';
+import ThreeStage from '../ThreeStage';
 
 async function loading_method_1() {
   const model = Assets.models.collada.elf;

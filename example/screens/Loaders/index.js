@@ -1,10 +1,15 @@
 import React from 'react';
 import GraphicsView from '../../components/GraphicsView';
+import TouchableView from '../../components/TouchableView';
 
 function sceneWithExample(example) {
   const Example = example.default;
   const stage = new Example();
-  return <GraphicsView {...stage} />;
+  return (
+    <TouchableView style={{ flex: 1 }}>
+      <GraphicsView {...stage} />
+    </TouchableView>
+  );
 }
 
 export default {
