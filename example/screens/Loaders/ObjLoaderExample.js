@@ -18,7 +18,9 @@ class ObjLoaderExample extends ThreeStage {
       model['displacement.jpg']
     );
 
-    const object = await ExpoTHREE.loadAsync(model['ninjaHead_Low.obj']);
+    const object = await ExpoTHREE.loadObjAsync({
+      asset: model['ninjaHead_Low.obj'],
+    });
 
     const materialStandard = new THREE.MeshStandardMaterial({
       color: 0xffffff,
@@ -28,30 +30,6 @@ class ObjLoaderExample extends ThreeStage {
       displacementScale: SCALE,
       displacementBias: BIAS,
       aoMap: aoMap,
-      normalMap: normalMap,
-      normalScale: new THREE.Vector2(1, -1),
-      //flatShading: true,
-      side: THREE.DoubleSide,
-    });
-
-    const materialDepthBasic = new THREE.MeshDepthMaterial({
-      depthPacking: THREE.BasicDepthPacking,
-      displacementMap: displacementMap,
-      displacementScale: SCALE,
-      displacementBias: BIAS,
-      side: THREE.DoubleSide,
-    });
-    const materialDepthRGBA = new THREE.MeshDepthMaterial({
-      depthPacking: THREE.RGBADepthPacking,
-      displacementMap: displacementMap,
-      displacementScale: SCALE,
-      displacementBias: BIAS,
-      side: THREE.DoubleSide,
-    });
-    const materialNormal = new THREE.MeshNormalMaterial({
-      displacementMap: displacementMap,
-      displacementScale: SCALE,
-      displacementBias: BIAS,
       normalMap: normalMap,
       normalScale: new THREE.Vector2(1, -1),
       //flatShading: true,

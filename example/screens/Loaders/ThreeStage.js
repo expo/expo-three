@@ -35,7 +35,7 @@ class ThreeStage {
 
   setupCamera = ({ width, height }) => {
     this.camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 10000);
-    this.camera.position.set(0, 6, -12);
+    this.camera.position.set(0, 6, 12);
     this.camera.lookAt(0, 0, 0);
   };
 

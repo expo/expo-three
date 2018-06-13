@@ -3,7 +3,6 @@ import { AR as ThreeAR, THREE } from 'expo-three';
 import React from 'react';
 import { Text, View } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
-
 import Page from './components/Page';
 
 const Navigator = createStackNavigator({

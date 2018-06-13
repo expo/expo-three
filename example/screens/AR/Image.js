@@ -10,6 +10,7 @@ class ImageExample extends React.Component {
     this._anchorsDidUpdate = AR.onAnchorsDidUpdate(({ anchors, eventType }) => {
       for (const anchor of anchors) {
         if (anchor.type === AR.AnchorTypes.Image) {
+          console.log('Found image', anchor);
           this.handleImage(anchor, eventType);
         }
       }
@@ -88,12 +89,12 @@ class ImageExample extends React.Component {
   };
 
   loadModel = async () => {
-    const model = await ExpoTHREE.loadAsync(
-      Assets.models.collada.stormtrooper['stormtrooper.dae'],
-      null,
-      name => Assets.models.collada.stormtrooper[name]
-    );
-    const { scene: mesh, animations } = model;
+    const model = Assets.models.collada.stormtrooper;
+    const collada = await ExpoTHREE.loadDaeAsync({
+      asset: model['stormtrooper.dae'],
+      onAssetRequested: model,
+    });
+    const { scene: mesh, animations } = collada;
     mesh.traverse(child => {
       if (child instanceof THREE.Mesh) {
         child.castShadow = true;

@@ -19,11 +19,19 @@ const trackingStateReasonExplainations = {
   [AR.TrackingStateReasons.Relocalizing]: { title: 'Relocalizing' },
 };
 
+const removeSuffix = str => {
+  if (typeof str === 'string') {
+    const components = str.split('0');
+    return components[components.length - 1];
+  }
+};
 class CameraInfo extends React.PureComponent {
   state = {};
 
   componentDidMount() {
-    AR.onCameraDidChangeTrackingState(tracking => this.setState(tracking));
+    AR.onCameraDidChangeTrackingState(tracking => {
+      this.setState(tracking);
+    });
   }
 
   componentWillUnmount() {
@@ -36,26 +44,29 @@ class CameraInfo extends React.PureComponent {
 
     let trackingStateColor = 'white';
     let trackingStateMessage = {};
-    switch (trackingState) {
+    switch (removeSuffix(trackingState)) {
       case AR.TrackingStates.NotAvailable:
         trackingStateMessage = { title: 'Not Available' };
         trackingStateColor = '#D0021B';
         break;
       case AR.TrackingStates.Limited:
-        trackingStateMessage = trackingStateReasonExplainations[trackingStateReason];
+        trackingStateMessage =
+          trackingStateReasonExplainations[removeSuffix(trackingStateReason)];
         trackingStateColor = '#F5C423';
         break;
       case AR.TrackingStates.Normal:
         break;
     }
     const { title, subtitle } = trackingStateMessage;
-
     return (
       <View style={{ flex: 1 }}>
         {children}
         <View style={[styles.container, style]}>
           {title && (
-            <Text style={[styles.title, { color: trackingStateColor }, titleStyle]}>{title}</Text>
+            <Text
+              style={[styles.title, { color: trackingStateColor }, titleStyle]}>
+              {title}
+            </Text>
           )}
           {subtitle && <Text style={styles.subtitle}>{subtitle}</Text>}
         </View>
@@ -72,6 +83,7 @@ const styles = StyleSheet.create({
     top: 56,
     right: 12,
     left: 12,
+    zIndex: 5,
   },
   title: {
     fontWeight: 'bold',

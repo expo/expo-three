@@ -168,6 +168,8 @@ export default class App extends React.Component {
         linecap: 'round',
       })
     );
+    /// https://stackoverflow.com/questions/36497763/three-js-line-disappears-if-one-point-is-outside-of-the-cameras-view
+    this.line.frustumCulled = false; // Avoid flicker
     this.line.visible = false;
     this.scene.add(this.line);
   };

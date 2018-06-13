@@ -7,12 +7,11 @@ class DaeRiggedLoaderExample extends ThreeStage {
     await super.setupModels();
 
     const model = Assets.models.collada.stormtrooper;
-
-    const { scene: mesh } = await ExpoTHREE.loadAsync(
-      model['stormtrooper.dae'],
-      null,
-      name => model[name]
-    );
+    const collada = await ExpoTHREE.loadDaeAsync({
+      asset: model['stormtrooper.dae'],
+      onAssetRequested: model,
+    });
+    const { scene: mesh, animations } = collada;
 
     ExpoTHREE.utils.scaleLongestSideToSize(mesh, 3);
     ExpoTHREE.utils.alignMesh(mesh, { y: 1 });

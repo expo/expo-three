@@ -11,10 +11,7 @@ const { width, height } = Dimensions.get('window');
 // A good read on lighting: https://threejs.org/examples/#webgl_lights_physical
 export default class App extends React.Component {
   magneticObject = new ThreeAR.MagneticObject();
-
-  get screenCenter() {
-    return new THREE.Vector2(0.5, 0.5);
-  }
+  screenCenter = new THREE.Vector2(0.5, 0.5);
 
   render() {
     return (
@@ -95,12 +92,13 @@ export default class App extends React.Component {
   };
 
   loadModel = async () => {
-    const model = await ExpoTHREE.loadAsync(
-      Assets.models.collada.stormtrooper['stormtrooper.dae'],
-      null,
-      name => Assets.models.collada.stormtrooper[name]
-    );
-    const { scene: mesh, animations } = model;
+    const model = Assets.models.collada.stormtrooper;
+    const collada = await ExpoTHREE.loadDaeAsync({
+      asset: model['stormtrooper.dae'],
+      onAssetRequested: model,
+    });
+
+    const { scene: mesh, animations } = collada;
     mesh.traverse(child => {
       if (child instanceof THREE.Mesh) {
         child.castShadow = true;
@@ -111,7 +109,6 @@ export default class App extends React.Component {
     mesh.rotation.z = Math.PI;
     mesh.castShadow = true;
 
-    console.log(Object.keys(ExpoTHREE.utils));
     ExpoTHREE.utils.scaleLongestSideToSize(mesh, 0.3);
 
     this.mixer = new THREE.AnimationMixer(mesh);

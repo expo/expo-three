@@ -28,7 +28,7 @@ class HitTest extends React.Component {
   onContextCreate = ({ gl, scale: pixelRatio, width, height }) => {
     AR.setPlaneDetection(AR.PlaneDetectionTypes.Horizontal);
 
-    this.renderer = ExpoTHREE.renderer({ gl, width, height, pixelRatio });
+    this.renderer = new ExpoTHREE.Renderer({ gl, width, height, pixelRatio });
 
     this.scene = new THREE.Scene();
     this.scene.background = new ThreeAR.BackgroundTexture(this.renderer);
