@@ -68,34 +68,25 @@ A function that will asynchronously load files based on their extension.
 
 #### Props
 
-**Image Format**
-
-- `number`: Static file reference `require('./model.*')`
-- `Array<number>`: Collection of static file references
-  `[require('./model.*')]`
-- `string`: The Expo.Asset
-  [`localUri`](https://docs.expo.io/versions/latest/sdk/asset.html#localuri)
-- `Array<string>`: Collection of Expo.Asset
-  [`localUri`](https://docs.expo.io/versions/latest/sdk/asset.html#localuri)s
-- `Expo.Asset`
-- `Array<Expo.Asset>`
-
-```js
-type ImageFormat = {
-  uri: string,
-};
-export type WildCard = Expo.Asset | number | string | ImageFormat;
-```
-
 | Property      |           Type            | Description                                                      |
 | ------------- | :-----------------------: | ---------------------------------------------------------------- |
-| resource      |         WildCard          | The asset that will be parsed asynchornously                     |
+| resource      |         PossibleAsset     | The asset that will be parsed asynchornously                     |
 | onProgress    |       (xhr) => void       | A function that is called with an xhr event                      |
 | assetProvider | () => Promise<Expo.Asset> | A function that is called whenever an unknown asset is requested |
 
+##### PossibleAsset Format
+export type PossibleAsset = Expo.Asset | number | string | AssetFormat;
+```js
+type PossibleAsset = number | string | Expo.Asset
+```
+- `number`: Static file reference `require('./model.*')`
+- `Expo.Asset`: [Expo.Asset](https://docs.expo.io/versions/latest/sdk/asset.html)
+- `string`: A uri path to an asset
+
 #### Returns
 
-This returns many different things, based on the input file 😅
+This returns many different things, based on the input file. 
+For a more predictable return value you should use one of the more specific model loaders.
 
 #### Example
 
@@ -134,7 +125,7 @@ const { scene } = await ExpoTHREE.loadAsync(
 
 ### loadObjAsync({ asset, mtlAsset, materials, onAssetRequested, onMtlAssetRequested })
 
-**Props:**
+#### Props
 
 - `asset`: a `obj` model reference that will be evaluated using `AssetUtils.uriAsync`
 - `mtlAsset`: an optional prop that will be loaded using `loadMtlAsync()`
@@ -153,7 +144,7 @@ See: [MTL Loader Demo](/example/screens/Loaders/MtlLoaderExample.js)
 
 ### loadMtlAsync({ asset, onAssetRequested })
 
-**Props:**
+#### Props
 
 - `asset`: a `mtl` material reference that will be evaluated using `AssetUtils.uriAsync`
 - `onAssetRequested`: A callback that is used to evaluate urls found within the `asset`, optionally you can just pass in a dictionary of key values if you know the assets required ahead of time.
@@ -170,7 +161,7 @@ See: [MTL Loader Demo](/example/screens/Loaders/MtlLoaderExample.js)
 
 ### loadDaeAsync({ asset, onAssetRequested, onProgress })
 
-**Props:**
+#### Props
 
 - `asset`: a reference to a `dae` scene that will be evaluated using `AssetUtils.uriAsync`
 - `onAssetRequested`: A callback that is used to evaluate urls found within the `asset`, optionally you can just pass in a dictionary of key values if you know the assets required ahead of time.
@@ -346,57 +337,57 @@ You should see if `ExpoTHREE.AR.MagneticObject()` has what you need before diggi
 
 converts AR warnings to logs, this prevents the console from jamming up
 
-### hitTestWithFeatures(...)
+### hitTestWithFeatures(camera: THREE.Camera, point: THREE.Vector2, coneOpeningAngleInDegrees: number, minDistance: number, maxDistance: number, rawFeaturePoints: Array<any>)
 
-**Props:**
+#### Props
 
 - camera: THREE.Camera
-- point: { x: number, y: number }
+- point: THREE.Vector2
 - coneOpeningAngleInDegrees: number
 - minDistance: number
 - maxDistance: number
 - rawFeaturePoints: Array<any>
 
-### hitTestWithPoint(...)
+### hitTestWithPoint(camera: THREE.Camera, point: THREE.Vector2)
 
-**Props:**
-
-- camera: THREE.Camera
-- point: { x: number, y: number }
-
-### unprojectPoint(...)
-
-**Props:**
+#### Props
 
 - camera: THREE.Camera
-- point: { x: number, y: number }
+- point: THREE.Vector2
 
-### hitTestRayFromScreenPos(...)
+### unprojectPoint(camera: THREE.Camera, point: THREE.Vector2)
 
-**Props:**
+#### Props
 
 - camera: THREE.Camera
-- point: { x: number, y: number }
+- point: THREE.Vector2
 
-### hitTestFromOrigin(...)
+### hitTestRayFromScreenPos(camera: THREE.Camera, point: THREE.Vector2)
 
-**Props:**
+#### Props
 
-- origin: Vector
-- direction: Vector
+- camera: THREE.Camera
+- point: THREE.Vector2
+
+### hitTestFromOrigin(origin: THREE.Vector3, direction: THREE.Vector3, rawFeaturePoints: ?Array<any>)
+
+#### Props
+
+- origin: THREE.Vector3
+- direction: THREE.Vector3
 - rawFeaturePoints: ?Array<any>
 
-### hitTestWithInfiniteHorizontalPlane(...)
+### hitTestWithInfiniteHorizontalPlane(camera: THREE.Camera, point: Point, pointOnPlane: THREE.Vector3)
 
-**Props:**
+#### Props
 
 - camera: THREE.Camera
-- point: Point
-- pointOnPlane: Vector
+- point: THREE.Vector2
+- pointOnPlane: THREE.Vector3
 
-### rayIntersectionWithHorizontalPlane(...)
+### rayIntersectionWithHorizontalPlane(rayOrigin: THREE.Vector3, direction: THREE.Vector3, planeY: number)
 
-**Props:**
+#### Props
 
 - rayOrigin: THREE.Vector3
 - direction: THREE.Vector3
@@ -404,22 +395,22 @@ converts AR warnings to logs, this prevents the console from jamming up
 
 ### convertTransformArray(transform: Array<number>): THREE.Matrix4
 
-**Props:**
+#### Props
 
 - transform: Array<number>
 
 ### positionFromTransform(transform: THREE.Matrix4): THREE.Vector3
 
-**Props:**
+#### Props
 
 - transform: THREE.Matrix4
 
-### worldPositionFromScreenPosition(...): { worldPosition: THREE.Vector3, planeAnchor: ARPlaneAnchor, hitAPlane: boolean }
+### worldPositionFromScreenPosition(camera: THREE.Camera, position: THREE.Vector2, objectPos: THREE.Vector3, infinitePlane = false, dragOnInfinitePlanesEnabled = false, rawFeaturePoints = null): { worldPosition: THREE.Vector3, planeAnchor: ARPlaneAnchor, hitAPlane: boolean }
 
-**Props:**
+#### Props
 
 - camera: THREE.Camera
-- position: Point
+- position: THREE.Vector2
 - objectPos: THREE.Vector3
 - infinitePlane = false
 - dragOnInfinitePlanesEnabled = false
@@ -427,15 +418,15 @@ converts AR warnings to logs, this prevents the console from jamming up
 
 ### positionFromAnchor(anchor: ARAnchor): THREE.Vector3
 
-**Props:**
+#### Props
 
 - anchor: { worldTransform: Matrix4 }
 
 ### improviseHitTest(point, camera: THREE.Camera): ?THREE.Vector3
 
-**Props:**
+#### Props
 
-- point: {x:number, y:number}
+- point: THREE.Vector2
 - camera: THREE.Camera
 
 ---
@@ -490,9 +481,9 @@ Used for smoothing imported geometry, specifically when imported from `.obj` mod
 
 #### Props
 
-| Property |    Type     | Description                       |
-| -------- | :---------: | --------------------------------- |
-| mesh     | &THREE.Mesh | The mesh that will be manipulated |
+| Property |    Type     | Description                                       |
+| -------- | :---------: | ------------------------------------------------- |
+| mesh     | &THREE.Mesh | The mutable (inout) mesh that will be manipulated |
 
 #### Example
 
