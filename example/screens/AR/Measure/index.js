@@ -123,8 +123,9 @@ export default class App extends React.Component {
               onContextCreate={this.onContextCreate}
               onRender={this.onRender}
               onResize={this.onResize}
-              trackingConfiguration={config}
-              arEnabled
+              arTrackingConfiguration={config}
+              isArEnabled
+              isArRunningStateEnabled
             />
           </View>
         </TapGestureHandler>

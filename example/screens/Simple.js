@@ -8,9 +8,6 @@ export default class App extends React.Component {
   componentDidMount() {
     THREE.suppressExpoWarnings(true);
   }
-  componentWillUnmount() {
-    THREE.suppressExpoWarnings(false);
-  }
   onShouldReloadContext = () => {
     /// The Android OS loses gl context on background, so we should reload it.
     return Platform.OS === 'android';

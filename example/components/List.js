@@ -5,7 +5,20 @@ import {
   Text,
   TouchableHighlight,
   View,
+  Dimensions,
+  Platform,
 } from 'react-native';
+
+//https://github.com/ptelad/react-native-iphone-x-helper/blob/3c919346769e3cb9315a5254d43fcad1aadee777/index.js#L1-L11
+function isIphoneX() {
+  const dimen = Dimensions.get('window');
+  return (
+    Platform.OS === 'ios' &&
+    !Platform.isPad &&
+    !Platform.isTVOS &&
+    (dimen.height === 812 || dimen.width === 812)
+  );
+}
 
 class List extends React.Component {
   renderSeparator = () => {
@@ -41,6 +54,7 @@ class List extends React.Component {
         keyExtractor={this.keyExtractor}
         ItemSeparatorComponent={this.renderSeparator}
         renderItem={this.renderItem}
+        contentContainerStyle={{ paddingBottom: isIphoneX() ? 64 : 0 }}
       />
     );
   }

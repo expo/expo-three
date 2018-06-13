@@ -26,7 +26,6 @@ export default class App extends React.Component {
           onResize={this.onResize}
           arTrackingConfiguration={AR.TrackingConfigurations.World}
           isArEnabled
-          isArRunningStateEnabled
           isArCameraStateEnabled
         />
       </TouchableView>
