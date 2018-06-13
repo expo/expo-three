@@ -54,6 +54,20 @@ const renderer = ExpoTHREE.createRenderer(props);
 
 A function that will asynchronously load files based on their extension.
 
+> **Notice**: Remember to update your `app.json` to bundle obscure file types!
+
+```json
+"packagerOpts": {
+  "assetExts": [
+    "dae",
+    "obj",
+    "mtl"
+  ]
+}
+```
+
+#### Props
+
 **Image Format**
 
 - `number`: Static file reference `require('./model.*')`
