@@ -6,7 +6,7 @@ import Assets from '../Assets';
 
 export default class App extends React.Component {
   componentDidMount() {
-    THREE.suppressExpoWarnings(true);
+    THREE.suppressExpoWarnings();
   }
   onShouldReloadContext = () => {
     /// The Android OS loses gl context on background, so we should reload it.
