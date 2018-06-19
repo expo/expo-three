@@ -83,7 +83,6 @@ class MtlLoaderExample extends ThreeStage {
 
         child.geometry = new THREE.BufferGeometry().fromGeometry(tempGeo);
 
-        child.material.shading = THREE.SmoothShading;
         child.material.side = THREE.FrontSide;
 
         /// Apply other maps - maybe this is supposed to be automatic :[

@@ -7,8 +7,6 @@ import TouchableView from '../../components/TouchableView';
 
 class HitTest extends React.Component {
   render() {
-    const config = AR.TrackingConfigurations.World;
-
     return (
       <TouchableView
         style={{ flex: 1 }}

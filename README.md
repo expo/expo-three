@@ -145,6 +145,19 @@ const mesh = await loadObjAsync({ asset: 'https://www.members.com/chef.obj' })
 
 See: [MTL Loader Demo](/example/screens/Loaders/MtlLoaderExample.js)
 
+### loadTextureAsync({ asset })
+
+#### Props
+
+- `asset`: an `Expo.Asset` that could be evaluated using `AssetUtils.resolveAsync` if `localUri` is missing or the asset hasn't been downloaded yet.
+
+This function is used as a more direct method to loading an image into a texture.
+You should use this function to debug when your image is using an odd extension like `.bmp`.
+
+```js
+const texture = await loadTextureAsync({ asset: require('./image.png') })
+```
+
 ### loadMtlAsync({ asset, onAssetRequested })
 
 #### Props
@@ -562,7 +575,7 @@ default this function will be activated on import.
 
 ```js
 import { THREE } from 'expo-three';
-THREE.suppressExpoWarnings(true);
+THREE.suppressExpoWarnings();
 ````
 
 ---
