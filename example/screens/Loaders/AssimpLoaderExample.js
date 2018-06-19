@@ -11,7 +11,7 @@ class AssimpLoaderExample extends ThreeStage {
     const object = await ExpoTHREE.loadAsync(
       model['Octaminator.assimp'],
       null,
-      name => model[name]
+      model
     );
 
     if (!object) {

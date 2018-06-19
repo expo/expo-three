@@ -1,6 +1,6 @@
 {
   "name": "expo-three",
-  "version": "3.0.0-alpha.1",
+  "version": "3.0.0-alpha.2",
   "description": "Utilities for using THREE.js on Expo",
   "files": [
     "lib"

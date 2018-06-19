@@ -18,8 +18,7 @@ export default class App extends React.Component {
   };
 
   componentDidMount() {
-    ThreeAR.suppressWarnings();
-    THREE.suppressExpoWarnings(true);
+    THREE.suppressExpoWarnings();
     ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
     this._setupAsync();
   }
@@ -30,7 +29,6 @@ export default class App extends React.Component {
   };
 
   componentWillUnmount() {
-    ThreeAR.suppressWarnings(false);
     THREE.suppressExpoWarnings(false);
     AR.stopAsync();
   }

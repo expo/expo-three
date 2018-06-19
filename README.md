@@ -72,22 +72,25 @@ A function that will asynchronously load files based on their extension.
 
 | Property      |           Type            | Description                                                      |
 | ------------- | :-----------------------: | ---------------------------------------------------------------- |
-| resource      |         PossibleAsset     | The asset that will be parsed asynchornously                     |
+| resource      |       PossibleAsset       | The asset that will be parsed asynchornously                     |
 | onProgress    |       (xhr) => void       | A function that is called with an xhr event                      |
 | assetProvider | () => Promise<Expo.Asset> | A function that is called whenever an unknown asset is requested |
 
 ##### PossibleAsset Format
+
 export type PossibleAsset = Expo.Asset | number | string | AssetFormat;
+
 ```js
-type PossibleAsset = number | string | Expo.Asset
+type PossibleAsset = number | string | Expo.Asset;
 ```
+
 - `number`: Static file reference `require('./model.*')`
 - `Expo.Asset`: [Expo.Asset](https://docs.expo.io/versions/latest/sdk/asset.html)
 - `string`: A uri path to an asset
 
 #### Returns
 
-This returns many different things, based on the input file. 
+This returns many different things, based on the input file.
 For a more predictable return value you should use one of the more specific model loaders.
 
 #### Example
@@ -144,6 +147,19 @@ const mesh = await loadObjAsync({ asset: 'https://www.members.com/chef.obj' })
 
 See: [MTL Loader Demo](/example/screens/Loaders/MtlLoaderExample.js)
 
+### loadTextureAsync({ asset })
+
+#### Props
+
+- `asset`: an `Expo.Asset` that could be evaluated using `AssetUtils.resolveAsync` if `localUri` is missing or the asset hasn't been downloaded yet.
+
+This function is used as a more direct method to loading an image into a texture.
+You should use this function to debug when your image is using an odd extension like `.bmp`.
+
+```js
+const texture = await loadTextureAsync({ asset: require('./image.png') })
+```
+
 ### loadMtlAsync({ asset, onAssetRequested })
 
 #### Props
@@ -184,6 +200,7 @@ See: [Collada Loader Demo](/example/screens/Loaders/DaeLoaderExample.js)
 Tools and utilites for working with ARKit in Expo.
 
 Here is an example of a basic AR enabled scene. [Also in snack form!](https://snack.expo.io/@bacon/basic-ar-scene)
+
 ```js
 import { AR } from 'expo';
 import ExpoTHREE, { AR as ThreeAR, THREE } from 'expo-three';
@@ -236,9 +253,9 @@ export default class App extends React.Component {
 ```
 
 #### Enabling AR:
-* `Expo.GLView`: call `Expo.AR.startAsync(gl)` after `Expo.GLView.onContextCreate` has been called.
-* `expo-graphics`: you need to add the `isArEnabled` & `arTrackingConfiguration` props.
 
+- `Expo.GLView`: call `Expo.AR.startAsync(gl)` after `Expo.GLView.onContextCreate` has been called.
+- `expo-graphics`: you need to add the `isArEnabled` & `arTrackingConfiguration` props.
 
 ### `new ExpoTHREE.AR.BackgroundTexture(renderer: WebGLRenderingContext)`
 
@@ -391,10 +408,6 @@ Three.js calculation utilites for working in ARKit.
 Most of these functions are used for calculating the surfaces.
 You should see if `ExpoTHREE.AR.MagneticObject()` has what you need before digging into these.
 [You can also check out this example provided by Apple](https://developer.apple.com/sample-code/wwdc/2017/PlacingObjects.zip)
-
-### suppressWarnings(shouldSuppress: boolean)
-
-converts AR warnings to logs, this prevents the console from jamming up
 
 ### hitTestWithFeatures(camera: THREE.Camera, point: THREE.Vector2, coneOpeningAngleInDegrees: number, minDistance: number, maxDistance: number, rawFeaturePoints: Array<any>)
 
@@ -564,7 +577,7 @@ default this function will be activated on import.
 
 ```js
 import { THREE } from 'expo-three';
-THREE.suppressExpoWarnings(true);
+THREE.suppressExpoWarnings();
 ````
 
 ---
