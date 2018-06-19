@@ -4,6 +4,9 @@ class ThreeStage {
   constructor() {
     this.onRender = this.onRender.bind(this);
     this.setupControls = this.setupControls.bind(this);
+    this.onResize = this.onResize.bind(this);
+    this.setupCamera = this.setupCamera.bind(this);
+    this.setupScene = this.setupScene.bind(this);
   }
   onContextCreate = async ({
     gl,
@@ -39,20 +42,20 @@ class ThreeStage {
     this.renderer.capabilities.maxVertexUniforms = 52502;
   };
 
-  setupCamera = ({ width, height }) => {
+  setupCamera({ width, height }) {
     this.camera = new THREE.PerspectiveCamera(50, width / height, 0.1, 10000);
     this.camera.position.set(0, 6, 12);
     this.camera.lookAt(0, 0, 0);
-  };
+  }
 
-  setupScene = () => {
+  setupScene() {
     this.scene = new THREE.Scene();
 
     this.scene.background = new THREE.Color(0x999999);
     this.scene.fog = new THREE.FogExp2(0xcccccc, 0.002);
 
     this.scene.add(new THREE.GridHelper(50, 50, 0xffffff, 0x555555));
-  };
+  }
 
   setupLights = () => {
     const directionalLightA = new THREE.DirectionalLight(0xffffff);
@@ -69,7 +72,7 @@ class ThreeStage {
 
   async setupModels() {}
 
-  onResize = ({ width, height, scale }) => {
+  onResize({ width, height, scale }) {
     this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
     this.renderer.setPixelRatio(scale);
@@ -77,7 +80,7 @@ class ThreeStage {
     this.width = width;
     this.height = height;
     this.pixelRatio = scale;
-  };
+  }
 
   onRender(delta) {
     this.renderer.render(this.scene, this.camera);
