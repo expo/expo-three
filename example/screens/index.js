@@ -6,7 +6,7 @@ import Legacy from './Legacy';
 import CubeTexture from './CubeTexture';
 
 export default {
-  AR,
+  // AR,
   Loaders,
   Effects,
   Simple,

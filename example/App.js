@@ -1,7 +1,7 @@
 import { AR, Permissions, ScreenOrientation } from 'expo';
 import { AR as ThreeAR, THREE } from 'expo-three';
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, StatusBar } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import Page from './components/Page';
 import 'three/examples/js/controls/OrbitControls';
@@ -21,6 +21,7 @@ export default class App extends React.Component {
     THREE.suppressExpoWarnings();
     ScreenOrientation.allow(ScreenOrientation.Orientation.ALL);
     this._setupAsync();
+    StatusBar.setBarStyle('dark-content', true);
   }
 
   _setupAsync = async () => {
