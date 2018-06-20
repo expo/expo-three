@@ -7,7 +7,13 @@
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "fix": "rm -rf node_modules/gl-matrix/.babelrc",
-    "start": "exp start"
+    "start": "exp start",
+    "build_ios": "exp build:ios",
+    "build_android": "exp build:android",
+    "upload_ios": "fastlane deliver",
+    "upload_android": "fastlane supply",
+    "create_app_ios": "fastlane produce",
+    "setup_metadata_ios": "fastlane deliver init"
   },
   "dependencies": {
     "@expo/browser-polyfill": "^0.0.0-alpha.8",
