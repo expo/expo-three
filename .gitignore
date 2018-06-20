@@ -9,4 +9,4 @@ node_modules/**/*
 .Trashes
 ehthumbs.db
 Thumbs.db
-*.ipa
+secret/

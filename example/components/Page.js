@@ -2,10 +2,12 @@ import React from 'react';
 
 import Data from '../screens';
 import List from './List';
+import StoreReviewButton from './StoreReviewButton';
 
 class Page extends React.Component {
   static navigationOptions = ({ navigation }) => ({
     title: (navigation.state.params || {}).title || 'Expo Three',
+    headerRight: <StoreReviewButton />,
   });
 
   render() {
