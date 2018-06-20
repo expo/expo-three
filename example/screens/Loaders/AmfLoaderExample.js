@@ -3,7 +3,7 @@ import Assets from '../../Assets';
 import ThreeStage from '../ThreeStage';
 
 class AmfLoaderExample extends ThreeStage {
-  static url = 'screens/Effects/AmfLoaderExample.js';
+  static url = 'screens/Loaders/AmfLoaderExample.js';
 
   async setupModels() {
     await super.setupModels();
