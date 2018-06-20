@@ -1,4 +1,7 @@
 node_modules/**/*
 .expo/*
 npm-debug.*
-release/
+secret/
+*.sketch
+*.apk
+*.ipa

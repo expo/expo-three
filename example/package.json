@@ -10,10 +10,8 @@
     "start": "exp start",
     "build_ios": "exp build:ios",
     "build_android": "exp build:android",
-    "upload_ios": "fastlane deliver",
-    "upload_android": "fastlane supply",
-    "create_app_ios": "fastlane produce",
-    "setup_metadata_ios": "fastlane deliver init"
+    "upload_ios": "cd ios && fastlane deliver && cd ..",
+    "upload_android": "cd android && fastlane supply && cd .."
   },
   "dependencies": {
     "@expo/browser-polyfill": "^0.0.0-alpha.8",
