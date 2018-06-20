@@ -8,6 +8,8 @@ import { View as GraphicsView } from 'expo-graphics';
 const { ExponentAR } = NativeModules;
 
 class RawData extends React.Component {
+  static url = 'screens/AR/RawData.js';
+
   handleAnchor = (anchor, eventType) => {
     if (eventType === AR.AnchorEventTypes.Add) {
       // Something added!
@@ -164,12 +166,7 @@ class RawData extends React.Component {
     );
   }
 
-  onContextCreate = async ({
-    gl,
-    scale: pixelRatio,
-    width,
-    height,
-  }) => {
+  onContextCreate = async ({ gl, scale: pixelRatio, width, height }) => {
     AR.setWorldAlignment(AR.WorldAlignmentTypes.Gravity);
     AR.setPlaneDetection(AR.PlaneDetectionTypes.Horizontal);
 

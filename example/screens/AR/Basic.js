@@ -6,6 +6,7 @@ import { Text, View } from 'react-native';
 import { View as GraphicsView } from 'expo-graphics';
 
 export default class App extends React.Component {
+  static url = 'screens/AR/Basic.js';
   render() {
     return (
       <View style={{ flex: 1 }}>

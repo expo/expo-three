@@ -3,6 +3,8 @@ import Assets from '../../Assets';
 import ThreeStage from './ThreeStage';
 
 class BabylonLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/BabylonLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
     // Babylon files usually contain full scenes as opposed to single meshes

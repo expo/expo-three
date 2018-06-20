@@ -46,6 +46,7 @@ void main()
 `;
 
 class LavaExample extends ThreeStage {
+  static url = 'screens/Shaders/LavaExample.js';
   async setupModels() {
     await super.setupModels();
 

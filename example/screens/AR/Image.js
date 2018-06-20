@@ -6,6 +6,7 @@ import Assets from '../../Assets';
 import { View as GraphicsView } from 'expo-graphics';
 
 class ImageExample extends React.Component {
+  static url = 'screens/AR/Image.js';
   componentWillMount() {
     this._anchorsDidUpdate = AR.onAnchorsDidUpdate(({ anchors, eventType }) => {
       for (const anchor of anchors) {

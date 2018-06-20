@@ -10,6 +10,7 @@ const { width, height } = Dimensions.get('window');
 
 // A good read on lighting: https://threejs.org/examples/#webgl_lights_physical
 export default class App extends React.Component {
+  static url = 'screens/AR/Model.js';
   magneticObject = new ThreeAR.MagneticObject();
   screenCenter = new THREE.Vector2(0.5, 0.5);
 

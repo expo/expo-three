@@ -3,7 +3,9 @@ import ExpoTHREE, { THREE } from 'expo-three';
 import Assets from '../../Assets';
 import ThreeStage from '../ThreeStage';
 
-class TdfLoaderExample extends ThreeStage {
+class TmfLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/TmfLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
 
@@ -30,4 +32,4 @@ class TdfLoaderExample extends ThreeStage {
   }
 }
 
-export default TdfLoaderExample;
+export default TmfLoaderExample;

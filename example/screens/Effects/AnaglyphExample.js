@@ -4,6 +4,7 @@ import ThreeStage from '../ThreeStage';
 import RandomJunkNode from './RandomJunkNode';
 
 class AnaglyphExample extends ThreeStage {
+  static url = 'screens/Effects/AnaglyphExample.js';
   async setupModels() {
     await super.setupModels();
 

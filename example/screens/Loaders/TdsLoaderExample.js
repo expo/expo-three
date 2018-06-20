@@ -3,6 +3,8 @@ import Assets from '../../Assets';
 import ThreeStage from '../ThreeStage';
 
 class TdsLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/TdsLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
 

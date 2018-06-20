@@ -9,7 +9,9 @@ const ToxicTypes = {
   high: 'high',
   wasted: 'wasted',
 };
-class App extends React.Component {
+class ToxicExample extends React.Component {
+  static url = 'screens/Effects/ToxicExample.js';
+
   selectedToxin = ToxicTypes.drunk;
   _renderSelector = () => (
     <View
@@ -140,4 +142,4 @@ class App extends React.Component {
 }
 
 // Wrap Touches Event Listener
-export default App;
+export default ToxicExample;

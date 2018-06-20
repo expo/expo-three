@@ -14,6 +14,7 @@ let messages = [
   "Whatever, guess I'll join you }:|",
 ];
 class App extends React.Component {
+  static url = 'screens/AR/Face.js';
   state = {
     scowlCount: 0,
   };

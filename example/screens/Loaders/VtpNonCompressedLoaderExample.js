@@ -3,6 +3,8 @@ import Assets from '../../Assets';
 import ThreeStage from '../ThreeStage';
 
 class VtpNonCompressedLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/VtpNonCompressedLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
 

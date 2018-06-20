@@ -36,6 +36,8 @@ async function loading_method_3() {
 }
 
 class DaeLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/DaeLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
 

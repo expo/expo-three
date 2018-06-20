@@ -4,6 +4,8 @@ import ThreeStage from '../ThreeStage';
 import RandomJunkNode from './RandomJunkNode';
 
 class ParallaxBarrierExample extends ThreeStage {
+  static url = 'screens/Effects/ParallaxBarrierExample.js';
+
   async setupModels() {
     await super.setupModels();
 

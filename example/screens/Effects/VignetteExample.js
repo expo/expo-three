@@ -3,7 +3,9 @@ import { THREE } from 'expo-three';
 import ThreeStage from '../ThreeStage';
 import RandomJunkNode from './RandomJunkNode';
 
-class VignetteExampleExample extends ThreeStage {
+class VignetteExample extends ThreeStage {
+  static url = 'screens/Effects/VignetteExample.js';
+
   async setupModels() {
     await super.setupModels();
 
@@ -76,4 +78,4 @@ class VignetteExampleExample extends ThreeStage {
   }
 }
 
-export default VignetteExampleExample;
+export default VignetteExample;

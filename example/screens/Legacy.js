@@ -5,6 +5,8 @@ import { Platform } from 'react-native';
 import Assets from '../Assets';
 import { Asset } from 'expo';
 export default class App extends React.Component {
+  static url = 'screens/Legacy.js';
+
   componentDidMount() {
     THREE.suppressExpoWarnings(true);
   }
@@ -46,7 +48,7 @@ export default class App extends React.Component {
     this.camera.position.z = 5;
     const geometry = new THREE.BoxGeometry(1, 1, 1);
 
-    const asset = Asset.fromModule(Assets['icon.png']);
+    const asset = Asset.fromModule(Assets.icons['ios.png']);
     await asset.downloadAsync();
     const map = await ExpoTHREE.createTextureAsync({ asset });
 

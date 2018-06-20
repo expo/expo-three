@@ -66,6 +66,8 @@ async function loading_method_4() {
 }
 
 class MtlLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/MtlLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
     const model = Assets.models.batman;

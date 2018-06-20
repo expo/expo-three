@@ -1,13 +1,17 @@
 {
   "name": "expo-three-example",
   "version": "0.0.0",
-  "description": "expo-pixi comprehensive example",
+  "description": "expo-three examples",
   "author": "support@expo.io",
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "fix": "rm -rf node_modules/gl-matrix/.babelrc",
-    "start": "exp start"
+    "start": "exp start",
+    "build_ios": "exp build:ios",
+    "build_android": "exp build:android",
+    "upload_ios": "cd ios && fastlane deliver && cd ..",
+    "upload_android": "cd android && fastlane supply && cd .."
   },
   "dependencies": {
     "@expo/browser-polyfill": "^0.0.0-alpha.8",

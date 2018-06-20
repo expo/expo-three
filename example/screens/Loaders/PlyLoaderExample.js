@@ -3,6 +3,8 @@ import Assets from '../../Assets';
 import ThreeStage from '../ThreeStage';
 
 class PlyLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/PlyLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
 

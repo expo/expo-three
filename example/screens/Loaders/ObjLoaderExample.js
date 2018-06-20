@@ -3,6 +3,8 @@ import Assets from '../../Assets';
 import ThreeStage from '../ThreeStage';
 
 class ObjLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/ObjLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
 

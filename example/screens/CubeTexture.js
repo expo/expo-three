@@ -6,6 +6,8 @@ import Assets from '../Assets';
 import TouchableView from '../components/TouchableView';
 
 export default class App extends React.Component {
+  static url = 'screens/CubeTexture.js';
+
   onShouldReloadContext = () => {
     /// The Android OS loses gl context on background, so we should reload it.
     return Platform.OS === 'android';
@@ -45,7 +47,7 @@ export default class App extends React.Component {
     this.camera = new THREE.PerspectiveCamera(75, width / height, 0.1, 1000);
     this.camera.position.z = 5;
     const geometry = new THREE.BoxGeometry(1, 1, 1);
-    const map = await ExpoTHREE.loadAsync(Assets['icon.png']);
+    const map = await ExpoTHREE.loadAsync(Assets.icons['ios.png']);
 
     const material = new THREE.MeshBasicMaterial({
       // NOTE: How to create an Expo-compatible THREE texture

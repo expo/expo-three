@@ -3,6 +3,8 @@ import Assets from '../../Assets';
 import ThreeStage from '../ThreeStage';
 
 class DaeRiggedLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/DaeRiggedLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
 
