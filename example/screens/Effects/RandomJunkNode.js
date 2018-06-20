@@ -8,7 +8,7 @@ class RandomJunkNode extends THREE.Object3D {
 
   loadAsync = async () => {
     const material = new THREE.MeshBasicMaterial({
-      map: await ExpoTHREE.loadTextureAsync({ asset: Assets['icon.png'] }),
+      map: await ExpoTHREE.loadTextureAsync({ asset: Assets.icons['ios.png'] }),
     });
 
     const geometry = new THREE.BoxGeometry(1, 1, 1);

@@ -1,7 +1,7 @@
 {
   "name": "expo-three-example",
   "version": "0.0.0",
-  "description": "expo-pixi comprehensive example",
+  "description": "expo-three examples",
   "author": "support@expo.io",
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
