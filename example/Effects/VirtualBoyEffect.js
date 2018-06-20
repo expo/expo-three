@@ -42,7 +42,6 @@ THREE.VirtualBoyEffect = function(renderer) {
   require('three/examples/js/postprocessing/ShaderPass');
   require('three/examples/js/postprocessing/MaskPass');
   require('three/examples/js/postprocessing/GlitchPass');
-  require('three/examples/js/postprocessing/BloomPass');
   require('three/examples/js/shaders/FilmShader');
   require('three/examples/js/postprocessing/FilmPass');
   require('three/examples/js/shaders/CopyShader');
