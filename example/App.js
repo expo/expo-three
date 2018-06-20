@@ -5,7 +5,7 @@ import { Text, View, StatusBar } from 'react-native';
 import { createStackNavigator } from 'react-navigation';
 import Page from './components/Page';
 import 'three/examples/js/controls/OrbitControls';
-
+import DebugPages from './screens';
 const Navigator = createStackNavigator({
   Page: {
     screen: Page,
@@ -55,7 +55,7 @@ export default class App extends React.Component {
     else if (hasCameraPermission === false) {
       return <ErrorView>No access to camera</ErrorView>;
     } else {
-      return <Navigator />;
+      return <DebugPages.README />; //<Navigator />;
     }
   }
 }
