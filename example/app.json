@@ -46,7 +46,6 @@
     "ios": {
       "supportsTablet": true,
       "bundleIdentifier": "com.expo.expothree",
-      "appStoreUrl": "",
       "icon": "./assets/icons/ios.png",
       "buildNumber": "0.0.0"
     },
