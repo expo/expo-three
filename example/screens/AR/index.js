@@ -1,21 +1,23 @@
-import Measure from './Measure';
-import Model from './Model';
-import RawData from './RawData';
-import Face from './Face';
-import Image from './Image';
-import Basic from './Basic';
-import HitTest from './HitTest';
-import Points from './Points';
-import Planes from './Planes';
+import arSceneWithExample from './arSceneWithExample';
+import { AR } from 'expo';
+import Settings from '../../constants/Settings';
 
-export default {
-  Basic,
-  Measure,
-  // Model,
-  Face,
-  // Image,
-  HitTest,
-  Points,
-  Planes,
-  // RawData,
+let screens = {
+  Basic: arSceneWithExample(require(`./Basic`)),
+  Measure: arSceneWithExample(require(`./Measure`)),
+  HitTest: arSceneWithExample(require(`./HitTest`)),
+  Points: arSceneWithExample(require(`./Points`)),
+  Planes: arSceneWithExample(require(`./Planes`)),
+  // RawData: arSceneWithExample(require(`./RawData`)),
 };
+
+if (AR.isFrontCameraAvailable()) {
+  screens['Face'] = arSceneWithExample(require(`./Face`));
+}
+
+if (!Settings.isInAppleReview) {
+  screens['Model'] = arSceneWithExample(require(`./Model`));
+  screens['Image'] = arSceneWithExample(require(`./Image`));
+}
+
+module.exports = screens;

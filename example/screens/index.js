@@ -5,8 +5,9 @@ import Effects from './Effects';
 import Legacy from './Legacy';
 import CubeTexture from './CubeTexture';
 import Shaders from './Shaders';
-export default {
-  // AR,
+import { AR as ExpoAR } from 'expo';
+
+let screens = {
   Loaders,
   Effects,
   Shaders,
@@ -14,3 +15,9 @@ export default {
   Legacy,
   CubeTexture,
 };
+
+if (ExpoAR.isAvailable()) {
+  screens['AR'] = AR;
+}
+
+module.exports = screens;
