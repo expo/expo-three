@@ -1,1 +1,1 @@
-http://www.expo.io/
+https://github.com/expo/expo-three

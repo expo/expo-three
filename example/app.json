@@ -47,7 +47,8 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.expo.expothree",
       "icon": "./assets/icons/ios.png",
-      "buildNumber": "0.0.0"
+      "buildNumber": "0.0.0",
+      "appStoreUrl": "https://itunes.apple.com/us/app/expo-three/id1401079652?ls=1&mt=8"
     },
     "android": {
       "icon": "./assets/icons/android.png",
