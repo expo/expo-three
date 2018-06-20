@@ -6,6 +6,8 @@ import Assets from '../Assets';
 import TouchableView from '../components/TouchableView';
 
 export default class App extends React.Component {
+  static url = 'screens/CubeTexture.js';
+
   onShouldReloadContext = () => {
     /// The Android OS loses gl context on background, so we should reload it.
     return Platform.OS === 'android';
