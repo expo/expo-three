@@ -18,7 +18,7 @@ export default class Item extends React.Component {
         <View style={styles.container}>
           <Text style={styles.text}>{item}</Text>
 
-          <Ionicons size={24} color={'#3f3f3f'} name="ios-arrow-forward" />
+          <Ionicons size={24} color={'#CCCCCC'} name="ios-arrow-forward" />
         </View>
       </TouchableHighlight>
     );
