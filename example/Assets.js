@@ -13,27 +13,33 @@ export default {
 		"py.jpg": require(`./assets/skybox/py.jpg`),
 		"pz.jpg": require(`./assets/skybox/pz.jpg`)
 	},
+	"images": {
+		"lava": {
+			"cloud.png": require(`./assets/images/lava/cloud.png`),
+			"lavatile.jpg": require(`./assets/images/lava/lavatile.jpg`)
+		}
+	},
 	"models": {
-		"3mf": {
-			"cube_gears.3mf": require(`./assets/models/3mf/cube_gears.3mf`)
-		},
 		"amf": {
 			"rook.amf": require(`./assets/models/amf/rook.amf`)
 		},
+		"3mf": {
+			"cube_gears.3mf": require(`./assets/models/3mf/cube_gears.3mf`)
+		},
 		"babylon": {
 			"skull.babylon": require(`./assets/models/babylon/skull.babylon`)
+		},
+		"bvh": {
+			"pirouette.bvh": require(`./assets/models/bvh/pirouette.bvh`)
 		},
 		"batman": {
 			"B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins.mtl": require(`./assets/models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins.mtl`),
 			"B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins.obj": require(`./assets/models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins.obj`),
 			"B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_D.png": require(`./assets/models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_D.png`),
 			"B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_N.png": require(`./assets/models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_N.png`),
-			"B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_S.png": require(`./assets/models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_S.png`),
 			"B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_SP.png": require(`./assets/models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_SP.png`),
+			"B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_S.png": require(`./assets/models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_Body_S.png`),
 			"B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_DM_ENV.png": require(`./assets/models/batman/B-AO_iOS_HERO_Bruce_Wayne_Batman_Arkham_Origins_DM_ENV.png`)
-		},
-		"bvh": {
-			"pirouette.bvh": require(`./assets/models/bvh/pirouette.bvh`)
 		},
 		"draco": {
 			"bunny.drc": require(`./assets/models/draco/bunny.drc`)
@@ -55,19 +61,6 @@ export default {
 				"Octaminator_lowpoly_final.fbx": require(`./assets/models/assimp/octaminator/Octaminator_lowpoly_final.fbx`)
 			}
 		},
-		"collada": {
-			"elf": {
-				"Body_tex_003.jpg": require(`./assets/models/collada/elf/Body_tex_003.jpg`),
-				"Face_tex_002_toObj.jpg": require(`./assets/models/collada/elf/Face_tex_002_toObj.jpg`),
-				"Hair_tex_001.jpg": require(`./assets/models/collada/elf/Hair_tex_001.jpg`),
-				"ce.jpg": require(`./assets/models/collada/elf/ce.jpg`),
-				"elf.dae": require(`./assets/models/collada/elf/elf.dae`)
-			},
-			"stormtrooper": {
-				"Stormtrooper_D.jpg": require(`./assets/models/collada/stormtrooper/Stormtrooper_D.jpg`),
-				"stormtrooper.dae": require(`./assets/models/collada/stormtrooper/stormtrooper.dae`)
-			}
-		},
 		"obj": {
 			"ninja": {
 				"ao.jpg": require(`./assets/models/obj/ninja/ao.jpg`),
@@ -84,14 +77,6 @@ export default {
 				"Zaghetto.pcd": require(`./assets/models/pcd/binary/Zaghetto.pcd`)
 			}
 		},
-		"ply": {
-			"ascii": {
-				"dolphins.ply": require(`./assets/models/ply/ascii/dolphins.ply`)
-			},
-			"binary": {
-				"Lucy100k.ply": require(`./assets/models/ply/binary/Lucy100k.ply`)
-			}
-		},
 		"stl": {
 			"ascii": {
 				"pr2_head_pan.stl": require(`./assets/models/stl/ascii/pr2_head_pan.stl`)
@@ -100,11 +85,32 @@ export default {
 				"pr2_head_pan.stl": require(`./assets/models/stl/binary/pr2_head_pan.stl`)
 			}
 		},
+		"collada": {
+			"elf": {
+				"Body_tex_003.jpg": require(`./assets/models/collada/elf/Body_tex_003.jpg`),
+				"Face_tex_002_toObj.jpg": require(`./assets/models/collada/elf/Face_tex_002_toObj.jpg`),
+				"Hair_tex_001.jpg": require(`./assets/models/collada/elf/Hair_tex_001.jpg`),
+				"ce.jpg": require(`./assets/models/collada/elf/ce.jpg`),
+				"elf.dae": require(`./assets/models/collada/elf/elf.dae`)
+			},
+			"stormtrooper": {
+				"stormtrooper.dae": require(`./assets/models/collada/stormtrooper/stormtrooper.dae`),
+				"Stormtrooper_D.jpg": require(`./assets/models/collada/stormtrooper/Stormtrooper_D.jpg`)
+			}
+		},
 		"xfile": {
 			"SSR06_Born2.x": require(`./assets/models/xfile/SSR06_Born2.x`),
 			"texture": {
 				"SSR06_Born2_bp_base.png": require(`./assets/models/xfile/texture/SSR06_Born2_bp_base.png`),
 				"SSR06_Born2_dif.png": require(`./assets/models/xfile/texture/SSR06_Born2_dif.png`)
+			}
+		},
+		"ply": {
+			"ascii": {
+				"dolphins.ply": require(`./assets/models/ply/ascii/dolphins.ply`)
+			},
+			"binary": {
+				"Lucy100k.ply": require(`./assets/models/ply/binary/Lucy100k.ply`)
 			}
 		},
 		"3ds": {
