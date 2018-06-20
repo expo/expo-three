@@ -4,6 +4,7 @@ import ThreeStage from '../ThreeStage';
 import RandomJunkNode from './RandomJunkNode';
 
 class GlitchExample extends ThreeStage {
+  static url = 'screens/Effects/GlitchExample.js';
   async setupModels() {
     await super.setupModels();
 

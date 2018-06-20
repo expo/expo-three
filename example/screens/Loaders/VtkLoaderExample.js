@@ -4,6 +4,8 @@ import Assets from '../../Assets';
 import ThreeStage from '../ThreeStage';
 
 class VtkLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/VtkLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
 

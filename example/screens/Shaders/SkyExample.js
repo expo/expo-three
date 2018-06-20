@@ -4,6 +4,7 @@ import SkyMaterial from '../../Effects/SkyMaterial';
 import ThreeStage from '../ThreeStage';
 
 class SkyExample extends ThreeStage {
+  static url = 'screens/Shaders/SkyExample.js';
   async setupModels() {
     await super.setupModels();
 

@@ -4,6 +4,8 @@ import Assets from '../../Assets';
 import ThreeStage from './ThreeStage';
 
 class DracoLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/DracoLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
 

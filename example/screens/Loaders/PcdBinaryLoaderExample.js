@@ -3,6 +3,8 @@ import Assets from '../../Assets';
 import ThreeStage from '../ThreeStage';
 
 class PcdBinaryLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/PcdBinaryLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
 

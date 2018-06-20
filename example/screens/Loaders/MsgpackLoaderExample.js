@@ -4,6 +4,8 @@ import Assets from '../../Assets';
 import ThreeStage from './ThreeStage';
 
 class MsgpackLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/MsgpackLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
     const model = Assets.models.pack['robo_pigeon.pack'];

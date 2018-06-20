@@ -3,6 +3,8 @@ import Assets from '../../Assets';
 import ThreeStage from '../ThreeStage';
 
 class StlLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/StlLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
     /// This works for both `ASCII` & `Binary` `.stl` files

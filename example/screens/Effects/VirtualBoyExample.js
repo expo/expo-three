@@ -4,6 +4,8 @@ import ThreeStage from '../ThreeStage';
 import RandomJunkNode from './RandomJunkNode';
 
 class VirtualBoyExample extends ThreeStage {
+  static url = 'screens/Effects/VirtualBoyExample.js';
+
   async setupModels() {
     await super.setupModels();
 

@@ -5,6 +5,8 @@ import { Platform } from 'react-native';
 import Assets from '../Assets';
 import { Asset } from 'expo';
 export default class App extends React.Component {
+  static url = 'screens/Legacy.js';
+
   componentDidMount() {
     THREE.suppressExpoWarnings(true);
   }

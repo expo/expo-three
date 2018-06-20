@@ -4,6 +4,8 @@ import Assets from '../../Assets';
 import ThreeStage from '../ThreeStage';
 
 class PlyBinaryLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/PlyBinaryLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
 

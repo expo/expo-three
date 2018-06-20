@@ -15,6 +15,7 @@ function metersToInches(meters) {
 }
 
 export default class App extends React.Component {
+  static url = 'screens/AR/Measure/index.js';
   state = {
     distance: 0,
   };

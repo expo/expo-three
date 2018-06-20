@@ -3,6 +3,8 @@ import Assets from '../../Assets';
 import ThreeStage from '../ThreeStage';
 
 class AssimpLoaderExample extends ThreeStage {
+  static url = 'screens/Loaders/AssimpLoaderExample.js';
+
   async setupModels() {
     await super.setupModels();
 

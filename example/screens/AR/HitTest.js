@@ -6,6 +6,7 @@ import { View as GraphicsView } from 'expo-graphics';
 import TouchableView from '../../components/TouchableView';
 
 class HitTest extends React.Component {
+  static url = 'screens/AR/HitTest.js';
   render() {
     return (
       <TouchableView

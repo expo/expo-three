@@ -5,6 +5,7 @@ import { Platform } from 'react-native';
 import Assets from '../Assets';
 
 export default class App extends React.Component {
+  static url = 'screens/Simple.js';
   componentDidMount() {
     THREE.suppressExpoWarnings();
   }

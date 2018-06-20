@@ -5,6 +5,7 @@ import React from 'react';
 import { View as GraphicsView } from 'expo-graphics';
 
 export default class App extends React.Component {
+  static url = 'screens/AR/Points.js';
   render() {
     return (
       <GraphicsView
