@@ -4,7 +4,7 @@ import Data from '../screens';
 import List from './List';
 import StoreReviewButton from './StoreReviewButton';
 import LinkButton from './LinkButton';
-
+import { Constants } from 'expo';
 class Page extends React.Component {
   static navigationOptions = ({ navigation }) => {
     const params = navigation.state.params || {};
@@ -15,10 +15,11 @@ class Page extends React.Component {
       url = params.data.url;
     }
 
-    const headerRight = url ? <LinkButton url={url} /> : <StoreReviewButton />;
+    const headerRight = url ? <LinkButton url={url} /> : null; //<StoreReviewButton />
     return {
       title,
       headerRight,
+      headerTintColor: Constants.manifest.primaryColor,
     };
   };
 

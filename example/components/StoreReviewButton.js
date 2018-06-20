@@ -30,7 +30,11 @@ const StoreReviewButton = () => {
           );
         }
       }}>
-      <Ionicons size={24} color={'black'} name="md-heart" />
+      <Ionicons
+        size={24}
+        color={Constants.manifest.primaryColor}
+        name="md-heart"
+      />
     </TouchableOpacity>
   );
 };

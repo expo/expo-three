@@ -1,7 +1,7 @@
-import React from 'react';
 import { Ionicons } from '@expo/vector-icons';
-import { StoreReview, Constants, WebBrowser } from 'expo';
-import { Linking, Alert, TouchableOpacity } from 'react-native';
+import { Constants, WebBrowser } from 'expo';
+import React from 'react';
+import { TouchableOpacity } from 'react-native';
 
 const LinkButton = ({ url }) => {
   return (
@@ -12,7 +12,11 @@ const LinkButton = ({ url }) => {
           'https://github.com/expo/expo-three/blob/master/example/' + url
         );
       }}>
-      <Ionicons size={24} color={'black'} name="md-code" />
+      <Ionicons
+        size={24}
+        color={Constants.manifest.primaryColor}
+        name="md-code"
+      />
     </TouchableOpacity>
   );
 };
