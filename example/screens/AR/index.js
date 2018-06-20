@@ -11,9 +11,9 @@ import Planes from './Planes';
 export default {
   Basic,
   Measure,
-  Model,
+  // Model,
   Face,
-  Image,
+  // Image,
   HitTest,
   Points,
   Planes,
