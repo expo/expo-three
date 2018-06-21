@@ -32,8 +32,8 @@ iPhone X only, this shows how to query facial input from the front facing camera
 
 ### Image
 
-When you point your camera at the clone trooper image (`/assets/marker.png`), a clone will appear.
-![This is not the placeholder you are looking for](/assets/marker.png '-> Add another starwars joke here')
+When you point your camera at the clone trooper image (`/assets/marker.jpg`), a clone will appear.
+![This is not the placeholder you are looking for](assets/marker.jpg '-> Add another starwars joke here')
 
 ### HitTest
 
