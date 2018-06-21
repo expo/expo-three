@@ -10,7 +10,8 @@ target 'expo-three' do
     :subspecs => [
       "Core",
       "CPP",
-      "GL"
+      "GL",
+      "AR"
     ],
     :inhibit_warnings => true
 
