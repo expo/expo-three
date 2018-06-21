@@ -1,0 +1,8 @@
+app_identifier("com.expo.expothree") # The bundle identifier of your app
+apple_id("evanjbacon@gmail.com") # Your Apple email address
+
+itc_team_id("118573547") # iTunes Connect Team ID
+team_id("QQ57RJ5UTD") # Developer Portal Team ID
+
+# For more information about the Appfile, see:
+#     https://docs.fastlane.tools/advanced/#appfile
