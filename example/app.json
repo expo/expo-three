@@ -14,7 +14,9 @@
       "backgroundColor": "#ffffff",
       "resizeMode": "cover"
     },
-    "assetBundlePatterns": ["assets/**/*"],
+    "assetBundlePatterns": [
+      "assets/**/*"
+    ],
     "packagerOpts": {
       "assetExts": [
         "ttf",
@@ -51,13 +53,23 @@
       "appStoreUrl": "https://itunes.apple.com/us/app/expo-three/id1401079652?ls=1&mt=8",
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera for aumented reality experiences."
-      }
+      },
+      "publishBundlePath": "ios/expo-three/Supporting/shell-app.bundle",
+      "publishManifestPath": "ios/expo-three/Supporting/shell-app-manifest.json"
     },
     "android": {
       "icon": "./assets/icons/android.png",
       "package": "com.expo.expothree",
       "playStoreUrl": "https://play.google.com/store/apps/details?id=com.expo.expothree",
-      "versionCode": 1
-    }
+      "versionCode": 1,
+      "publishBundlePath": "android/app/src/main/assets/shell-app.bundle",
+      "publishManifestPath": "android/app/src/main/assets/shell-app-manifest.json"
+    },
+    "isDetached": true,
+    "detach": {
+      "iosExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/ios-v2.6.5-sdk28.0.0-7eac2a72-06b2-48c9-8281-c0c6c308f0b0.tar.gz",
+      "androidExpoViewUrl": "https://s3.amazonaws.com/exp-exponent-view-code/android-v2.6.2-sdk28.0.0-141d0954-b898-4919-aa89-3ab45453213f.tar.gz"
+    },
+    "scheme": "expbcbf53aa3e7e44e48f09b28e9b4f9b57"
   }
 }
