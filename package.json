@@ -20,7 +20,7 @@
     "prettier": "eslint . --fix"
   },
   "directories": {
-    "example": "examples",
+    "example": "example",
     "lib": "lib"
   },
   "keywords": [
