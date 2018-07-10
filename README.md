@@ -1,5 +1,3 @@
-> This lib uses @expo/browser-polyfill please take a look at this [issue with v26](https://github.com/expo/browser-polyfill#bug). You will need to run `rm -rf node_modules/gl-matrix/.babelrc` after running `yarn` or `npm install`
-
 [![NPM](https://nodei.co/npm/expo-three.png)](https://nodei.co/npm/expo-three/)
 
 # expo-three
