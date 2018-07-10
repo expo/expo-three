@@ -21,6 +21,7 @@ export default class App extends React.Component {
         shouldCancelWhenOutside={false}
         onTouchesBegan={this.onTouchesBegan}>
         <GraphicsView
+          isShadowsEnabled
           style={styles.container}
           onContextCreate={this.onContextCreate}
           onRender={this.onRender}

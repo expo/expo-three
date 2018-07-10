@@ -49,7 +49,7 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.expo.expothree",
       "icon": "./assets/icons/ios.png",
-      "buildNumber": "1",
+      "buildNumber": "2",
       "appStoreUrl": "https://itunes.apple.com/us/app/expo-three/id1401079652?ls=1&mt=8",
       "infoPlist": {
         "NSCameraUsageDescription": "This app uses the camera for aumented reality experiences."
