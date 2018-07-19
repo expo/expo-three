@@ -1,6 +1,6 @@
 {
   "name": "expo-three",
-  "version": "3.0.0-alpha.2",
+  "version": "3.0.0-alpha.3",
   "description": "Utilities for using THREE.js on Expo",
   "files": [
     "lib"
@@ -37,11 +37,11 @@
     "@expo/browser-polyfill": "^0.0.0-alpha.4",
     "color-temperature": "0.2.7",
     "expo-asset-utils": "^0.0.4-alpha.2",
-    "three": "^0.93.0"
+    "three": "0.88.0"
   },
   "peerDependencies": {
     "react-native": "*",
-    "three": "^0.93.0",
+    "three": "0.88.0",
     "expo": "^28.0.0"
   },
   "devDependencies": {
