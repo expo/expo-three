@@ -34,7 +34,7 @@
   "author": "Nikhilesh Sigatapu",
   "license": "MIT",
   "dependencies": {
-    "@expo/browser-polyfill": "^0.0.0-alpha.4",
+    "@expo/browser-polyfill": "^0.0.1-alpha.3",
     "color-temperature": "0.2.7",
     "expo-asset-utils": "^0.0.4-alpha.2",
     "three": "0.88.0"
