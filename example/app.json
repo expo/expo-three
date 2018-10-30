@@ -3,7 +3,7 @@
     "name": "Expo Three",
     "description": "A collection of Three.js examples in React Native.",
     "slug": "expo-three",
-    "sdkVersion": "28.0.0",
+    "sdkVersion": "30.0.0",
     "version": "1.0.0",
     "privacy": "public",
     "primaryColor": "#5844ed",
