@@ -1,4 +1,4 @@
-import Expo, { AR } from 'expo';
+import { AR } from 'expo';
 import ExpoTHREE, { THREE, AR as ThreeAR } from 'expo-three';
 
 import React from 'react';

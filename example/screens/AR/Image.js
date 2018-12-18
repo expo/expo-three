@@ -1,4 +1,4 @@
-import Expo, { AR } from 'expo';
+import { AR, Asset } from 'expo';
 import ExpoTHREE, { THREE, AR as ThreeAR } from 'expo-three';
 import React from 'react';
 import { View, Linking, TouchableOpacity, Text, Image } from 'react-native';
@@ -43,7 +43,7 @@ class ImageExample extends React.Component {
   };
 
   addDetectionImageAsync = async (resource, width = 0.254) => {
-    let asset = Expo.Asset.fromModule(resource);
+    let asset = Asset.fromModule(resource);
     await asset.downloadAsync();
     await AR.setDetectionImagesAsync({
       icon: {
