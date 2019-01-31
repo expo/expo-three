@@ -40,9 +40,8 @@
     "three": "0.88.0"
   },
   "peerDependencies": {
-    "expo": ">= 31.0.0",
-    "react-native": "*",
-    "three": "0.88.0"
+    "expo": ">= 30.0.0",
+    "react-native": "*"
   },
   "devDependencies": {
     "babel-jest": "^23.0.1",
