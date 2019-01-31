@@ -112,7 +112,7 @@ class RawData extends React.Component {
     });
 
     AR.onDidFailWithError(({ error }) => {
-      console.error(error);
+      throw new Error(error);
     });
 
     AR.onAnchorsDidUpdate(({ anchors, eventType }) => {

@@ -17,7 +17,7 @@ class AssimpLoaderExample extends ThreeStage {
     );
 
     if (!object) {
-      console.error('Failed to load model!');
+      throw new Error('Failed to load model!');
     }
 
     const { object: mesh, animation } = object;

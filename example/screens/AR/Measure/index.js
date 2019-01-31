@@ -24,7 +24,7 @@ export default class App extends React.Component {
 
   componentDidMount() {
     AR.onDidFailWithError(({ error }) => {
-      console.error(error);
+      throw new Error(error);
     });
 
     AR.onSessionWasInterrupted(() => {
