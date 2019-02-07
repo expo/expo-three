@@ -38,7 +38,7 @@ import { AR as ThreeAR } from 'expo-three';
 ### `ExpoTHREE.Renderer({ gl: WebGLRenderingContext, width: number, height: number, pixelRatio: number, ...extras })`
 
 Given a `gl` from an
-[`Expo.GLView`](https://docs.expo.io/versions/latest/sdk/gl-view.html), return a
+[`Expo.GLView`](https://docs.expo.io/versions/latest/sdk/gl-view), return a
 [`THREE.WebGLRenderer`](https://threejs.org/docs/#api/renderers/WebGLRenderer)
 that draws into it.
 
@@ -83,7 +83,7 @@ type PossibleAsset = number | string | Expo.Asset;
 ```
 
 - `number`: Static file reference `require('./model.*')`
-- `Expo.Asset`: [Expo.Asset](https://docs.expo.io/versions/latest/sdk/asset.html)
+- `Expo.Asset`: [Expo.Asset](https://docs.expo.io/versions/latest/sdk/asset)
 - `string`: A uri path to an asset
 
 #### Returns
@@ -93,7 +93,7 @@ For a more predictable return value you should use one of the more specific mode
 
 #### Example
 
-A list of supported formats can be found [here](/examples/loader)
+A list of supported formats can be found [here](/examples/app.json)
 
 ```js
 const texture = await ExpoTHREE.loadAsync('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
@@ -364,12 +364,12 @@ Example:
 
 ```js
 const skybox = {
-	nx: require('./nx.jpg'),
-	ny: require('./ny.jpg'),
-	nz: require('./nz.jpg'),
-	px: require('./px.jpg'),
-	py: require('./py.jpg'),
-	pz: require('./pz.jpg')
+  nx: require('./nx.jpg'),
+  ny: require('./ny.jpg'),
+  nz: require('./nz.jpg'),
+  px: require('./px.jpg'),
+  py: require('./py.jpg'),
+  pz: require('./pz.jpg')
 }
 const cubeTexture = new CubeTexture()
 await cubeTexture.loadAsync({assetForDirection: ({ direction }) => skybox[direction]})
