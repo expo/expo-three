@@ -37,7 +37,7 @@
     "@expo/browser-polyfill": "^0.0.1-alpha.3",
     "color-temperature": "0.2.7",
     "expo-asset-utils": "^0.0.4-alpha.2",
-    "three": "0.88.0"
+    "three": "^0.102.1"
   },
   "peerDependencies": {
     "expo": ">= 30.0.0",
