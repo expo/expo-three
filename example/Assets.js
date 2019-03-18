@@ -67,6 +67,11 @@ export default {
         "dancing.fbx": require(`./assets/models/fbx/samba/dancing.fbx`)
       }
     },
+    "gltf": {
+      "robot": {
+        "robot.glb": require(`./assets/models/gltf/robot.glb`)
+      }
+    },
 		"collada": {
 			"elf": {
 				"Body_tex_003.jpg": require(`./assets/models/collada/elf/Body_tex_003.jpg`),
