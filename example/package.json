@@ -16,7 +16,7 @@
     "@expo/browser-polyfill": "^0.0.1-alpha.3",
     "expo": "^30.0.0",
     "expo-graphics": "^1.0.0-alpha.1",
-    "expo-three": "../expo-three-v3.0.0-alpha.4.tgz",
+    "expo-three": "../",
     "react": "16.4.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-30.0.0.tar.gz",
     "react-navigation": "^2.3.0"

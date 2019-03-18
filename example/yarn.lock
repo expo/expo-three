@@ -2832,9 +2832,8 @@ expo-sms@~1.0.2:
     expo-core "~1.1.0"
     expo-permissions-interface "~1.1.0"
 
-expo-three@../expo-three-v3.0.0-alpha.4.tgz:
-  version "3.0.0-alpha.4"
-  resolved "../expo-three-v3.0.0-alpha.4.tgz#0fccac4dae20129d6db9da93406fb0c13962697d"
+expo-three@../:
+  version "3.0.0-alpha.8"
   dependencies:
     "@expo/browser-polyfill" "^0.0.1-alpha.3"
     color-temperature "0.2.7"
