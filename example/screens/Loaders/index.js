@@ -5,6 +5,7 @@ export default {
   //   Babylon: sceneWithExample(require(`./BabylonLoaderExample.js`)),
   Bvh: sceneWithExample(require(`./BvhLoaderExample.js`)),
   Dae: sceneWithExample(require(`./DaeLoaderExample.js`)),
+  Fbx: sceneWithExample(require(`./FbxLoaderExample.js`)),
   // DaeRigged: sceneWithExample(require(`./DaeRiggedLoaderExample.js`)),
   //   Draco: sceneWithExample(require(`./DracoLoaderExample.js`)),
   //   Msgpack: sceneWithExample(require(`./MsgpackLoaderExample.js`)),
