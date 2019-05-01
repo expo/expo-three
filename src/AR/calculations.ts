@@ -36,8 +36,8 @@ export function hitTestWithFeatures(
   maxDistance: number = 99999999999999,
   maxResults: number = 1,
   rawFeaturePoints: any[] = []
-): any[] | undefined {
-  let results: any[] = [];
+): FeatureHitTestResult[] {
+  let results: FeatureHitTestResult[] = [];
 
   let featurePoints = _getRawFeaturePoints(rawFeaturePoints);
   if (featurePoints.length === 0) {
@@ -117,8 +117,8 @@ export function hitTestWithFeatures(
 }
 
 //-> [FeatureHitTestResult]
-export function hitTestWithPoint(camera: ARCamera, point: THREE.Vector2): any[] {
-  let results: any[] = [];
+export function hitTestWithPoint(camera: ARCamera, point: THREE.Vector2): FeatureHitTestResult[] {
+  let results: FeatureHitTestResult[] = [];
   const ray = hitTestRayFromScreenPos(camera, point);
   if (!ray || !ray.origin || !ray.direction) {
     return results;
@@ -145,7 +145,7 @@ export function unprojectPoint(camera: ARCamera, point: THREE.Vector3): THREE.Ve
   return vector;
 }
 
-export function hitTestRayFromScreenPos(camera: ARCamera, point: THREE.Vector2) {
+export function hitTestRayFromScreenPos(camera: ARCamera, point: THREE.Vector2): HitTestRay {
   const cameraPos = positionFromTransform(camera.matrix);
 
   // Note: z: 1.0 will unproject() the screen position to the far clipping plane.
@@ -157,8 +157,10 @@ export function hitTestRayFromScreenPos(camera: ARCamera, point: THREE.Vector2) 
   return hitTest;
 }
 
-const ARFrameAttribute = AR.FrameAttribute || AR.FrameAttributes;
-const ARHitTestResultType = AR.HitTestResultType || AR.HitTestResultTypes;
+// @ts-ignore
+const ARFrameAttribute = AR.FrameAttribute || AR.FrameAttributes || {};
+// @ts-ignore
+const ARHitTestResultType = AR.HitTestResultType || AR.HitTestResultTypes || {};
 
 function _getRawFeaturePoints(rawFeaturePoints) {
   let featurePoints = rawFeaturePoints;
@@ -271,7 +273,7 @@ export function rayIntersectionWithHorizontalPlane(
   return null;
 }
 
-export function convertTransformArray(transform: Array<number>): THREE.Matrix4 {
+export function convertTransformArray(transform: number[]): THREE.Matrix4 {
   const matrix = new THREE.Matrix4();
   matrix.fromArray(transform);
   return matrix;
@@ -292,7 +294,11 @@ export function worldPositionFromScreenPosition(
   infinitePlane: boolean = false,
   dragOnInfinitePlanesEnabled: boolean = false,
   rawFeaturePoints: any = undefined
-) {
+): null | {
+  worldPosition?: THREE.Vector3;
+  planeAnchor: AR.PlaneAnchor | null;
+  hitAPlane: boolean;
+} {
   // -------------------------------------------------------------------------------
   // 1. Always do a hit test against exisiting plane anchors first.
   //    (If any such anchors exist & only within their extents.)
@@ -317,10 +323,11 @@ export function worldPositionFromScreenPosition(
       // Return immediately - this is the best possible outcome.
       return {
         worldPosition,
-        planeAnchor: anchor,
+        planeAnchor: anchor as AR.PlaneAnchor,
         hitAPlane: true,
       };
     }
+    return null;
   }
 
   // -------------------------------------------------------------------------------
@@ -352,7 +359,7 @@ export function worldPositionFromScreenPosition(
 
     let pointOnInfinitePlane = hitTestWithInfiniteHorizontalPlane(camera, position, pointOnPlane);
     if (pointOnInfinitePlane) {
-      return { worldPosition: pointOnInfinitePlane, hitAPlane: true };
+      return { worldPosition: pointOnInfinitePlane, planeAnchor: null, hitAPlane: true };
     }
   }
 
@@ -361,7 +368,7 @@ export function worldPositionFromScreenPosition(
   //    features if the hit tests against infinite planes were skipped or no
   //    infinite plane was hit.
   if (highQualityFeatureHitTestResult) {
-    return { worldPosition: featureHitTestPosition, hitAPlane: false };
+    return { worldPosition: featureHitTestPosition, planeAnchor: null, hitAPlane: false };
   }
 
   // -------------------------------------------------------------------------------
@@ -371,10 +378,10 @@ export function worldPositionFromScreenPosition(
   let unfilteredFeatureHitTestResults = hitTestWithPoint(camera, position);
   if (unfilteredFeatureHitTestResults.length > 0) {
     let result = unfilteredFeatureHitTestResults[0];
-    return { worldPosition: result.position, hitAPlane: false };
+    return { worldPosition: result.position, planeAnchor: null, hitAPlane: false };
   }
 
-  return { worldPosition: null, planeAnchor: null, hitAPlane: null };
+  return { planeAnchor: null, hitAPlane: false };
 }
 
 export function positionFromAnchor({ worldTransform }): THREE.Vector3 {

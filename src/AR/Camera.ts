@@ -15,7 +15,7 @@ class ARCamera extends THREE.PerspectiveCamera {
     this.far = far;
   }
 
-  updateMatrixWorld() {
+  updateMatrixWorld(): void {
     if (this.width > 0 && this.height > 0) {
       const matrices = AR.getARMatrices(this.near, this.far);
       if (matrices && matrices.viewMatrix) {
@@ -26,7 +26,7 @@ class ARCamera extends THREE.PerspectiveCamera {
     }
   }
 
-  updateProjectionMatrix = () => this.updateMatrixWorld();
+  updateProjectionMatrix = (): void => this.updateMatrixWorld();
 }
 
 export default ARCamera;

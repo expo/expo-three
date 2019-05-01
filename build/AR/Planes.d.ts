@@ -5,7 +5,7 @@ declare class Planes extends THREE.Object3D {
     _data: PlaneAnchor[];
     segments: number;
     defaultRotationX: number;
-    planeMaterial: any;
+    planeMaterial: THREE.MeshBasicMaterial;
     data: PlaneAnchor[];
     update: () => void;
 }

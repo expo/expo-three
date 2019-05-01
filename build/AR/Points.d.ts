@@ -5,7 +5,7 @@ export default class Points extends THREE.Object3D {
         [id: string]: THREE.Points;
     };
     _data: RawFeaturePoint[];
-    material: any;
+    material: THREE.PointsMaterial;
     data: RawFeaturePoint[];
     update: () => void;
 }

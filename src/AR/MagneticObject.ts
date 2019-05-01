@@ -1,6 +1,7 @@
+import { AR } from 'expo';
 import THREE from '../Three';
 import { positionFromTransform, worldPositionFromScreenPosition } from './calculations';
-
+import ARCamera from './Camera';
 // TODO: Bacon: Vertical support
 
 class MagneticObject extends THREE.Object3D {
@@ -15,7 +16,11 @@ class MagneticObject extends THREE.Object3D {
     super();
   }
 
-  updateForAnchor = (position, planeAnchor, camera) => {
+  updateForAnchor = (
+    position: THREE.Vector3,
+    planeAnchor: AR.PlaneAnchor | null,
+    camera: THREE.Camera
+  ) => {
     if (planeAnchor != null) {
       // const index = this.anchorsOfVisitedPlanes.indexOf(planeAnchor);
       this.anchorsOfVisitedPlanes.unshift(planeAnchor);
@@ -27,14 +32,10 @@ class MagneticObject extends THREE.Object3D {
     this.updateTransform(position, camera);
   };
 
-  update = (camera, screenPosition) => {
-    const { worldPosition, planeAnchor } = worldPositionFromScreenPosition(
-      camera,
-      screenPosition,
-      this.position
-    );
-    if (worldPosition) {
-      this.updateForAnchor(worldPosition, planeAnchor, camera);
+  update = (camera: ARCamera, screenPosition): void => {
+    const data = worldPositionFromScreenPosition(camera, screenPosition, this.position);
+    if (data && data.worldPosition) {
+      this.updateForAnchor(data.worldPosition, data.planeAnchor, camera);
     }
   };
 

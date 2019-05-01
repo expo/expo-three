@@ -1,4 +1,4 @@
-import { Platform } from 'expo-core';
+import { Platform } from 'react-native';
 const suppressExpoWarnings = (shouldSuppress = true) => {
     if (Platform.OS === 'web') {
         return;

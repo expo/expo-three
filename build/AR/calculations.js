@@ -109,8 +109,10 @@ export function hitTestRayFromScreenPos(camera, point) {
     const hitTest = new HitTestRay(cameraPos, screenPosOnFarClippingPlane);
     return hitTest;
 }
-const ARFrameAttribute = AR.FrameAttribute || AR.FrameAttributes;
-const ARHitTestResultType = AR.HitTestResultType || AR.HitTestResultTypes;
+// @ts-ignore
+const ARFrameAttribute = AR.FrameAttribute || AR.FrameAttributes || {};
+// @ts-ignore
+const ARHitTestResultType = AR.HitTestResultType || AR.HitTestResultTypes || {};
 function _getRawFeaturePoints(rawFeaturePoints) {
     let featurePoints = rawFeaturePoints;
     if (featurePoints == null) {
@@ -230,6 +232,7 @@ export function worldPositionFromScreenPosition(camera, position, objectPos, inf
                 hitAPlane: true,
             };
         }
+        return null;
     }
     // -------------------------------------------------------------------------------
     // 2. Collect more information about the environment by hit testing against
@@ -249,7 +252,7 @@ export function worldPositionFromScreenPosition(camera, position, objectPos, inf
         let pointOnPlane = objectPos || new THREE.Vector3();
         let pointOnInfinitePlane = hitTestWithInfiniteHorizontalPlane(camera, position, pointOnPlane);
         if (pointOnInfinitePlane) {
-            return { worldPosition: pointOnInfinitePlane, hitAPlane: true };
+            return { worldPosition: pointOnInfinitePlane, planeAnchor: null, hitAPlane: true };
         }
     }
     // -------------------------------------------------------------------------------
@@ -257,7 +260,7 @@ export function worldPositionFromScreenPosition(camera, position, objectPos, inf
     //    features if the hit tests against infinite planes were skipped or no
     //    infinite plane was hit.
     if (highQualityFeatureHitTestResult) {
-        return { worldPosition: featureHitTestPosition, hitAPlane: false };
+        return { worldPosition: featureHitTestPosition, planeAnchor: null, hitAPlane: false };
     }
     // -------------------------------------------------------------------------------
     // 5. As a last resort, perform a second, unfiltered hit test against features.
@@ -265,9 +268,9 @@ export function worldPositionFromScreenPosition(camera, position, objectPos, inf
     let unfilteredFeatureHitTestResults = hitTestWithPoint(camera, position);
     if (unfilteredFeatureHitTestResults.length > 0) {
         let result = unfilteredFeatureHitTestResults[0];
-        return { worldPosition: result.position, hitAPlane: false };
+        return { worldPosition: result.position, planeAnchor: null, hitAPlane: false };
     }
-    return { worldPosition: null, planeAnchor: null, hitAPlane: null };
+    return { planeAnchor: null, hitAPlane: false };
 }
 export function positionFromAnchor({ worldTransform }) {
     const transform = convertTransformArray(worldTransform);

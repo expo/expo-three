@@ -5,7 +5,6 @@ function getExtension(uri) {
 }
 export function loaderClassForUri(uri) {
     const extension = getExtension(uri);
-    // console.log('ExpoTHREE.loaderClassForUri', { extension, uri });
     return loaderClassForExtension(extension);
 }
 export function loaderClassForExtension(extension) {
@@ -60,6 +59,17 @@ export function loaderClassForExtension(extension) {
                 require('three/examples/js/loaders/ctm/CTMLoader');
             }
             return THREE.CTMLoader;
+        case 'fbx':
+            if (!THREE.FBXLoader) {
+                require('three/examples/js/libs/inflate.min');
+                require('three/examples/js/loaders/FBXLoader');
+            }
+            return THREE.FBXLoader;
+        case 'glb':
+        case 'gltf':
+            if (!THREE.GLTFLoader)
+                require('three/examples/js/loaders/GLTFLoader');
+            return THREE.GLTFLoader;
         case 'max':
         case '3ds':
             if (!THREE.TDSLoader) {
