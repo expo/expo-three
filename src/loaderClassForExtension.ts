@@ -65,6 +65,16 @@ export function loaderClassForExtension(extension: string): any {
         require('three/examples/js/loaders/ctm/CTMLoader');
       }
       return THREE.CTMLoader;
+    case 'fbx':
+      if (!THREE.FBXLoader) {
+        require('three/examples/js/libs/inflate.min');
+        require('three/examples/js/loaders/FBXLoader');
+      }
+      return THREE.FBXLoader;
+    case 'glb':
+    case 'gltf':
+      if (!THREE.GLTFLoader) require('three/examples/js/loaders/GLTFLoader');
+      return THREE.GLTFLoader;
     case 'max':
     case '3ds':
       if (!THREE.TDSLoader) {
@@ -124,6 +134,9 @@ export function loaderClassForExtension(extension: string): any {
     //   if (!THREE.DRACOLoader) require('three/examples/js/loaders/draco/DRACOLoader');
     //   return THREE.DRACOLoader;
     default:
-      throw new Error('ExpoTHREE.loaderClassForExtension(): Unrecognized file type ' + extension);
+      throw new Error(
+        'ExpoTHREE.loaderClassForExtension(): Unrecognized file type ' +
+          extension,
+      );
   }
 }
