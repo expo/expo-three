@@ -1,9 +1,12 @@
 {
   "name": "expo-three",
-  "version": "3.0.0-alpha.8",
+  "version": "3.0.1",
+  "sideEffects": true,
   "description": "Utilities for using THREE.js on Expo",
+  "main": "build/index.js",
+  "types": "build/index.d.ts",
   "files": [
-    "lib"
+    "src"
   ],
   "homepage": "https://github.com/expo/expo-three#readme",
   "repository": {
@@ -13,15 +16,17 @@
   "bugs": {
     "url": "https://github.com/expo/expo-three/issues"
   },
-  "main": "lib/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "eslint .",
-    "prettier": "eslint . --fix"
+    "build": "expo-module build",
+    "clean": "expo-module clean",
+    "test": "expo-module test",
+    "prepare": "expo-module prepare",
+    "prepublishOnly": "expo-module prepublishOnly",
+    "expo-module": "expo-module"
   },
   "directories": {
     "example": "examples",
-    "lib": "lib"
+    "lib": "src"
   },
   "keywords": [
     "expo",
@@ -36,7 +41,7 @@
   "dependencies": {
     "@expo/browser-polyfill": "^0.0.1-alpha.3",
     "color-temperature": "0.2.7",
-    "expo-asset-utils": "^0.0.4-alpha.2",
+    "expo-asset-utils": "^1.0.0",
     "three": "^0.102.1"
   },
   "peerDependencies": {
@@ -44,16 +49,10 @@
     "react-native": "*"
   },
   "devDependencies": {
-    "babel-jest": "^23.0.1",
-    "babel-preset-expo": "^4.0.0",
-    "babel-preset-react-native": "^4.0.0",
-    "eslint": "^4.19.1",
-    "eslint-config-react-native-prettier": "^1.0.1",
-    "flow-bin": "^0.26.0",
-    "jest": "^23.1.0",
-    "prettier": "^1.13.5"
+    "@types/three": "^0.93.22",
+    "expo-module-scripts": "^1.0.0"
   },
-  "eslintConfig": {
-    "extends": "expo"
+  "jest": {
+    "preset": "expo-module-scripts"
   }
 }

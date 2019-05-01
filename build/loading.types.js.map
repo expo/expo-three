@@ -1,0 +1,1 @@
+{"version":3,"file":"loading.types.js","sourceRoot":"","sources":["../src/loading.types.ts"],"names":[],"mappings":"","sourcesContent":["export type ProgressCallback = (xhr: XMLHttpRequest) => void;\n"]}
