@@ -13,10 +13,7 @@ import {
   loadArrayBufferAsync,
 } from './loaders/loadModelsAsync';
 
-import {
-  loaderClassForExtension,
-  loaderClassForUri,
-} from './loaderClassForExtension';
+import { loaderClassForExtension, loaderClassForUri } from './loaderClassForExtension';
 
 export async function loadBasicModelAsync(options: {
   uri: string;
@@ -36,12 +33,12 @@ export async function loadBasicModelAsync(options: {
 export default async function loadAsync(
   res,
   onProgress?: ProgressCallback,
-  onAssetRequested = function() {},
+  onAssetRequested = function() {}
 ) {
   let urls = await resolveAsset(res);
   if (!urls) {
     throw new Error(
-      `ExpoTHREE.loadAsync: Cannot parse undefined assets. Please pass valid resources for: ${res}.`,
+      `ExpoTHREE.loadAsync: Cannot parse undefined assets. Please pass valid resources for: ${res}.`
     );
   }
   const asset = urls[0];
@@ -49,7 +46,7 @@ export default async function loadAsync(
 
   if (url == null) {
     throw new Error(
-      `ExpoTHREE.loadAsync: this asset couldn't be downloaded. Be sure that your app.json contains the correct extensions.`,
+      `ExpoTHREE.loadAsync: this asset couldn't be downloaded. Be sure that your app.json contains the correct extensions.`
     );
   }
 
@@ -76,9 +73,7 @@ export default async function loadAsync(
       const arrayBuffer = await loadArrayBufferAsync({ uri: url, onProgress });
       const GLTFLoader = loaderClassForExtension('gltf');
       const loader = new GLTFLoader();
-      return new Promise((res, rej) =>
-        loader.parse(arrayBuffer, onAssetRequested, res, rej)
-      );
+      return new Promise((res, rej) => loader.parse(arrayBuffer, onAssetRequested, res, rej));
     } else if (url.match(/\.x$/i)) {
       const XLoader = loaderClassForExtension('x');
 
@@ -87,12 +82,10 @@ export default async function loadAsync(
         load: loadTexture,
       };
       const loader = new XLoader(undefined, texLoader);
-      return new Promise((res, rej) =>
-        loader.load([url, false], res, onProgress, rej),
-      );
+      return new Promise((res, rej) => loader.load([url, false], res, onProgress, rej));
     } else if (url.match(/\.json$/i)) {
       throw new Error(
-        'loadAsync: Please use ExpoTHREE.parseAsync({json}) instead, json can be loaded in lots of different ways.',
+        'loadAsync: Please use ExpoTHREE.parseAsync({json}) instead, json can be loaded in lots of different ways.'
       );
     } else if (url.match(/\.obj$/i)) {
       return loadObjAsync({ asset: url, onAssetRequested });
@@ -133,9 +126,10 @@ export default async function loadAsync(
 
 function loadTexture(url, onLoad, onProgress, onError) {
   const texture = new THREE.Texture();
-  // @ts-ignore
   if (
+    // @ts-ignore
     typeof this.path === 'function' ||
+    // @ts-ignore
     (this.path !== null && typeof this.path === 'object')
   ) {
     (async () => {

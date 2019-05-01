@@ -1,10 +1,6 @@
 import THREE from './Three';
 
-async function parseWithLoaderAsync({
-  json,
-  assetProvider,
-  loader,
-}): Promise<any> {
+async function parseWithLoaderAsync({ json, assetProvider, loader }): Promise<any> {
   loader.setPath && loader.setPath(assetProvider);
   return loader.parse(json, assetProvider);
 }
@@ -16,12 +12,7 @@ type Parseable = {
   assetProvider: any;
 };
 
-export default async function parseAsync({
-  json,
-  format,
-  onProgress,
-  assetProvider,
-}: Parseable): Promise<any> {
+export default async function parseAsync({ json, format, assetProvider }: Parseable): Promise<any> {
   if (!format && json.metadata && json.metadata.type) {
     format = json.metadata.type;
   }
@@ -35,7 +26,6 @@ export default async function parseAsync({
     case 'object':
       return parseWithLoaderAsync({
         json,
-        onProgress,
         assetProvider,
         loader: new THREE.ObjectLoader(),
       });
@@ -43,14 +33,12 @@ export default async function parseAsync({
     case 'blender':
       return parseWithLoaderAsync({
         json,
-        onProgress,
         assetProvider,
         loader: new THREE.JSONLoader(),
       });
     case 'buffer':
       return parseWithLoaderAsync({
         json,
-        onProgress,
         assetProvider,
         loader: new THREE.BufferGeometryLoader(),
       });

@@ -7,8 +7,6 @@ function getExtension(uri: string): string {
 
 export function loaderClassForUri(uri: string): string {
   const extension = getExtension(uri);
-  // console.log('ExpoTHREE.loaderClassForUri', { extension, uri });
-
   return loaderClassForExtension(extension);
 }
 
@@ -134,9 +132,6 @@ export function loaderClassForExtension(extension: string): any {
     //   if (!THREE.DRACOLoader) require('three/examples/js/loaders/draco/DRACOLoader');
     //   return THREE.DRACOLoader;
     default:
-      throw new Error(
-        'ExpoTHREE.loaderClassForExtension(): Unrecognized file type ' +
-          extension,
-      );
+      throw new Error('ExpoTHREE.loaderClassForExtension(): Unrecognized file type ' + extension);
   }
 }
