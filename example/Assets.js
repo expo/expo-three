@@ -62,6 +62,16 @@ export default {
 				"Octaminator_lowpoly_final.fbx": require(`./assets/models/assimp/octaminator/Octaminator_lowpoly_final.fbx`)
 			}
 		},
+    "fbx": {
+      "samba": {
+        "dancing.fbx": require(`./assets/models/fbx/samba/dancing.fbx`)
+      }
+    },
+    "gltf": {
+      "robot": {
+        "robot.glb": require(`./assets/models/gltf/robot.glb`)
+      }
+    },
 		"collada": {
 			"elf": {
 				"Body_tex_003.jpg": require(`./assets/models/collada/elf/Body_tex_003.jpg`),
