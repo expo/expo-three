@@ -1,5 +1,6 @@
 import { AR } from 'expo';
 import THREE from '../Three';
+// @ts-ignore
 const ARFrameAttribute = AR.FrameAttribute || AR.FrameAttributes;
 export default class Points extends THREE.Object3D {
     constructor() {
@@ -11,7 +12,12 @@ export default class Points extends THREE.Object3D {
             const { rawFeaturePoints } = AR.getCurrentFrame({
                 [ARFrameAttribute.RawFeaturePoints]: true,
             });
-            this.data = rawFeaturePoints;
+            if (rawFeaturePoints) {
+                this.data = rawFeaturePoints;
+            }
+            else {
+                this.data = [];
+            }
         };
     }
     get data() {

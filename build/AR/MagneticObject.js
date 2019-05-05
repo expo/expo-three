@@ -22,9 +22,9 @@ class MagneticObject extends THREE.Object3D {
             this.updateTransform(position, camera);
         };
         this.update = (camera, screenPosition) => {
-            const { worldPosition, planeAnchor } = worldPositionFromScreenPosition(camera, screenPosition, this.position);
-            if (worldPosition) {
-                this.updateForAnchor(worldPosition, planeAnchor, camera);
+            const data = worldPositionFromScreenPosition(camera, screenPosition, this.position);
+            if (data && data.worldPosition) {
+                this.updateForAnchor(data.worldPosition, data.planeAnchor, camera);
             }
         };
         this.isValidVector = vector => vector && !isNaN(vector.x) && !isNaN(vector.y) && !isNaN(vector.z);

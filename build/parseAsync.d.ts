@@ -4,5 +4,5 @@ declare type Parseable = {
     onProgress?: (...args: any[]) => any;
     assetProvider: any;
 };
-export default function parseAsync({ json, format, onProgress, assetProvider, }: Parseable): Promise<any>;
+export default function parseAsync({ json, format, assetProvider }: Parseable): Promise<any>;
 export {};

@@ -1,5 +1,5 @@
-import { Platform } from 'expo-core';
-import AssetUtils from 'expo-asset-utils';
+import { Platform } from 'react-native';
+import { uriAsync } from 'expo-asset-utils';
 import resolveAsset, { stringFromAsset } from './resolveAsset';
 import THREE from './Three';
 import parseAssetCallback from './loaders/parseAssetCallback';
@@ -19,7 +19,7 @@ export default async function loadAsync(res, onProgress, onAssetRequested = func
         throw new Error(`ExpoTHREE.loadAsync: Cannot parse undefined assets. Please pass valid resources for: ${res}.`);
     }
     const asset = urls[0];
-    let url = await AssetUtils.uriAsync(asset);
+    let url = await uriAsync(asset);
     if (url == null) {
         throw new Error(`ExpoTHREE.loadAsync: this asset couldn't be downloaded. Be sure that your app.json contains the correct extensions.`);
     }
@@ -39,6 +39,18 @@ export default async function loadAsync(res, onProgress, onAssetRequested = func
                 onProgress,
                 onAssetRequested,
             });
+        }
+        else if (url.match(/\.fbx$/i)) {
+            const arrayBuffer = await loadArrayBufferAsync({ uri: url, onProgress });
+            const FBXLoader = loaderClassForExtension('fbx');
+            const loader = new FBXLoader();
+            return loader.parse(arrayBuffer, onAssetRequested);
+        }
+        else if (url.match(/\.glb|gltf$/i)) {
+            const arrayBuffer = await loadArrayBufferAsync({ uri: url, onProgress });
+            const GLTFLoader = loaderClassForExtension('gltf');
+            const loader = new GLTFLoader();
+            return new Promise((res, rej) => loader.parse(arrayBuffer, onAssetRequested, res, rej));
         }
         else if (url.match(/\.x$/i)) {
             const XLoader = loaderClassForExtension('x');
@@ -94,8 +106,11 @@ export default async function loadAsync(res, onProgress, onAssetRequested = func
 }
 function loadTexture(url, onLoad, onProgress, onError) {
     const texture = new THREE.Texture();
+    if (
     // @ts-ignore
-    if (typeof this.path === 'function' || (this.path !== null && typeof this.path === 'object')) {
+    typeof this.path === 'function' ||
+        // @ts-ignore
+        (this.path !== null && typeof this.path === 'object')) {
         (async () => {
             url = url.split('/').pop();
             // @ts-ignore

@@ -2,8 +2,11 @@ import { AR } from 'expo';
 import { PlaneAnchor } from 'expo/src/AR';
 
 import THREE from '../Three';
-import { convertTransformArray } from './calculations';
 
+// @ts-ignore
+const AnchorTypes = AR.AnchorType || AR.AnchorTypes;
+
+// @ts-ignore
 const ARFrameAttribute = AR.FrameAttribute || AR.FrameAttributes;
 
 //TODO: Evan: Add vertical plane support
@@ -66,12 +69,16 @@ class Planes extends THREE.Object3D {
     this.common = nextPlanes;
   }
 
-  update = () => {
+  update = (): void => {
     const { anchors } = AR.getCurrentFrame({
       [ARFrameAttribute.Anchors]: {},
     });
-    const planes = anchors.filter(({ type }) => type === AR.AnchorTypes.Plane);
-    this.data = planes;
+    if (anchors) {
+      const planes = anchors.filter(({ type }) => type === AnchorTypes.Plane);
+      this.data = planes as PlaneAnchor[];
+    } else {
+      this.data = [];
+    }
   };
 }
 

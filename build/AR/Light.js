@@ -1,18 +1,19 @@
 import { AR } from 'expo';
 import ct from 'color-temperature';
 import THREE from '../Three';
+// @ts-ignore
 const ARFrameAttribute = AR.FrameAttribute || AR.FrameAttributes;
 class Light extends THREE.PointLight {
     constructor() {
         super(0xffee88, 1, 100, 2);
-        this._data = {};
+        this._data = null;
     }
     set data(value) {
         if (value === this._data) {
             return;
         }
         this._data = value;
-        if (value !== Object(value)) {
+        if (!value) {
             return;
         }
         const { ambientIntensity, ambientColorTemperature } = value;
@@ -21,7 +22,7 @@ class Light extends THREE.PointLight {
         this.color = new THREE.Color(red / 255.0, green / 255.0, blue / 255.0);
     }
     update() {
-        const { lightEstimation } = AR.getCurrentFrame({
+        const { lightEstimation = null } = AR.getCurrentFrame({
             [ARFrameAttribute.LightEstimation]: true,
         });
         this.data = lightEstimation;

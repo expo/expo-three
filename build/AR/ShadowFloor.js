@@ -1,5 +1,5 @@
 import THREE from '../Three';
-//TODO: Evan: Add Physics
+// TODO: Evan: Add Physics
 class ShadowFloor extends THREE.Mesh {
     constructor({ width, height, opacity }) {
         const material = new THREE.ShadowMaterial();
