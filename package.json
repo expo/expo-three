@@ -1,13 +1,10 @@
 {
   "name": "expo-three",
-  "version": "3.0.1",
+  "version": "3.0.2-alpha.0",
   "sideEffects": true,
   "description": "Utilities for using THREE.js on Expo",
   "main": "build/index.js",
   "types": "build/index.d.ts",
-  "files": [
-    "src"
-  ],
   "homepage": "https://github.com/expo/expo-three#readme",
   "repository": {
     "type": "git",
@@ -23,10 +20,6 @@
     "prepare": "expo-module prepare",
     "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module"
-  },
-  "directories": {
-    "example": "examples",
-    "lib": "src"
   },
   "keywords": [
     "expo",
