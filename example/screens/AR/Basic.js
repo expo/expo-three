@@ -18,7 +18,7 @@ export default class App extends React.Component {
           isArEnabled
           isArRunningStateEnabled
           isArCameraStateEnabled
-          arTrackingConfiguration={AR.TrackingConfigurations.World}
+          arTrackingConfiguration={AR.TrackingConfiguration.World}
         />
         <View
           style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -29,7 +29,7 @@ export default class App extends React.Component {
   }
 
   onContextCreate = props => {
-    AR.setPlaneDetection(AR.PlaneDetectionTypes.Horizontal);
+    AR.setPlaneDetection(AR.PlaneDetection.Horizontal);
     this.commonSetup(props);
   };
 
