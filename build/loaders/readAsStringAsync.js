@@ -7,7 +7,7 @@ export default async function readFromFileSystemAsStringAsync(localUri) {
     }
     if (Platform.OS === 'web') {
         const loader = new THREE.FileLoader();
-        return new Promise((resolve, reject) => loader.load(localUri, value => {
+        return new Promise((resolve, reject) => loader.load(localUri, async (value) => {
             // @ts-ignore
             resolve(await value);
         }, () => { }, reject));

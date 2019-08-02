@@ -1,6 +1,6 @@
 {
   "name": "expo-three",
-  "version": "4.0.2",
+  "version": "4.0.3",
   "sideEffects": true,
   "description": "Utilities for using THREE.js on Expo",
   "main": "build/index.js",
@@ -40,6 +40,9 @@
     "expo-file-system": "^6.0.0",
     "three": "^0.102.1"
   },
+  "jest": {
+    "preset": "expo-module-scripts"
+  },
   "peerDependencies": {
     "expo": ">= 30.0.0",
     "react-native": "*"
@@ -47,8 +50,5 @@
   "devDependencies": {
     "@types/three": "^0.93.22",
     "expo-module-scripts": "^1.0.1"
-  },
-  "jest": {
-    "preset": "expo-module-scripts"
   }
 }

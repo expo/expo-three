@@ -17,7 +17,7 @@ export default async function readFromFileSystemAsStringAsync(
     return new Promise((resolve, reject) =>
       loader.load(
         localUri,
-        value => {
+        async value => {
           // @ts-ignore
           resolve(await value);
         },
