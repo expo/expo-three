@@ -1,39 +1,16 @@
+import { Platform } from '@unimodules/core';
 import AssetUtils from 'expo-asset-utils';
 import THREE from '../Three';
 import readAsStringAsync from './readAsStringAsync';
-function provideBundlingExtensionErrorMessage({ extension, funcName }) {
-    return `
-    ExpoTHREE.${funcName}: The \`asset\` provided cannot be resolved. 
-    Please make sure your Expo project's \`app.json\` is bundling your asset, by including the extension: ${extension}
-      // app.json
-      "expo": {
-          "packagerOpts": {
-              assetExts: [ 
-                  "${extension}", 
-                  ... 
-              ],
-          }
-      }`;
-}
-async function loadFileAsync({ asset, extension, funcName, }) {
+async function loadFileAsync({ asset, funcName }) {
     if (!asset) {
         throw new Error(`ExpoTHREE.${funcName}: Cannot parse a null asset`);
     }
-    try {
-        return await AssetUtils.uriAsync(asset);
-    }
-    catch ({ message }) {
-        const customErrorMessage = provideBundlingExtensionErrorMessage({
-            extension,
-            funcName,
-        });
-        throw new Error(`${customErrorMessage}, ${message}`);
-    }
+    return await AssetUtils.uriAsync(asset);
 }
 export async function loadMtlAsync({ asset, onAssetRequested }) {
-    let uri = await loadFileAsync({
+    const uri = await loadFileAsync({
         asset,
-        extension: 'mtl',
         funcName: 'loadMtlAsync',
     });
     if (!uri)
@@ -45,6 +22,9 @@ export async function loadMtlAsync({ asset, onAssetRequested }) {
     // @ts-ignore
     const loader = new THREE.MTLLoader();
     loader.setPath(onAssetRequested);
+    if (Platform.OS === 'web') {
+        return await new Promise((resolve, reject) => loader.load(uri, resolve, () => { }, reject));
+    }
     return loadFileContentsAsync(loader, uri, 'loadMtlAsync');
 }
 export async function loadObjAsync(options) {
@@ -57,9 +37,8 @@ export async function loadObjAsync(options) {
         });
         nextMaterials.preload();
     }
-    let uri = await loadFileAsync({
+    const uri = await loadFileAsync({
         asset,
-        extension: 'obj',
         funcName: 'loadObjAsync',
     });
     if (!uri)
@@ -70,16 +49,20 @@ export async function loadObjAsync(options) {
     }
     // @ts-ignore
     const loader = new THREE.OBJLoader();
-    loader.setPath(onAssetRequested);
+    if (onAssetRequested) {
+        loader.setPath(onAssetRequested);
+    }
     if (nextMaterials != null) {
         loader.setMaterials(nextMaterials);
+    }
+    if (Platform.OS === 'web') {
+        return await new Promise((resolve, reject) => loader.load(uri, resolve, () => { }, reject));
     }
     return loadFileContentsAsync(loader, uri, 'loadObjAsync');
 }
 export async function loadDaeAsync({ asset, onAssetRequested, onProgress, }) {
-    let uri = await loadFileAsync({
+    const uri = await loadFileAsync({
         asset,
-        extension: 'dae',
         funcName: 'loadDaeAsync',
     });
     if (typeof uri !== 'string' || uri == null) {
