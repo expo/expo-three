@@ -38,4 +38,5 @@ export { default as THREE } from './Three';
 export const ThreeAR = AR;
 export { AR, utils, Renderer };
 export * from './loaders/loadModelsAsync';
+export * from './loaders/loadTextureAsync';
 //# sourceMappingURL=ExpoTHREE.js.map
