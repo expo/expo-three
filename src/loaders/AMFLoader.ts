@@ -20,8 +20,7 @@
  */
 
 import { TextDecoder } from 'text-encoding';
-import * as THREE from 'three';
-
+import THREE from '../Three';
 // @ts-ignore
 const {JSZip} = window;
 

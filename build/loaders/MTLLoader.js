@@ -3,7 +3,7 @@
  *
  * @author angelxuanchang
  */
-import THREE from 'three';
+import THREE from '../Three';
 // @ts-ignore
 THREE.MTLLoader = function (manager) {
     // @ts-ignore
