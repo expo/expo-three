@@ -1,8 +1,4 @@
-import { Platform } from 'react-native';
 const suppressExpoWarnings = (shouldSuppress = true) => {
-    if (Platform.OS === 'web') {
-        return;
-    }
     if (shouldSuppress) {
         global.__expo_three_oldWarn = global.__expo_three_oldWarn || console.warn;
         global.console.warn = str => {

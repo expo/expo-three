@@ -34,7 +34,10 @@
   "dependencies": {
     "@expo/browser-polyfill": "^0.0.1-alpha.3",
     "color-temperature": "0.2.7",
+    "expo": "^34.0.3",
+    "expo-asset": "^6.0.0",
     "expo-asset-utils": "^1.0.0",
+    "expo-file-system": "^6.0.0",
     "three": "^0.102.1"
   },
   "peerDependencies": {
@@ -43,7 +46,7 @@
   },
   "devDependencies": {
     "@types/three": "^0.93.22",
-    "expo-module-scripts": "^1.0.0"
+    "expo-module-scripts": "^1.0.1"
   },
   "jest": {
     "preset": "expo-module-scripts"

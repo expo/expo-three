@@ -1,0 +1,1 @@
+{"version":3,"file":"suppressWarnings.web.js","sourceRoot":"","sources":["../src/suppressWarnings.web.ts"],"names":[],"mappings":"AAAA,eAAe,CAAC,iBAA0B,IAAI,EAAE,EAAE,GAAE,CAAC,CAAC","sourcesContent":["export default (shouldSuppress: boolean = true) => {};\n"]}

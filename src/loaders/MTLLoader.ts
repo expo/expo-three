@@ -4,7 +4,7 @@
  * @author angelxuanchang
  */
 
-import THREE from 'three';
+import THREE from '../Three';
 
 // @ts-ignore
 THREE.MTLLoader = function(manager) {
@@ -12,6 +12,7 @@ THREE.MTLLoader = function(manager) {
   this.manager = manager !== undefined ? manager : THREE.DefaultLoadingManager;
 };
 
+// @ts-ignore
 THREE.MTLLoader.prototype = {
   // @ts-ignore
   constructor: THREE.MTLLoader,
@@ -169,7 +170,7 @@ THREE.MTLLoader.prototype = {
  * @constructor
  */
 
- // @ts-ignore
+// @ts-ignore
 THREE.MTLLoader.MaterialCreator = function(baseUrl, options) {
   // @ts-ignore
   this.baseUrl = baseUrl || '';
@@ -183,13 +184,16 @@ THREE.MTLLoader.MaterialCreator = function(baseUrl, options) {
   this.materialsArray = [];
   // @ts-ignore
   this.nameLookup = {};
-  
+
   // @ts-ignore
   this.side =
+    // @ts-ignore
+    this.options && this.options.side ? this.options.side : THREE.FrontSide;
   // @ts-ignore
-  this.options && this.options.side ? this.options.side : THREE.FrontSide;
-  // @ts-ignore
-  this.wrap = this.options && this.options.wrap ? this.options.wrap : THREE.RepeatWrapping;
+  this.wrap =
+    this.options && this.options.wrap
+      ? this.options.wrap
+      : THREE.RepeatWrapping;
 };
 
 // @ts-ignore
@@ -334,67 +338,67 @@ THREE.MTLLoader.MaterialCreator.prototype = {
           // Diffuse color (color under white light) using RGB values
           // @ts-ignore
           params.color = new THREE.Color().fromArray(value);
-          
+
           break;
-          
-          case 'ks':
+
+        case 'ks':
           // Specular color (color when light is reflected from shiny surface) using RGB values
           // @ts-ignore
           params.specular = new THREE.Color().fromArray(value);
-          
+
           break;
-          
-          case 'map_kd':
+
+        case 'map_kd':
           // Diffuse texture map
-          
+
           setMapForType('map', value);
-          
+
           break;
-          
-          case 'map_ks':
+
+        case 'map_ks':
           // Specular map
-          
+
           setMapForType('specularMap', value);
-          
+
           break;
-          
-          case 'norm':
+
+        case 'norm':
           setMapForType('normalMap', value);
-          
+
           break;
-          
-          case 'map_bump':
-          case 'bump':
+
+        case 'map_bump':
+        case 'bump':
           // Bump texture map
-          
+
           setMapForType('bumpMap', value);
-          
+
           break;
-          
-          case 'ns':
+
+        case 'ns':
           // The specular exponent (defines the focus of the specular highlight)
           // A high exponent results in a tight, concentrated highlight. Ns values normally range from 0 to 1000.
-          
+
           // @ts-ignore
           params.shininess = parseFloat(value);
-          
+
           break;
-          
-          case 'd':
+
+        case 'd':
           n = parseFloat(value);
-          
+
           if (n < 1) {
             // @ts-ignore
             params.opacity = n;
             // @ts-ignore
             params.transparent = true;
           }
-          
+
           break;
-          
-          case 'tr':
+
+        case 'tr':
           n = parseFloat(value);
-          
+
           if (n > 0) {
             // @ts-ignore
             params.opacity = 1 - n;

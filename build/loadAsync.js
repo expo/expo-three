@@ -1,10 +1,10 @@
-import { Platform } from 'react-native';
 import { uriAsync } from 'expo-asset-utils';
 import resolveAsset, { stringFromAsset } from './resolveAsset';
-import THREE from './Three';
-import parseAssetCallback from './loaders/parseAssetCallback';
-import { loadDaeAsync, loadObjAsync, loadMtlAsync, loadTextureAsync, loadArrayBufferAsync, } from './loaders/loadModelsAsync';
-import { loaderClassForExtension, loaderClassForUri } from './loaderClassForExtension';
+import { loadTexture } from './loadTexture';
+import { loadDaeAsync, loadObjAsync, loadMtlAsync, loadArrayBufferAsync, } from './loaders/loadModelsAsync';
+import './polyfillTextureLoader.fx';
+import { loadTextureAsync } from './loaders/loadTextureAsync';
+import { loaderClassForExtension, loaderClassForUri, } from './loaderClassForExtension';
 export async function loadBasicModelAsync(options) {
     const { uri, onProgress, onAssetRequested, loader, LoaderClass } = options;
     const _loader = loader || new LoaderClass();
@@ -103,36 +103,5 @@ export default async function loadAsync(res, onProgress, onAssetRequested = func
     else {
         throw new Error('Too many arguments passed: ' + urls);
     }
-}
-function loadTexture(url, onLoad, onProgress, onError) {
-    const texture = new THREE.Texture();
-    if (
-    // @ts-ignore
-    typeof this.path === 'function' ||
-        // @ts-ignore
-        (this.path !== null && typeof this.path === 'object')) {
-        (async () => {
-            url = url.split('/').pop();
-            // @ts-ignore
-            const asset = await parseAssetCallback(url, this.path);
-            const { minFilter, image } = await loadTextureAsync({ asset });
-            texture.image = image;
-            texture.needsUpdate = true;
-            texture['isDataTexture'] = true; // Forces passing to `gl.texImage2D(...)` verbatim
-            texture.minFilter = minFilter; // Pass-through non-power-of-two
-            if (onLoad !== undefined) {
-                console.warn('loaded tex', texture);
-                onLoad(texture);
-            }
-        })();
-    }
-    return texture;
-}
-/*
-  **Super Hack:**
-  Override Texture Loader to use the `path` component as a callback to get resources or Expo `Asset`s
-*/
-if (Platform.OS !== 'web') {
-    THREE.TextureLoader.prototype.load = loadTexture;
 }
 //# sourceMappingURL=loadAsync.js.map

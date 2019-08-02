@@ -1,5 +1,5 @@
 import { AR } from 'expo';
-import { PlaneAnchor } from 'expo/src/AR';
+import { PlaneAnchor } from 'expo/build/AR';
 
 import THREE from '../Three';
 
@@ -42,7 +42,12 @@ class Planes extends THREE.Object3D {
       this.common[id] = null;
 
       if (!object) {
-        const geometry = new THREE.PlaneBufferGeometry(width, length, this.segments, this.segments);
+        const geometry = new THREE.PlaneBufferGeometry(
+          width,
+          length,
+          this.segments,
+          this.segments,
+        );
         const planeMesh = new THREE.Mesh(geometry, this.planeMaterial);
         planeMesh.rotation.x = this.defaultRotationX;
 

@@ -3,7 +3,7 @@ import * as AR from './AR';
 import * as utils from './utils';
 import Renderer from './Renderer';
 export { default as loadAsync } from './loadAsync';
-import { loadTextureAsync, } from './loaders/loadModelsAsync';
+import { loadTextureAsync } from './loaders/loadTextureAsync';
 export * from './loaderClassForExtension';
 /*
  Legacy
@@ -36,6 +36,6 @@ export { default as loadCubeTextureAsync } from './loadCubeTextureAsync';
 export { default as parseAsync } from './parseAsync';
 export { default as THREE } from './Three';
 export const ThreeAR = AR;
-export { AR, utils, Renderer, };
+export { AR, utils, Renderer };
 export * from './loaders/loadModelsAsync';
 //# sourceMappingURL=ExpoTHREE.js.map

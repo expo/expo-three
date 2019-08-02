@@ -1,4 +1,4 @@
-import { RawFeaturePoint } from 'expo/src/AR';
+import { RawFeaturePoint } from 'expo/build/AR';
 import { AR } from 'expo';
 
 import THREE from '../Three';
