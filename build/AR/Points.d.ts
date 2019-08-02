@@ -1,4 +1,4 @@
-import { RawFeaturePoint } from 'expo/src/AR';
+import { RawFeaturePoint } from 'expo/build/AR';
 import THREE from '../Three';
 export default class Points extends THREE.Object3D {
     common: {

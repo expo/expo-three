@@ -1,5 +1,4 @@
 import AssetUtils from 'expo-asset-utils';
-import { Platform } from 'react-native';
 import THREE from '../Three';
 import readAsStringAsync from './readAsStringAsync';
 
@@ -18,7 +17,11 @@ function provideBundlingExtensionErrorMessage({ extension, funcName }) {
       }`;
 }
 
-async function loadFileAsync({ asset, extension, funcName }): Promise<string | null> {
+async function loadFileAsync({
+  asset,
+  extension,
+  funcName,
+}): Promise<string | null> {
   if (!asset) {
     throw new Error(`ExpoTHREE.${funcName}: Cannot parse a null asset`);
   }
@@ -33,32 +36,6 @@ async function loadFileAsync({ asset, extension, funcName }): Promise<string | n
   }
 }
 
-export async function loadTextureAsync({ asset }): Promise<any> {
-  if (!asset) {
-    throw new Error('ExpoTHREE.loadTextureAsync(): Cannot parse a null asset');
-  }
-
-  if (Platform.OS === 'web') {
-    const assetUrl = await AssetUtils.uriAsync(asset);
-    return new THREE.TextureLoader().load(assetUrl);
-  }
-
-  let nextAsset = asset;
-  if (!nextAsset.localUri) {
-    nextAsset = await AssetUtils.resolveAsync(asset);
-  }
-  const texture = new THREE.Texture();
-  texture.image = {
-    data: nextAsset,
-    width: nextAsset.width,
-    height: nextAsset.height,
-  };
-  texture.needsUpdate = true;
-  texture['isDataTexture'] = true; // Forces passing to `gl.texImage2D(...)` verbatim
-  texture.minFilter = THREE.LinearFilter; // Pass-through non-power-of-two
-  return texture;
-}
-
 export async function loadMtlAsync({ asset, onAssetRequested }): Promise<any> {
   let uri = await loadFileAsync({
     asset,
@@ -67,10 +44,12 @@ export async function loadMtlAsync({ asset, onAssetRequested }): Promise<any> {
   });
   if (!uri) return;
 
+  // @ts-ignore
   if (THREE.MTLLoader == null) {
     require('./MTLLoader');
   }
 
+  // @ts-ignore
   const loader = new THREE.MTLLoader();
   loader.setPath(onAssetRequested);
 
@@ -84,7 +63,13 @@ export async function loadObjAsync(options: {
   mtlAsset?: any;
   materials?: any;
 }): Promise<any> {
-  const { asset, onAssetRequested, onMtlAssetRequested, mtlAsset, materials } = options;
+  const {
+    asset,
+    onAssetRequested,
+    onMtlAssetRequested,
+    mtlAsset,
+    materials,
+  } = options;
   let nextMaterials = materials;
   if (nextMaterials == null && mtlAsset != null) {
     nextMaterials = await loadMtlAsync({
@@ -101,9 +86,11 @@ export async function loadObjAsync(options: {
   });
   if (!uri) return;
 
+  // @ts-ignore
   if (THREE.OBJLoader == null) {
     require('three/examples/js/loaders/OBJLoader');
   }
+  // @ts-ignore
   const loader = new THREE.OBJLoader();
   loader.setPath(onAssetRequested as any);
   if (nextMaterials != null) {
@@ -113,7 +100,11 @@ export async function loadObjAsync(options: {
   return loadFileContentsAsync(loader, uri, 'loadObjAsync');
 }
 
-export async function loadDaeAsync({ asset, onAssetRequested, onProgress }): Promise<any> {
+export async function loadDaeAsync({
+  asset,
+  onAssetRequested,
+  onProgress,
+}): Promise<any> {
   let uri = await loadFileAsync({
     asset,
     extension: 'dae',
@@ -123,6 +114,7 @@ export async function loadDaeAsync({ asset, onAssetRequested, onProgress }): Pro
     return;
   }
 
+  // @ts-ignore
   if (THREE.ColladaLoader == null) {
     require('three/examples/js/loaders/ColladaLoader');
   }
@@ -131,13 +123,14 @@ export async function loadDaeAsync({ asset, onAssetRequested, onProgress }): Pro
     new THREE.FileLoader().load(
       uri!,
       text => {
+        // @ts-ignore
         const loader = new THREE.ColladaLoader();
         const parsedResult = (loader.parse as any)(text, onAssetRequested);
         res(parsedResult);
       },
       onProgress,
-      rej
-    )
+      rej,
+    ),
   );
 }
 
@@ -148,7 +141,7 @@ async function loadFileContentsAsync(loader, uri, funcName): Promise<any> {
   } catch ({ message }) {
     // Or model loader THREE.OBJLoader failed to parse fileContents
     throw new Error(
-      `ExpoTHREE.${funcName}: Expo.FileSystem Failed to read uri: ${uri}. ${message}`
+      `ExpoTHREE.${funcName}: Expo.FileSystem Failed to read uri: ${uri}. ${message}`,
     );
   }
 }

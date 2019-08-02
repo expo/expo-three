@@ -1,6 +1,3 @@
-export declare function loadTextureAsync({ asset }: {
-    asset: any;
-}): Promise<any>;
 export declare function loadMtlAsync({ asset, onAssetRequested }: {
     asset: any;
     onAssetRequested: any;
@@ -12,7 +9,7 @@ export declare function loadObjAsync(options: {
     mtlAsset?: any;
     materials?: any;
 }): Promise<any>;
-export declare function loadDaeAsync({ asset, onAssetRequested, onProgress }: {
+export declare function loadDaeAsync({ asset, onAssetRequested, onProgress, }: {
     asset: any;
     onAssetRequested: any;
     onProgress: any;

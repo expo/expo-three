@@ -1,4 +1,4 @@
-import { PlaneAnchor } from 'expo/src/AR';
+import { PlaneAnchor } from 'expo/build/AR';
 import THREE from '../Three';
 declare class Planes extends THREE.Object3D {
     common: {};

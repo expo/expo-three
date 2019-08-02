@@ -9,6 +9,7 @@ THREE.MTLLoader = function (manager) {
     // @ts-ignore
     this.manager = manager !== undefined ? manager : THREE.DefaultLoadingManager;
 };
+// @ts-ignore
 THREE.MTLLoader.prototype = {
     // @ts-ignore
     constructor: THREE.MTLLoader,
@@ -158,7 +159,10 @@ THREE.MTLLoader.MaterialCreator = function (baseUrl, options) {
         // @ts-ignore
         this.options && this.options.side ? this.options.side : THREE.FrontSide;
     // @ts-ignore
-    this.wrap = this.options && this.options.wrap ? this.options.wrap : THREE.RepeatWrapping;
+    this.wrap =
+        this.options && this.options.wrap
+            ? this.options.wrap
+            : THREE.RepeatWrapping;
 };
 // @ts-ignore
 THREE.MTLLoader.MaterialCreator.prototype = {
