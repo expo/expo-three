@@ -32,12 +32,12 @@
   "author": "Nikhilesh Sigatapu",
   "license": "MIT",
   "dependencies": {
-    "@expo/browser-polyfill": "^0.0.1-alpha.3",
+    "@expo/browser-polyfill": "^0.1.0",
     "color-temperature": "0.2.7",
     "expo": "^34.0.3",
     "expo-asset": "^6.0.0",
-    "expo-asset-utils": "^1.0.0",
-    "expo-file-system": "^6.0.0",
+    "expo-asset-utils": "^1.2.0",
+    "expo-file-system": "^6.0.2",
     "three": "^0.102.1"
   },
   "jest": {
