@@ -1,2 +1,0 @@
-json_key_file "../../secret/harambe_bot.json" # Path to the json secret file - Follow https://github.com/fastlane/supply#setup to get one
-package_name "com.expo.expothree" # e.g. com.evanbacon.tickleapp

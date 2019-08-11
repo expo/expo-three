@@ -1,5 +1,0 @@
-With this app you can get familiar with all the exciting new features of expo-three! You can play with all the examples for the npm package expo-three and check out the open source. 
-
-Three.js is the most advanced 3D graphics library for javascript ever made. Now with Expo you can write native 3D AR/VR experiences with it.
-
-Get started today by visiting https://github.com/expo/expo-three
