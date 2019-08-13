@@ -1,6 +1,6 @@
 {
   "name": "expo-three",
-  "version": "4.0.3",
+  "version": "4.0.4",
   "sideEffects": true,
   "description": "Utilities for using THREE.js on Expo",
   "main": "build/index.js",
@@ -32,7 +32,7 @@
   "author": "Nikhilesh Sigatapu",
   "license": "MIT",
   "dependencies": {
-    "@expo/browser-polyfill": "^0.0.1-alpha.3",
+    "@expo/browser-polyfill": "^0.1.0",
     "color-temperature": "0.2.7",
     "expo": "^34.0.3",
     "expo-asset": "^6.0.0",
