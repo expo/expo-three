@@ -35,6 +35,7 @@ export { default as CubeTexture } from './CubeTexture';
 export { default as loadCubeTextureAsync } from './loadCubeTextureAsync';
 export { default as parseAsync } from './parseAsync';
 export { default as THREE } from './Three';
+export { default as TextureLoader } from './TextureLoader';
 export const ThreeAR = AR;
 export { AR, utils, Renderer };
 export * from './loaders/loadModelsAsync';

@@ -34,17 +34,18 @@
   "dependencies": {
     "@expo/browser-polyfill": "^0.1.0",
     "color-temperature": "0.2.7",
-    "expo": "^34.0.3",
     "expo-asset": "^6.0.0",
     "expo-asset-utils": "^1.0.0",
-    "expo-file-system": "^6.0.0",
     "three": "^0.102.1"
+  },
+  "unimodulePeerDependencies": {
+    "@unimodules/core": "*",
+    "expo-file-system": "*"
   },
   "jest": {
     "preset": "expo-module-scripts"
   },
   "peerDependencies": {
-    "expo": ">= 30.0.0",
     "react-native": "*"
   },
   "devDependencies": {
