@@ -1,7 +1,11 @@
 import * as THREE from 'three';
 import suppressExpoWarnings from './suppressWarnings';
 
-// @ts-ignore
+declare var global: any;
+
 global.THREE = global.THREE || THREE;
-THREE['suppressExpoWarnings'] = suppressExpoWarnings;
+
+// @ts-ignore
+global.THREE['suppressExpoWarnings'] = suppressExpoWarnings;
+
 export default THREE;
