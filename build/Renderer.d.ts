@@ -1,12 +1,13 @@
 import THREE from './Three';
+declare type RendererProps = THREE.WebGLRendererParameters & {
+    gl: WebGLRenderingContext;
+    canvas?: HTMLCanvasElement;
+    pixelRatio?: number;
+    clearColor?: THREE.Color | string | number;
+    width?: number;
+    height?: number;
+};
 export default class Renderer extends THREE.WebGLRenderer {
-    constructor({ gl, canvas, pixelRatio, clearColor, width, height, ...props }: {
-        [x: string]: any;
-        gl: any;
-        canvas: any;
-        pixelRatio: any;
-        clearColor: any;
-        width: any;
-        height: any;
-    });
+    constructor({ gl: context, canvas, pixelRatio, clearColor, width, height, ...props }: RendererProps);
 }
+export {};

@@ -22,4 +22,6 @@ const suppressExpoWarnings = (shouldSuppress: boolean = true) => {
   }
 };
 
+suppressExpoWarnings();
+
 export default suppressExpoWarnings;

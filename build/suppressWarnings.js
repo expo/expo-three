@@ -18,5 +18,6 @@ const suppressExpoWarnings = (shouldSuppress = true) => {
         console.warn = global.__expo_three_oldWarn;
     }
 };
+suppressExpoWarnings();
 export default suppressExpoWarnings;
 //# sourceMappingURL=suppressWarnings.js.map
