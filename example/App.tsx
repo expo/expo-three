@@ -1,8 +1,6 @@
 import { GLView, ExpoWebGLRenderingContext } from 'expo-gl';
 import * as React from 'react';
-import { Renderer, loadTextureAsync, THREE } from 'expo-three';
-
-global.THREE = THREE;
+import { Renderer, TextureLoader, loadTextureAsync, THREE } from 'expo-three';
 
 export default function App() {
   let timeout;
@@ -54,12 +52,7 @@ export default function App() {
 
         camera.lookAt(gem.position);
 
-        // Load a texture (we must use this method because of the way Metro bundler bundles assets)
-        const texture = await loadTextureAsync({
-          asset: require('./assets/icon.png'),
-        });
-
-        const cube = new IconMesh(texture);
+        const cube = new IconMesh();
         cube.position.x = 2;
         scene.add(cube);
 
@@ -111,11 +104,11 @@ class GemMesh extends THREE.Mesh {
 }
 
 class IconMesh extends THREE.Mesh {
-  constructor(map) {
+  constructor() {
     super(
       new THREE.BoxBufferGeometry(1.0, 1.0, 1.0),
       new THREE.MeshStandardMaterial({
-        map,
+        map: new TextureLoader().load(require('./assets/icon.png')),
       }),
     );
   }
