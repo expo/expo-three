@@ -56,14 +56,26 @@ A function that will asynchronously load files based on their extension.
 
 > **Notice**: Remember to update your `app.json` to bundle obscure file types!
 
-```json
-"packagerOpts": {
-  "assetExts": [
-    "dae",
-    "obj",
-    "mtl"
-  ]
+`app.json`
+
+```diff
+{
+  "expo": {
+    "packagerOpts": {
++      "config": "metro.config.js"
+    },
+  }
 }
+```
+
+`metro.config.js`
+
+```js
+module.exports = {
+  resolver: {
+    assetExts: ['db', 'mp3', 'ttf', 'obj', 'png', 'jpg'],
+  },
+};
 ```
 
 #### Props
@@ -96,12 +108,12 @@ For a more predictable return value you should use one of the more specific mode
 A list of supported formats can be found [here](/examples/loader)
 
 ```js
-const texture = await ExpoTHREE.loadAsync('https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png');
+const texture = await ExpoTHREE.loadAsync(
+  'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+);
 ```
 
 ## Loaders
-
-> Don't forget to add your extensions to `expo.packagerOpts.assetExts` in the `app.json`
 
 ### loadAsync(assetReference, onProgress, onAssetRequested)
 
@@ -112,17 +124,14 @@ Optionally more specific loaders are provided with less complexity.
 // A THREE.Texture from a static resource.
 const texture = await ExpoTHREE.loadAsync(require('./icon.png'));
 const obj = await ExpoTHREE.loadAsync(
-  [
-    require('./cartman.obj'),
-    require('./cartman.mtl')
-  ],
+  [require('./cartman.obj'), require('./cartman.mtl')],
   null,
-  (imageName) => resources[imageName]
+  imageName => resources[imageName],
 );
 const { scene } = await ExpoTHREE.loadAsync(
   resources['./kenny.dae'],
   onProgress,
-  resources
+  resources,
 );
 ```
 
@@ -140,7 +149,7 @@ This function is used as a more direct method to loading a `.obj` model.
 You should use this function to debug when your model has a corrupted format.
 
 ```js
-const mesh = await loadObjAsync({ asset: 'https://www.members.com/chef.obj' })
+const mesh = await loadObjAsync({ asset: 'https://www.members.com/chef.obj' });
 ```
 
 See: [MTL Loader Demo](/example/screens/Loaders/MtlLoaderExample.js)
@@ -155,7 +164,7 @@ This function is used as a more direct method to loading an image into a texture
 You should use this function to debug when your image is using an odd extension like `.bmp`.
 
 ```js
-const texture = await loadTextureAsync({ asset: require('./image.png') })
+const texture = await loadTextureAsync({ asset: require('./image.png') });
 ```
 
 ### loadMtlAsync({ asset, onAssetRequested })
@@ -168,9 +177,8 @@ const texture = await loadTextureAsync({ asset: require('./image.png') })
 ```js
 const materials = await loadMtlAsync({
   asset: require('chef.mtl'),
-  onAssetRequested:
-  modelAssets
-})
+  onAssetRequested: modelAssets,
+});
 ```
 
 See: [MTL Loader Demo](/example/screens/Loaders/MtlLoaderExample.js)
@@ -187,8 +195,8 @@ See: [MTL Loader Demo](/example/screens/Loaders/MtlLoaderExample.js)
 const { scene } = await loadDaeAsync({
   asset: require('chef.dae'),
   onAssetRequested: modelAssets,
-  onProgress: () => {}
-})
+  onProgress: () => {},
+});
 ```
 
 See: [Collada Loader Demo](/example/screens/Loaders/DaeLoaderExample.js)
@@ -343,7 +351,11 @@ This is used to render shadows on real world surfaces.
 renderer.gammaInput = true;
 renderer.gammaOutput = true;
 renderer.shadowMap.enabled = true;
-const shadowFloor = new ExpoTHREE.AR.ShadowFloor({ width: 1, height: 1, opacity: 0.6 }); // The opacity of the shadow
+const shadowFloor = new ExpoTHREE.AR.ShadowFloor({
+  width: 1,
+  height: 1,
+  opacity: 0.6,
+}); // The opacity of the shadow
 ```
 
 See: [Model Demo](/example/screens/AR/Model.js)
@@ -364,16 +376,18 @@ Example:
 
 ```js
 const skybox = {
-	nx: require('./nx.jpg'),
-	ny: require('./ny.jpg'),
-	nz: require('./nz.jpg'),
-	px: require('./px.jpg'),
-	py: require('./py.jpg'),
-	pz: require('./pz.jpg')
-}
-const cubeTexture = new CubeTexture()
-await cubeTexture.loadAsync({assetForDirection: ({ direction }) => skybox[direction]})
-scene.background = cubeTexture
+  nx: require('./nx.jpg'),
+  ny: require('./ny.jpg'),
+  nz: require('./nz.jpg'),
+  px: require('./px.jpg'),
+  py: require('./py.jpg'),
+  pz: require('./pz.jpg'),
+};
+const cubeTexture = new CubeTexture();
+await cubeTexture.loadAsync({
+  assetForDirection: ({ direction }) => skybox[direction],
+});
+scene.background = cubeTexture;
 ```
 
 ### `new ExpoTHREE.AR.Points()`
