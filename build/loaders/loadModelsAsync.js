@@ -1,4 +1,4 @@
-import { Platform } from '@unimodules/core';
+import { Platform } from 'react-native';
 import AssetUtils from 'expo-asset-utils';
 import THREE from '../Three';
 import readAsStringAsync from './readAsStringAsync';

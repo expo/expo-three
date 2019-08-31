@@ -190,10 +190,13 @@ THREE.MTLLoader.MaterialCreator = function(baseUrl, options) {
     // @ts-ignore
     this.options && this.options.side ? this.options.side : THREE.FrontSide;
   // @ts-ignore
-  this.wrap =
-    this.options && this.options.wrap
-      ? this.options.wrap
-      : THREE.RepeatWrapping;
+  if (this.options && this.options.wrap) {
+    // @ts-ignore
+    this.wrap = this.options.wrap;
+  } else {
+    // @ts-ignore
+    this.wrap = THREE.RepeatWrapping;
+  }
 };
 
 // @ts-ignore

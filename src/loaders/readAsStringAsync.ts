@@ -1,4 +1,4 @@
-import { Platform } from '@unimodules/core';
+import { Platform } from 'react-native';
 import { readAsStringAsync } from 'expo-file-system';
 
 import THREE from '../Three';
