@@ -1,8 +1,8 @@
 {
   "name": "expo-three",
-  "version": "4.0.6",
+  "version": "5.0.0",
   "sideEffects": true,
-  "description": "Utilities for using THREE.js on Expo",
+  "description": "Utilities for using THREE.js with Expo",
   "main": "build/index.js",
   "types": "build/index.d.ts",
   "homepage": "https://github.com/expo/expo-three#readme",
@@ -21,24 +21,32 @@
     "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module"
   },
+  "contributors": [
+    "Evan Bacon <bacon@expo.io> (https://github.com/evanbacon)"
+  ],
   "keywords": [
-    "expo",
     "three.js",
+    "three",
+    "gaming",
     "graphics",
     "opengl",
     "gl",
-    "arkit"
+    "expo",
+    "arkit",
+    "expo-web",
+    "react",
+    "react-native",
+    "react-native-web"
   ],
   "author": "Nikhilesh Sigatapu",
   "license": "MIT",
   "dependencies": {
     "@expo/browser-polyfill": "^0.1.0",
     "color-temperature": "0.2.7",
-    "expo-asset": "^6.0.0",
-    "expo-asset-utils": "^1.0.0",
-    "three": "^0.102.1"
+    "expo-asset-utils": "^1.0.0"
   },
   "unimodulePeerDependencies": {
+    "expo-asset": "*",
     "@unimodules/core": "*",
     "expo-file-system": "*"
   },
@@ -46,10 +54,15 @@
     "preset": "expo-module-scripts"
   },
   "peerDependencies": {
-    "react-native": "*"
+    "react-native": "*",
+    "three": "^0.108.0"
   },
   "devDependencies": {
     "@types/three": "^0.93.22",
-    "expo-module-scripts": "^1.0.1"
+    "@unimodules/core": "^3.0.2",
+    "expo-asset": "^6.0.0",
+    "expo-file-system": "^6.0.2",
+    "expo-module-scripts": "^1.0.1",
+    "react-native": "^0.60.5"
   }
 }

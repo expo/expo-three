@@ -1,6 +1,6 @@
 import AssetUtils from 'expo-asset-utils';
 import THREE from './Three';
-import { Platform } from '@unimodules/core';
+import { Platform } from 'react-native';
 // JPEGs can't have an alpha channel, so memory can be saved by storing them as RGB.
 function formatFromURI(uri) {
     const isJPEG = uri.search(/\.jpe?g($|\?)/i) > 0 || uri.search(/^data\:image\/jpeg/) === 0;

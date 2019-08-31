@@ -1,6 +1,6 @@
-import { GLView, ExpoWebGLRenderingContext } from 'expo-gl';
+import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
+import { Renderer, TextureLoader, THREE } from 'expo-three';
 import * as React from 'react';
-import { Renderer, TextureLoader, loadTextureAsync, THREE } from 'expo-three';
 
 export default function App() {
   let timeout;
