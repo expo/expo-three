@@ -55,14 +55,7 @@ export function loaderClassForExtension(extension) {
             return THREE[loaderName];
         }
         case 'ctm':
-            // @ts-ignore
-            if (!THREE.CTMLoader) {
-                require('three/examples/js/loaders/ctm/lzma');
-                require('three/examples/js/loaders/ctm/ctm');
-                require('three/examples/js/loaders/ctm/CTMLoader');
-            }
-            // @ts-ignore
-            return THREE.CTMLoader;
+            throw new Error('CTMLoader is deprecated. Please load it manually with three.js');
         case 'fbx':
             // @ts-ignore
             if (!THREE.FBXLoader) {
