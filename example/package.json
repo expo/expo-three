@@ -10,11 +10,12 @@
   "dependencies": {
     "expo": "^34.0.1",
     "expo-gl": "^6.0.0",
-    "expo-three": "^4.0.4",
+    "expo-three": "../expo-three-5.0.0.tgz",
     "react": "16.8.3",
     "react-dom": "^16.8.6",
     "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz",
-    "react-native-web": "^0.11.4"
+    "react-native-web": "^0.11.4",
+    "three": "^0.108.0"
   },
   "devDependencies": {
     "@types/react": "^16.8.23",
