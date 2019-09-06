@@ -16,5 +16,7 @@ function withTHREE(config) {
 module.exports = {
   projects: [
     withTHREE(withTypeScript(require('jest-expo/android/jest-preset'))),
+    withTHREE(withTypeScript(require('jest-expo/ios/jest-preset'))),
+    withTHREE(withTypeScript(require('jest-expo/web/jest-preset'))),
   ],
 };
