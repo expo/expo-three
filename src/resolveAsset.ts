@@ -1,15 +1,15 @@
 import { Asset } from 'expo-asset';
-import AssetUtils from 'expo-asset-utils';
+import { resolveAsync } from 'expo-asset-utils';
 
 export default async function resolveAsset(fileReference: any): Promise<Asset[]> {
   let urls: Asset[] = [];
   if (Array.isArray(fileReference)) {
     for (let file of fileReference) {
-      const asset = await AssetUtils.resolveAsync(file);
+      const asset = await resolveAsync(file);
       urls.push(asset);
     }
   } else {
-    const asset = await AssetUtils.resolveAsync(fileReference);
+    const asset = await resolveAsync(fileReference);
     urls.push(asset);
   }
   return urls;
