@@ -19,7 +19,8 @@
     "test": "expo-module test",
     "prepare": "expo-module prepare",
     "prepublishOnly": "expo-module prepublishOnly",
-    "expo-module": "expo-module"
+    "expo-module": "expo-module",
+    "sync-example": "cp -a build/ example/node_modules/expo-three/build/"
   },
   "contributors": [
     "Evan Bacon <bacon@expo.io> (https://github.com/evanbacon)"
@@ -50,9 +51,6 @@
     "@unimodules/core": "*",
     "expo-file-system": "*"
   },
-  "jest": {
-    "preset": "expo-module-scripts"
-  },
   "peerDependencies": {
     "react-native": "*",
     "three": "^0.108.0"
@@ -60,9 +58,15 @@
   "devDependencies": {
     "@types/three": "^0.93.22",
     "@unimodules/core": "^3.0.2",
+    "@unimodules/react-native-adapter": "^3.0.0",
     "expo-asset": "^6.0.0",
+    "expo-constants": "^6.0.0",
     "expo-file-system": "^6.0.2",
-    "expo-module-scripts": "^1.0.1",
-    "react-native": "^0.60.5"
+    "expo-font": "^6.0.1",
+    "expo-module-scripts": "^1.1.0",
+    "jest-expo": "^34.1.0",
+    "react": "^16.9.0",
+    "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz",
+    "three": "^0.108.0"
   }
 }
