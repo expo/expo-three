@@ -1,7 +1,10 @@
-import { Platform } from 'react-native';
 import AssetUtils from 'expo-asset-utils';
+import { Platform } from 'react-native';
+import { FileLoader } from 'three';
+import { ColladaLoader } from 'three/examples/jsm/loaders/ColladaLoader';
+import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 
-import THREE from '../Three';
 import readAsStringAsync from './readAsStringAsync';
 
 async function loadFileAsync({ asset, funcName }): Promise<string | null> {
@@ -18,13 +21,7 @@ export async function loadMtlAsync({ asset, onAssetRequested }): Promise<any> {
   });
   if (!uri) return;
 
-  // @ts-ignore
-  if (THREE.MTLLoader == null) {
-    require('./MTLLoader');
-  }
-
-  // @ts-ignore
-  const loader = new THREE.MTLLoader();
+  const loader = new MTLLoader();
   loader.setPath(onAssetRequested);
 
   if (Platform.OS === 'web') {
@@ -65,12 +62,7 @@ export async function loadObjAsync(options: {
   });
   if (!uri) return;
 
-  // @ts-ignore
-  if (THREE.OBJLoader == null) {
-    require('three/examples/js/loaders/OBJLoader');
-  }
-  // @ts-ignore
-  const loader = new THREE.OBJLoader();
+  const loader = new OBJLoader();
   if (onAssetRequested) {
     loader.setPath(onAssetRequested as any);
   }
@@ -100,17 +92,12 @@ export async function loadDaeAsync({
     return;
   }
 
-  // @ts-ignore
-  if (THREE.ColladaLoader == null) {
-    require('three/examples/js/loaders/ColladaLoader');
-  }
-
   return new Promise((res, rej) =>
-    new THREE.FileLoader().load(
+    new FileLoader().load(
       uri!,
       text => {
         // @ts-ignore
-        const loader = new THREE.ColladaLoader();
+        const loader = new ColladaLoader();
         const parsedResult = (loader.parse as any)(text, onAssetRequested);
         res(parsedResult);
       },
@@ -133,7 +120,7 @@ async function loadFileContentsAsync(loader, uri, funcName): Promise<any> {
 }
 
 export async function loadArrayBufferAsync({ uri, onProgress }): Promise<any> {
-  const loader = new THREE.FileLoader();
+  const loader = new FileLoader();
   loader.setResponseType('arraybuffer');
   return new Promise((res, rej) => loader.load(uri, res, onProgress, rej));
 }
