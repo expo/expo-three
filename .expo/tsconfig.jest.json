@@ -1,0 +1,11 @@
+{
+  "extends": "/Users/evanbacon/Documents/GitHub/expo-three/tsconfig.json",
+  "compilerOptions": {
+    "module": "esnext",
+    "typeRoots": [
+      "./node_modules/@types",
+      "../node_modules/@types",
+      "/Users/evanbacon/Documents/GitHub/expo-three/node_modules/expo-module-scripts/ts-declarations"
+    ]
+  }
+}
