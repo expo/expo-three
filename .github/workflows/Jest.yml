@@ -1,0 +1,17 @@
+on:
+  push:
+    paths:
+      - !*.md
+name: Unit Tests
+jobs:
+  lint:
+    name: Unit Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install Node Dependencies
+        uses: actions/npm@master
+        ars: install
+      - name: Unit Tests
+        uses: rkusa/jest-action:latest
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
