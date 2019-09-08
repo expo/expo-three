@@ -1,17 +1,38 @@
+# Useful resource: https://github.com/actions/starter-workflows
+
+name: Jest Tests
+
+# https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requestpaths
+
+# on: [push]
+## This doesn't seem to work
 on:
   push:
     paths:
-      - !*.md
-name: Unit Tests
+      - '*'
+      - '!*.md'
+
 jobs:
-  lint:
-    name: Unit Tests
+  test:
+    name: Jest Tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        # node-version: [8.x, 10.x, 12.x]
+        # os: [ubuntu-latest, windows-latest, macOS-latest]
+        node-version: [10.x]
     steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: Install Node Dependencies
-        uses: actions/npm@master
-        args: install
-      - name: Unit Tests
-        uses: rkusa/jest-action:latest
+        run: |
+          npm install
+        env:
+          CI: true
+      - name: Run Tests
+        uses: rkusa/jest-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
