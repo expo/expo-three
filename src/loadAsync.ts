@@ -36,7 +36,6 @@ export default async function loadAsync(
   onProgress?: ProgressCallback,
   onAssetRequested = function() {},
 ) {
-  console.log('.');
   let urls = await resolveAsset(res);
   if (!urls) {
     throw new Error(
