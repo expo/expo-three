@@ -22,6 +22,6 @@ jobs:
         env:
           CI: true
       - name: Run Tests
-        uses: rkusa/jest-action@v1
+        uses: rkusa/jest-action@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
