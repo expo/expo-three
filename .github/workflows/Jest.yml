@@ -38,10 +38,10 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Node Dependencies
         run: |
-          npm install
+          npm install && npm run test
         env:
           CI: true
-      - name: Run Tests
-        uses: rkusa/jest-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Run Tests
+      #   uses: rkusa/jest-action@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
