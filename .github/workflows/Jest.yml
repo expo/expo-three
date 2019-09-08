@@ -1,13 +1,17 @@
-name: Unit Tests
+# Useful resource: https://github.com/actions/starter-workflows
 
+name: Jest Tests
+
+# https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requestpaths
 on:
   push:
     paths:
-      - !*.md
+      - '*'
+      - '!*.md'
 
 jobs:
   build:
-    name: Unit Tests
+    name: Jest Tests
     runs-on: ubuntu-latest
     strategy:
       matrix:
