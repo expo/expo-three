@@ -7,12 +7,14 @@ name: Jest Tests
 # on: [push]
 ## This doesn't seem to work
 on:
-  # push:
-  #   paths:
-  #     - '*'
-  #     - '!*.md'
-  #     - .github/workflows/Jest.yml
-  [push, pull_request]:
+  push:
+    branches:
+      - master
+    paths:
+      - '*'
+      - '!*.md'
+      - .github/workflows/Jest.yml
+  pull_request:
     paths:
       - '*'
       - '!*.md'
@@ -34,12 +36,12 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Install Node Dependencies
-        run: |
-          npm install
-        env:
-          CI: true
-      - name: Run Tests
-        uses: rkusa/jest-action@master
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      # - name: Install Node Dependencies
+      #   run: |
+      #     npm install
+      #   env:
+      #     CI: true
+      # - name: Run Tests
+      #   uses: rkusa/jest-action@master
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
