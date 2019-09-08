@@ -25,10 +25,10 @@ jobs:
     strategy:
       matrix:
         # Run tests with all of these node versions/systems :]
-        # node-version: [8.x, 10.x, 12.x]
-        node-version: [10.x]
-        # os: [ubuntu-latest, windows-latest, macOS-latest]
-        os: [ubuntu-latest]
+        node-version: [8.x, 10.x, 12.x]
+        # node-version: [10.x]
+        os: [ubuntu-latest, windows-latest, macOS-latest]
+        # os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v1
@@ -38,10 +38,11 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Install Node Dependencies
         run: |
-          npm install && npm run test
+          npm install
         env:
           CI: true
-      # - name: Run Tests
-      #   uses: rkusa/jest-action@master
-      #   env:
-      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Run Unit-Tests
+        run: |
+          npm run test
+        env:
+          CI: true
