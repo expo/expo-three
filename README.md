@@ -1,18 +1,16 @@
-[![NPM](https://nodei.co/npm/expo-three.png)](https://nodei.co/npm/expo-three/)
-
-# expo-three
-
 <p align="center">
   <a href="https://github.com/expo/expo-three"><img alt="GitHub Actions status" src="https://github.com/expo/expo-three/workflows/Main%20workflow/badge.svg"></a>
 </p>
 
-[![Actions Status](https://github.com/expo/expo-three/workflows/Main%20workflow/badge.svg)](https://github.com/expo/expo-three/actions)
+# expo-three
 
 Tools for using three.js to build native 3D experiences 💙
 
 > AR was moved to `expo-three-ar` in `expo-three@5.0.0`
 
 ### Installation
+
+[![NPM](https://nodei.co/npm/expo-three.png)](https://nodei.co/npm/expo-three/)
 
 > In `expo-three@5.0.0` Three.js is a **peer dependency**
 
