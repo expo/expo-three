@@ -4,13 +4,13 @@ name: Jest Tests
 
 # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requestpaths
 
-on: [push]
+# on: [push]
 ## This doesn't seem to work
-# on:
-#   push:
-#     paths:
-#       - '*'
-#       - '!*.md'
+on:
+  push:
+    paths:
+      - '*'
+      - '!*.md'
 
 jobs:
   test:
