@@ -1,16 +1,24 @@
-[![NPM](https://nodei.co/npm/expo-three.png)](https://nodei.co/npm/expo-three/)
+<h1 align="center">Welcome to Expo & Three.JS 👋</h1>
 
-# expo-three
-
-<p align="center">
-  <a href="https://github.com/expo/expo-three/actions"><img alt="GitHub Actions status" src="https://github.com/expo/expo-three/workflows/Tests/badge.svg"></a>
+<p>
+  <a href="https://github.com/expo/expo-three/actions">
+     <img alt="GitHub Actions status" src="https://github.com/expo/expo-three/workflows/Tests/badge.svg">
+  </a>
+  <a href="https://twitter.com/expo" aria-label="follow @expo on Twitter">
+    <img alt="Twitter: Expo" src="https://img.shields.io/twitter/follow/expo.svg?style=social" target="_blank" />
+  </a>
+  <a href="https://github.com/expo/expo-three/blob/master/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
+  </a>
 </p>
 
-Tools for using three.js to build native 3D experiences 💙
+> Tools for using three.js to build native 3D experiences 💙
 
-> AR was moved to `expo-three-ar` in `expo-three@5.0.0`
+AR was moved to `expo-three-ar` in `expo-three@5.0.0`
 
 ### Installation
+
+[![NPM](https://nodei.co/npm/expo-three.png)](https://nodei.co/npm/expo-three/)
 
 > In `expo-three@5.0.0` Three.js is a **peer dependency**
 
@@ -292,3 +300,17 @@ Somewhat out of date
 - [Game: Nitro Roll](https://github.com/EvanBacon/Expo-Nitro-Roll)
 - [Game: Pillar Valley](https://github.com/EvanBacon/Expo-Pillar-Valley)
 - [Voxel Terrain](https://github.com/EvanBacon/Expo-Voxel)
+
+## 🤝 Contributing
+
+Contributions, issues and feature requests are welcome!<br />Feel free to check [issues page](https://github.com/Expo/expo-three/issues).
+
+## Show your support
+
+Give a ⭐️ if this project helped you!
+
+## 📝 License
+
+Copyright © 2019 [Expo](https://github.com/Expo).<br />
+This project is [MIT](https://github.com/Expo/expo-three/blob/master/LICENSE) licensed.
+
