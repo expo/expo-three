@@ -2,7 +2,7 @@
 
 <p>
   <a href="https://github.com/expo/expo-three/actions">
-     <img alt="GitHub Actions status" src="https://github.com/expo/expo-three/workflows/Tests/badge.svg">
+     <img alt="GitHub Actions status" src="https://github.com/expo/expo-three/workflows/Jest%20Tests/badge.svg">
   </a>
   <a href="https://twitter.com/expo" aria-label="follow @expo on Twitter">
     <img alt="Twitter: Expo" src="https://img.shields.io/twitter/follow/expo.svg?style=social" target="_blank" />
