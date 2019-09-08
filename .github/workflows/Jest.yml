@@ -2,25 +2,34 @@
 
 name: Jest Tests
 
-# https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requestpaths
-
-# on: [push]
-## This doesn't seem to work
 on:
+  # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requestpaths
+  # More helpful: https://help.github.com/en/articles/events-that-trigger-workflows#webhook-events
   push:
+    branches:
+      # If this isn't defined then all PR tests will be run twice
+      - master
     paths:
       - '*'
       - '!*.md'
+      - .github/workflows/Jest.yml
+  pull_request:
+    paths:
+      - '*'
+      - '!*.md'
+      - .github/workflows/Jest.yml
 
 jobs:
   test:
     name: Jest Tests
-    runs-on: ubuntu-latest
     strategy:
       matrix:
-        # node-version: [8.x, 10.x, 12.x]
+        # Run tests with all of these node versions/systems :]
+        node-version: [8.x, 10.x, 12.x]
+        # node-version: [10.x]
         # os: [ubuntu-latest, windows-latest, macOS-latest]
-        node-version: [10.x]
+        os: [ubuntu-latest]
+    runs-on: ${{ matrix.os }}
     steps:
       - uses: actions/checkout@v1
       - name: Use Node.js ${{ matrix.node-version }}
@@ -32,7 +41,8 @@ jobs:
           npm install
         env:
           CI: true
-      - name: Run Tests
-        uses: rkusa/jest-action@master
+      - name: Run Unit-Tests
+        run: |
+          npm run test
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI: true
