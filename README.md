@@ -311,6 +311,5 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2019 [Expo](https://github.com/Expo).<br />
+Copyright © 2019 [650 Industries](https://expo.io/about).<br />
 This project is [MIT](https://github.com/Expo/expo-three/blob/master/LICENSE) licensed.
-
