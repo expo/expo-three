@@ -475,8 +475,8 @@ THREE.MTLLoader.MaterialCreator.prototype = {
 
     // @ts-ignore
     if (loader.setCrossOrigin) loader.setCrossOrigin(this.crossOrigin);
+    // @ts-ignore
     texture = loader.load(url, onLoad, onProgress, onError);
-
     if (mapping !== undefined) texture.mapping = mapping;
 
     return texture;
