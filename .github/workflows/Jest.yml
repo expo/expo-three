@@ -1,17 +1,26 @@
-on:
-  push:
-    paths:
-      - !*.md
 name: Unit Tests
+
+on: [push]
+
 jobs:
-  lint:
+  build:
     name: Unit Tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [8.x, 10.x, 12.x]
     steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
       - name: Install Node Dependencies
-        uses: actions/npm@master
-        args: install
-      - name: Unit Tests
-        uses: rkusa/jest-action:latest
+        run: |
+          npm install
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CI: true
+      # - name: Unit Tests
+      #   uses: rkusa/jest-action:latest
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
