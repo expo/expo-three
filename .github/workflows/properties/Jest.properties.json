@@ -1,0 +1,15 @@
+{
+  "name": "Unit Tests",
+  "description": "Run universal jest unit-tests on any modified library code",
+  "iconName": "octicon smiley",
+  "categories": [
+    "Automation",
+    "Testing",
+    "Jest",
+    "ReactNative",
+    "Expo",
+    "ExpoWeb",
+    "Threejs",
+    "React"
+  ]
+}
