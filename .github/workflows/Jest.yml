@@ -7,11 +7,11 @@ name: Jest Tests
 # on: [push]
 ## This doesn't seem to work
 on:
-  push:
-    paths:
-      - '*'
-      - '!*.md'
-      - .github/workflows/Jest.yml
+  # push:
+  #   paths:
+  #     - '*'
+  #     - '!*.md'
+  #     - .github/workflows/Jest.yml
   pull_request:
     paths:
       - '*'
