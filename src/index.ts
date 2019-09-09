@@ -1,6 +1,6 @@
 /**
  * import { ... } from 'expo-three';
- * ...
+ *
  * import ExpoTHREE from 'expo-three';
  */
 import * as ExpoTHREE from './ExpoTHREE';
