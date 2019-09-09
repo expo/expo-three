@@ -1,6 +1,6 @@
 # Useful resource: https://github.com/actions/starter-workflows
 
-name: Jest Tests
+name: Check Universal Module
 
 on:
   # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requestpaths
@@ -12,21 +12,19 @@ on:
     paths:
       - '*'
       - '!*.md'
-      - .github/workflows/Jest.yml
   pull_request:
     paths:
       - '*'
       - '!*.md'
-      - .github/workflows/Jest.yml
 
 jobs:
   test:
-    name: Jest Tests
+    name: Check Universal Module
     strategy:
       matrix:
         # Run tests with all of these node versions/systems :]
-        node-version: [8.x, 10.x, 12.x]
-        # node-version: [10.x]
+        # node-version: [8.x, 10.x, 12.x]
+        node-version: [10.x]
         # os: [ubuntu-latest, windows-latest, macOS-latest]
         os: [ubuntu-latest]
     runs-on: ${{ matrix.os }}
@@ -41,8 +39,7 @@ jobs:
           npm install
         env:
           CI: true
-      - name: Run Unit-Tests
-        run: |
-          npm run test
+      - name: Check Package
+        run: ./scripts/module-scripts-check-package.sh
         env:
           CI: true

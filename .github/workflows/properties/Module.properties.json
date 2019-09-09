@@ -1,11 +1,12 @@
 {
-  "name": "Unit Tests",
-  "description": "Run universal jest unit-tests on any modified library code",
+  "name": "Check Universal Module",
+  "description": "Ensure the package is built correctly, linted, and tested",
   "iconName": "octicon smiley",
   "categories": [
     "Automation",
     "Testing",
     "Jest",
+    "Lint",
     "ReactNative",
     "Expo",
     "ExpoWeb",
