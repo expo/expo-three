@@ -16,7 +16,6 @@ function strictlyRunScript {
         runScript $@
     else
         printf "🤷‍♀️ \e[31mRequired script \`\e[0;36m${1}\e[00m\e[31m\` not found, exiting...\e[00m\n";
-        set +e
         exit 1
     fi
 }
@@ -42,7 +41,6 @@ strictlyRunScript build
 if [ "$(git status --porcelain ${file})" != "" ]; then
     printf "\e[0;31m\n▶️  The path ${file} in ${packageName} has uncommitted changes after building. Please rebuild and commit the following files:\n\n\e[00m"
     printf "\e[0;33m$(git status --porcelain ${file})\e[00m\n\n"
-    set +e
     exit 1
 fi
 
