@@ -6,7 +6,7 @@ declare var global: {
 };
 
 it(`defines a global instance of three.js`, () => {
-  expect(global.THREE).not.toBeDefined();
+  expect(global.THREE).toBeDefined();
   // @ts-ignore
   require('..');
   expect(global.THREE).toBeDefined();
