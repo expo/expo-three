@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 # Copyright 2019-present 650 Industries. All rights reserved.
 
+# exit when any command fails
+set -e
+
 file=${1:-"./build/"}
 
 packageName=$(cat package.json | grep name | head -1 | awk -F: '{ print $2 }' | sed 's/[",]//g' | tr -d '[[:space:]]')
