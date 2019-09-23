@@ -1,16 +1,33 @@
 <h1 align="center">Welcome to Expo & Three.JS 👋</h1>
 
-<p>
-  <a href="https://github.com/expo/expo-three/actions">
-     <img alt="GitHub Actions status" src="https://github.com/expo/expo-three/workflows/Check%20Universal%20Module/badge.svg">
+<p align="center">
+
+  <a aria-label="sponsored by expo" href="http://expo.io">
+    <img src="https://img.shields.io/badge/SPONSORED%20BY%20EXPO-4630EB.svg?style=for-the-badge" target="_blank" />
   </a>
-  <a href="https://twitter.com/expo" aria-label="follow @expo on Twitter">
-    <img alt="Twitter: Expo" src="https://img.shields.io/twitter/follow/expo.svg?style=social" target="_blank" />
+      
+<!--  <a aria-label="EXPO logo" href="https://github.com/expo">
+    <img src="https://img.shields.io/badge/MADE%20WITH%20EXPO-4630EB.svg?style=for-the-badge&logo=EXPO&labelColor=FFFFFF&logoWidth=20">
+  </a> -->
+  <a href="https://twitter.com/expo">
+    <img alt="Twitter: expo" src="https://img.shields.io/twitter/follow/expo.svg?style=for-the-badge&logo=TWITTER&logoColor=FFFFFF&labelColor=00aced&logoWidth=20&color=lightgray" target="_blank" />
   </a>
-  <a href="https://github.com/expo/expo-three/blob/master/LICENSE">
-    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" target="_blank" />
+
+  <a href="https://blog.expo.io" aria-label="Follow Expo on Medium">
+    <img alt="Medium: expo" src="https://img.shields.io/badge/EXPO%20BLOG-4630EB.svg?style=for-the-badge&logo=MEDIUM&labelColor=000&logoWidth=20" target="_blank" />
+  </a>
+  
+  <a href="/LICENSE">
+    <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge" target="_blank" />
+  </a>
+  
+  <br>
+
+  <a aria-label="Well tested THREE.js Library" href="https://github.com/expo/expo-three/actions">
+    <img alt="GitHub Actions status" src="https://github.com/expo/expo-three/workflows/Check%20Universal%20Module/badge.svg">
   </a>
 </p>
+
 
 > Tools for using three.js to build native 3D experiences 💙
 
