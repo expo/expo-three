@@ -6,3 +6,5 @@ example/
 secret/
 *.tgz
 babel.config.js
+/src
+/tsconfig.json
