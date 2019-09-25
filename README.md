@@ -1,33 +1,27 @@
-
 <h1 align="center">Welcome to Expo & Three.JS 👋</h1>
 
+<p align="center"><b>Tools for using three.js to build native 3D experiences 💙</b></p>
 
 <p align="center">
-
-
   <a aria-label="sponsored by expo" href="http://expo.io">
     <img src="https://img.shields.io/badge/SPONSORED%20BY%20EXPO-4630EB.svg?style=for-the-badge" target="_blank" />
   </a>
-      
-<!--  <a aria-label="EXPO logo" href="https://github.com/expo">
-    <img src="https://img.shields.io/badge/MADE%20WITH%20EXPO-4630EB.svg?style=for-the-badge&logo=EXPO&labelColor=FFFFFF&logoWidth=20">
-  </a> -->
-  
+
   <a aria-label="Expo is free to use" href="https://github.com/expo/expo/blob/master/LICENSE" target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-success.svg?style=for-the-badge&color=33CC12" target="_blank" />
   </a>
+  <br/>
 
-  <p align="center">Tools for using three.js to build native 3D experiences 💙</p>
-
+  <a align="center" aria-label="Well tested THREE.js Library" href="https://github.com/expo/expo-three/actions">
+    <img align="center" alt="GitHub Actions status" src="https://github.com/expo/expo-three/workflows/Check%20Universal%20Module/badge.svg">
+  </a>
 </p>
 
 <p>
   <a aria-label="Follow @expo on Twitter" href="https://twitter.com/intent/follow?screen_name=expo" target="_blank">
     <img  alt="Twitter: expo" src="https://img.shields.io/twitter/follow/expo.svg?style=flat-square&label=Follow%20%40expo&logo=TWITTER&logoColor=FFFFFF&labelColor=00aced&logoWidth=15&color=lightgray" target="_blank" />
   </a>
-  <a align="center" aria-label="Well tested THREE.js Library" href="https://github.com/expo/expo-three/actions">
-    <img align="center" alt="GitHub Actions status" src="https://github.com/expo/expo-three/workflows/Check%20Universal%20Module/badge.svg">
-  </a>
+ 
   <a aria-label="Follow Expo on Medium" href="https://blog.expo.io">
     <img align="right" alt="Medium: exposition" src="https://img.shields.io/badge/Learn%20more%20on%20our%20blog-lightgray.svg?style=flat-square" target="_blank" />
   </a>
