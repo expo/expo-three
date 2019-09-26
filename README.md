@@ -10,7 +10,13 @@
 
 <h1 align="center">Welcome to Expo & Three.JS 👋</h1>
 
-<p align="center"><b>Tools for using three.js to build native 3D experiences 💙</b></p>
+<p align="center">
+  <b>Tools for using three.js to create universal 3D experiences</b>
+  |
+  <a aria-label="Try Expo THREE in the browser with Expo Snack" href="https://snack.expo.io/@bacon/three">
+    <b>Try it in the browser!</b>
+  </a>
+</p>
 
 <p align="center">
   <a aria-label="Well tested THREE.js Library" href="https://github.com/expo/expo-three/actions">
