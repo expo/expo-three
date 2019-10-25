@@ -18,35 +18,27 @@ export function loaderClassForExtension(extension: string): any {
     case '3mf': {
       const loaderName = 'ThreeMFLoader';
       if (!THREE[loaderName]) {
-        require('three/examples/js/loaders/3MFLoader');
+        try {
+          require('three/examples/js/loaders/3MFLoader');
+        } catch (_) {}
       }
       return THREE[loaderName];
     }
     case 'amf': {
       const loaderName = 'AMFLoader';
       if (!THREE[loaderName]) {
-        require('./loaders/AMFLoader');
+        try {
+          require('./loaders/AMFLoader');
+        } catch (_) {}
       }
       return THREE[loaderName];
     }
     case 'assimp': {
       const loaderName = 'AssimpLoader';
       if (!THREE[loaderName]) {
-        require('three/examples/js/loaders/AssimpLoader');
-      }
-      return THREE[loaderName];
-    }
-    case 'awd':
-      // @ts-ignore
-      if (!THREE.AWDLoader) {
-        require('three/examples/js/loaders/AWDLoader');
-      }
-      // @ts-ignore
-      return THREE.AWDLoader;
-    case 'babylon': {
-      const loaderName = 'BabylonLoader';
-      if (!THREE[loaderName]) {
-        require('three/examples/js/loaders/BabylonLoader');
+        try {
+          require('three/examples/js/loaders/AssimpLoader');
+        } catch (_) {}
       }
       return THREE[loaderName];
     }
@@ -54,7 +46,9 @@ export function loaderClassForExtension(extension: string): any {
       const loaderName = 'BVHLoader';
 
       if (!THREE[loaderName]) {
-        require('three/examples/js/loaders/BVHLoader');
+        try {
+          require('three/examples/js/loaders/BVHLoader');
+        } catch (_) {}
       }
       return THREE[loaderName];
     }
@@ -65,70 +59,103 @@ export function loaderClassForExtension(extension: string): any {
     case 'fbx':
       // @ts-ignore
       if (!THREE.FBXLoader) {
-        require('three/examples/js/libs/inflate.min');
-        require('three/examples/js/loaders/FBXLoader');
+        try {
+          require('three/examples/js/libs/inflate.min');
+          require('three/examples/js/loaders/FBXLoader');
+        } catch (_) {}
       }
       // @ts-ignore
       return THREE.FBXLoader;
     case 'glb':
     case 'gltf':
       // @ts-ignore
-      if (!THREE.GLTFLoader) require('three/examples/js/loaders/GLTFLoader');
+      if (!THREE.GLTFLoader) {
+        try {
+          require('three/examples/js/loaders/GLTFLoader');
+        } catch (_) {}
+      }
       // @ts-ignore
       return THREE.GLTFLoader;
     case 'max':
     case '3ds':
       // @ts-ignore
-      if (!THREE.TDSLoader) require('three/examples/js/loaders/TDSLoader');
+      if (!THREE.TDSLoader) {
+        try {
+          require('three/examples/js/loaders/TDSLoader');
+        } catch (_) {}
+      }
       // @ts-ignore
       return THREE.TDSLoader;
     case 'pcd': {
       const loaderName = 'PCDLoader';
       if (!THREE[loaderName]) {
-        require('three/examples/js/loaders/PCDLoader');
+        try {
+          require('three/examples/js/loaders/PCDLoader');
+        } catch (_) {}
       }
       return THREE[loaderName];
     }
     case 'ply': {
       const loaderName = 'PLYLoader';
       if (!THREE[loaderName]) {
-        require('three/examples/js/loaders/PLYLoader');
+        try {
+          require('three/examples/js/loaders/PLYLoader');
+        } catch (_) {}
       }
       return THREE[loaderName];
     }
     case 'obj':
       // @ts-ignore
-      if (!THREE.OBJLoader) require('three/examples/js/loaders/OBJLoader');
+      if (!THREE.OBJLoader) {
+        try {
+          require('three/examples/js/loaders/OBJLoader');
+        } catch (_) {}
+      }
       // @ts-ignore
       return THREE.OBJLoader;
     case 'mtl':
       // @ts-ignore
-      if (!THREE.MTLLoader) require('three/examples/js/loaders/MTLLoader');
+      if (!THREE.MTLLoader) {
+        try {
+          require('three/examples/js/loaders/MTLLoader');
+        } catch (_) {}
+      }
       // @ts-ignore
       return THREE.MTLLoader;
     case 'dae':
       // @ts-ignore
-      if (!THREE.ColladaLoader)
-        require('three/examples/js/loaders/ColladaLoader');
+      if (!THREE.ColladaLoader) {
+        try {
+          require('three/examples/js/loaders/ColladaLoader');
+        } catch (_) {}
+      }
       // @ts-ignore
       return THREE.ColladaLoader;
     case 'stl':
       // @ts-ignore
-      if (!THREE.STLLoader) require('three/examples/js/loaders/STLLoader');
+      if (!THREE.STLLoader) {
+        try {
+          require('three/examples/js/loaders/STLLoader');
+        } catch (_) {}
+      }
       // @ts-ignore
       return THREE.STLLoader;
     case 'vtk':
     case 'vtp': {
       const loaderName = 'VTKLoader';
       if (!THREE[loaderName]) {
-        require('three/examples/js/loaders/VTKLoader');
+        try {
+          require('three/examples/js/loaders/VTKLoader');
+        } catch (_) {}
       }
       return THREE[loaderName];
     }
     case 'x': {
       const loaderName = 'XLoader';
       if (!THREE[loaderName]) {
-        require('three/examples/js/loaders/XLoader');
+        try {
+          require('three/examples/js/loaders/XLoader');
+        } catch (_) {}
       }
       return THREE[loaderName];
     }
