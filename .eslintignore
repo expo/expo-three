@@ -1,0 +1,12 @@
+node_modules/
+coverage/
+dist/
+lib/
+web-build/
+web-report/
+out/
+build/
+.netlify/
+.expo/
+.expo-shared/
+.next/
