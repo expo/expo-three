@@ -2755,7 +2755,7 @@ expo-app-loader-provider@~8.0.0:
   resolved "https://registry.yarnpkg.com/expo-app-loader-provider/-/expo-app-loader-provider-8.0.0.tgz#c18ef20a24153f5a0dbb297106ef0bcb5de57180"
   integrity sha512-uMEdstZdm14JW8jfWXBWItIjGPNBH7cLj2pNu5e0pYF21W4j759rGL17NTNWit4UdLZg/zJB/HHRidVwEINfxA==
 
-expo-asset-utils@^1.0.0, expo-asset-utils@^1.2.0:
+expo-asset-utils@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/expo-asset-utils/-/expo-asset-utils-1.2.0.tgz#df52f8e8c836c343ad713a0044db79be69cfe64b"
   integrity sha512-06zVi5aXzyMq7SFiawxu2FUbpbVlxnE9W44cG4K5HyhLaqyRqss+o5MZMEGn8Ibd+008UiK7yCPy/bSpx2hVag==
@@ -2839,17 +2839,17 @@ expo-sqlite@~8.0.0:
     "@types/websql" "^0.0.27"
     lodash "^4.17.15"
 
-expo-three@../expo-three-5.0.0.tgz:
-  version "5.0.0"
-  resolved "../expo-three-5.0.0.tgz#68d8b9021f25f893a8fa6ee5fbe038f5f9619e89"
-  dependencies:
-    "@expo/browser-polyfill" "^0.1.0"
-    color-temperature "0.2.7"
-    expo-asset-utils "^1.0.0"
-
 expo-three@../expo-three-5.3.0-alpha.0.tgz:
   version "5.3.0-alpha.0"
   resolved "../expo-three-5.3.0-alpha.0.tgz#c22270802ac5a446e55d9b4a425de1269bbc50b9"
+  dependencies:
+    "@expo/browser-polyfill" "^0.1.0"
+    color-temperature "0.2.7"
+    expo-asset-utils "^1.2.0"
+
+expo-three@../expo-three-5.3.0-alpha.1.tgz:
+  version "5.3.0-alpha.1"
+  resolved "../expo-three-5.3.0-alpha.1.tgz#0e3cc3467b822eb33bfe590aa7f66cc093fa30ee"
   dependencies:
     "@expo/browser-polyfill" "^0.1.0"
     color-temperature "0.2.7"
