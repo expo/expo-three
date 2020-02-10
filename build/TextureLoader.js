@@ -1,9 +1,9 @@
 import AssetUtils from 'expo-asset-utils';
-import THREE from './Three';
 import { Platform } from 'react-native';
+import THREE from './Three';
 // JPEGs can't have an alpha channel, so memory can be saved by storing them as RGB.
 function formatFromURI(uri) {
-    const isJPEG = uri.search(/\.jpe?g($|\?)/i) > 0 || uri.search(/^data\:image\/jpeg/) === 0;
+    const isJPEG = uri.search(/\.jpe?g($|\?)/i) > 0 || uri.search(/^data:image\/jpeg/) === 0;
     return isJPEG ? THREE.RGBFormat : THREE.RGBAFormat;
 }
 export default class ExpoTextureLoader extends THREE.TextureLoader {

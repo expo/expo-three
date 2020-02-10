@@ -11,8 +11,7 @@ import { PLYLoader } from 'three/examples/jsm/loaders/PLYLoader';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 import { TDSLoader } from 'three/examples/jsm/loaders/TDSLoader';
 import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
-import { VRMLLoader } from 'three/examples/jsm/loaders/VTKLoader';
-import { VRMLLoader as XLoader } from 'three/examples/jsm/loaders/XLoader';
+import { XLoader } from 'three/examples/jsm/loaders/XLoader';
 function getExtension(uri) {
     const lastUriComponent = uri.split('.').pop();
     return lastUriComponent.split('?')[0].split('#')[0];
@@ -58,7 +57,7 @@ export function loaderClassForExtension(extension) {
             return STLLoader;
         case 'vtk':
         case 'vtp':
-            return VRMLLoader;
+            throw new Error('VRMLoader is deprecated. Please load it manually with three.js');
         case 'x':
             return XLoader;
         // case 'drc':

@@ -34,12 +34,12 @@ export async function loadBasicModelAsync(options: {
 export default async function loadAsync(
   res,
   onProgress?: ProgressCallback,
-  onAssetRequested = function() {},
+  onAssetRequested = function() {}
 ) {
   let urls = await resolveAsset(res);
   if (!urls) {
     throw new Error(
-      `ExpoTHREE.loadAsync: Cannot parse undefined assets. Please pass valid resources for: ${res}.`,
+      `ExpoTHREE.loadAsync: Cannot parse undefined assets. Please pass valid resources for: ${res}.`
     );
   }
   const asset = urls[0];
@@ -47,11 +47,11 @@ export default async function loadAsync(
 
   if (url == null) {
     throw new Error(
-      `ExpoTHREE.loadAsync: this asset couldn't be downloaded. Be sure that your app.json contains the correct extensions.`,
+      `ExpoTHREE.loadAsync: this asset couldn't be downloaded. Be sure that your app.json contains the correct extensions.`
     );
   }
 
-  if (urls.length == 1) {
+  if (urls.length === 1) {
     if (url.match(/\.(jpeg|jpg|gif|png)$/)) {
       return loadTextureAsync({ asset });
     } else if (url.match(/\.assimp$/i)) {
@@ -75,7 +75,7 @@ export default async function loadAsync(
       const GLTFLoader = loaderClassForExtension('gltf');
       const loader = new GLTFLoader();
       return new Promise((res, rej) =>
-        loader.parse(arrayBuffer, onAssetRequested, res, rej),
+        loader.parse(arrayBuffer, onAssetRequested, res, rej)
       );
     } else if (url.match(/\.x$/i)) {
       const XLoader = loaderClassForExtension('x');
@@ -86,11 +86,11 @@ export default async function loadAsync(
       };
       const loader = new XLoader(undefined, texLoader);
       return new Promise((res, rej) =>
-        loader.load([url, false], res, onProgress, rej),
+        loader.load([url, false], res, onProgress, rej)
       );
     } else if (url.match(/\.json$/i)) {
       throw new Error(
-        'loadAsync: Please use ExpoTHREE.parseAsync({json}) instead, json can be loaded in lots of different ways.',
+        'loadAsync: Please use ExpoTHREE.parseAsync({json}) instead, json can be loaded in lots of different ways.'
       );
     } else if (url.match(/\.obj$/i)) {
       return loadObjAsync({ asset: url, onAssetRequested });

@@ -26,7 +26,7 @@ export async function loadMtlAsync({ asset, onAssetRequested }): Promise<any> {
 
   if (Platform.OS === 'web') {
     return await new Promise((resolve, reject) =>
-      loader.load(uri, resolve, () => {}, reject),
+      loader.load(uri, resolve, () => {}, reject)
     );
   }
 
@@ -72,7 +72,7 @@ export async function loadObjAsync(options: {
 
   if (Platform.OS === 'web') {
     return await new Promise((resolve, reject) =>
-      loader.load(uri, resolve, () => {}, reject),
+      loader.load(uri, resolve, () => {}, reject)
     );
   }
 
@@ -102,8 +102,8 @@ export async function loadDaeAsync({
         res(parsedResult);
       },
       onProgress,
-      rej,
-    ),
+      rej
+    )
   );
 }
 
@@ -114,7 +114,7 @@ async function loadFileContentsAsync(loader, uri, funcName): Promise<any> {
   } catch ({ message }) {
     // Or model loader THREE.OBJLoader failed to parse fileContents
     throw new Error(
-      `ExpoTHREE.${funcName}: Expo.FileSystem Failed to read uri: ${uri}. ${message}`,
+      `ExpoTHREE.${funcName}: Expo.FileSystem Failed to read uri: ${uri}. ${message}`
     );
   }
 }

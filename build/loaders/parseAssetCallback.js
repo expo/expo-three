@@ -2,7 +2,8 @@ export default function parseAssetCallback(assetName, callbackOrDictionary) {
     if (typeof callbackOrDictionary === 'function') {
         return callbackOrDictionary(assetName);
     }
-    else if (callbackOrDictionary !== null && typeof callbackOrDictionary === 'object') {
+    else if (callbackOrDictionary !== null &&
+        typeof callbackOrDictionary === 'object') {
         if (assetName in callbackOrDictionary) {
             return callbackOrDictionary[assetName];
         }

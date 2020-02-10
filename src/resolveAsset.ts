@@ -1,7 +1,9 @@
 import { Asset } from 'expo-asset';
 import { resolveAsync } from 'expo-asset-utils';
 
-export default async function resolveAsset(fileReference: any): Promise<Asset[]> {
+export default async function resolveAsset(
+  fileReference: any
+): Promise<Asset[]> {
   let urls: Asset[] = [];
   if (Array.isArray(fileReference)) {
     for (let file of fileReference) {
@@ -15,7 +17,9 @@ export default async function resolveAsset(fileReference: any): Promise<Asset[]>
   return urls;
 }
 
-export async function stringFromAsset(asset: Asset | string): Promise<string | null> {
+export async function stringFromAsset(
+  asset: Asset | string
+): Promise<string | null> {
   if (asset instanceof Asset) {
     if (!asset.localUri) {
       await asset.downloadAsync();

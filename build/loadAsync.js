@@ -23,7 +23,7 @@ export default async function loadAsync(res, onProgress, onAssetRequested = func
     if (url == null) {
         throw new Error(`ExpoTHREE.loadAsync: this asset couldn't be downloaded. Be sure that your app.json contains the correct extensions.`);
     }
-    if (urls.length == 1) {
+    if (urls.length === 1) {
         if (url.match(/\.(jpeg|jpg|gif|png)$/)) {
             return loadTextureAsync({ asset });
         }
