@@ -1,3 +1,4 @@
 node_modules/**/*
 secret/
 /.expo
+yarn-error.log
