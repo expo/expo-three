@@ -83,7 +83,7 @@ class IconMesh extends Mesh {
       new MeshStandardMaterial({
         map: new TextureLoader().load(require('./assets/icon.png')),
         // color: 0xff0000
-      }),
+      })
     );
   }
 }

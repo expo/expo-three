@@ -8,3 +8,15 @@ secret/
 babel.config.js
 /src
 /tsconfig.json
+
+.eslintignore
+.eslintrc.js
+.prettierrc
+jest.config.js
+example.js
+app.json
+
+/.expo
+web-build
+/.github/
+/scripts
