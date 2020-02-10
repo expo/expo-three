@@ -17,6 +17,7 @@
     "build": "expo-module build",
     "clean": "expo-module clean",
     "test": "expo-module test",
+    "lint": "expo-module lint",
     "prepare": "expo-module prepare",
     "prepublishOnly": "expo-module prepublishOnly",
     "expo-module": "expo-module",
@@ -44,13 +45,15 @@
   "dependencies": {
     "@expo/browser-polyfill": "^0.1.0",
     "color-temperature": "0.2.7",
-    "expo-asset-utils": "^1.2.0"
+    "eslint": "^6.8.0",
+    "expo-asset-utils": "^1.2.0",
+    "prettier": "^1.19.1"
   },
   "peerDependencies": {
-    "react-native": "*",
-    "expo-asset": "*",
     "@unimodules/core": "*",
+    "expo-asset": "*",
     "expo-file-system": "*",
+    "react-native": "*",
     "three": "^0.113.2"
   },
   "devDependencies": {

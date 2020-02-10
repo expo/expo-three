@@ -11,8 +11,8 @@ import { PLYLoader } from 'three/examples/jsm/loaders/PLYLoader';
 import { STLLoader } from 'three/examples/jsm/loaders/STLLoader';
 import { TDSLoader } from 'three/examples/jsm/loaders/TDSLoader';
 import { TTFLoader } from 'three/examples/jsm/loaders/TTFLoader';
-import { VRMLLoader } from 'three/examples/jsm/loaders/VTKLoader';
-import { VRMLLoader as XLoader } from 'three/examples/jsm/loaders/XLoader';
+import { VRMLLoader } from 'three/examples/jsm/loaders/VRMLLoader';
+import { XLoader } from 'three/examples/jsm/loaders/XLoader';
 
 function getExtension(uri: string): string {
   const lastUriComponent = uri.split('.').pop() as string;
@@ -39,7 +39,7 @@ export function loaderClassForExtension(extension: string): any {
       return BVHLoader;
     case 'ctm':
       throw new Error(
-        'CTMLoader is deprecated. Please load it manually with three.js',
+        'CTMLoader is deprecated. Please load it manually with three.js'
       );
     case 'fbx':
       return FBXLoader;
@@ -73,7 +73,7 @@ export function loaderClassForExtension(extension: string): any {
     default:
       throw new Error(
         'ExpoTHREE.loaderClassForExtension(): Unrecognized file type ' +
-          extension,
+          extension
       );
   }
 }

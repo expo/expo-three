@@ -50,7 +50,9 @@ export function toBufferGeometry(
   return bufferGeometry;
 }
 
-export function toGeometry(geometry: THREE.Geometry | THREE.BufferGeometry): THREE.Geometry {
+export function toGeometry(
+  geometry: THREE.Geometry | THREE.BufferGeometry
+): THREE.Geometry {
   if (geometry instanceof THREE.Geometry) {
     return geometry;
   }
