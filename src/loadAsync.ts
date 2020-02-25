@@ -70,7 +70,7 @@ export default async function loadAsync(
       const FBXLoader = loaderClassForExtension('fbx');
       const loader = new FBXLoader();
       return loader.parse(arrayBuffer, onAssetRequested);
-    } else if (url.match(/\.glb|gltf$/i)) {
+    } else if (url.match(/\.(glb|gltf)$/i)) {
       const arrayBuffer = await loadArrayBufferAsync({ uri: url, onProgress });
       const GLTFLoader = loaderClassForExtension('gltf');
       const loader = new GLTFLoader();
