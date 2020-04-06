@@ -1,7 +1,7 @@
 import { uriAsync } from 'expo-asset-utils';
 import resolveAsset, { stringFromAsset } from './resolveAsset';
 import { loadTexture } from './loadTexture';
-import { loadDaeAsync, loadObjAsync, loadMtlAsync, loadArrayBufferAsync, } from './loaders/loadModelsAsync';
+import { loadDaeAsync, loadGLTFAsync, loadObjAsync, loadMtlAsync, loadArrayBufferAsync, } from './loaders/loadModelsAsync';
 import './polyfillTextureLoader.fx';
 import { loadTextureAsync } from './loaders/loadTextureAsync';
 import { loaderClassForExtension, loaderClassForUri, } from './loaderClassForExtension';
@@ -47,10 +47,7 @@ export default async function loadAsync(res, onProgress, onAssetRequested = func
             return loader.parse(arrayBuffer, onAssetRequested);
         }
         else if (url.match(/\.glb|gltf$/i)) {
-            const arrayBuffer = await loadArrayBufferAsync({ uri: url, onProgress });
-            const GLTFLoader = loaderClassForExtension('gltf');
-            const loader = new GLTFLoader();
-            return new Promise((res, rej) => loader.parse(arrayBuffer, onAssetRequested, res, rej));
+            return await loadGLTFAsync({ asset: url, onAssetRequested });
         }
         else if (url.match(/\.x$/i)) {
             const XLoader = loaderClassForExtension('x');
