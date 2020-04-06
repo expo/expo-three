@@ -2,6 +2,7 @@ import AssetUtils from 'expo-asset-utils';
 import { Platform } from 'react-native';
 import { FileLoader } from 'three';
 import { ColladaLoader } from 'three/examples/jsm/loaders/ColladaLoader';
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader';
 import { MTLLoader } from 'three/examples/jsm/loaders/MTLLoader';
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 
@@ -12,6 +13,25 @@ async function loadFileAsync({ asset, funcName }): Promise<string | null> {
     throw new Error(`ExpoTHREE.${funcName}: Cannot parse a null asset`);
   }
   return await AssetUtils.uriAsync(asset);
+}
+
+export async function loadGLTFAsync(options) {
+  const { asset, onAssetRequested, } = options;
+  const uri = await loadFileAsync({
+      asset,
+      funcName: 'loadGLTFAsync',
+  });
+  if (!uri)
+      return;
+  const loader = new GLTFLoader();
+  // loader.setCrossOrigin('anonymous');
+  if (onAssetRequested) {
+      loader.setPath(onAssetRequested);
+  }
+  if (Platform.OS === 'web') {
+      return await new Promise((resolve, reject) => loader.load(asset, resolve, () => { }, reject));
+  }
+  return await loadFileContentsAsync(loader, asset, 'loadGLTFAsync');
 }
 
 export async function loadMtlAsync({ asset, onAssetRequested }): Promise<any> {
@@ -110,7 +130,7 @@ export async function loadDaeAsync({
 async function loadFileContentsAsync(loader, uri, funcName): Promise<any> {
   try {
     const fileContents = await readAsStringAsync(uri);
-    return loader.parse(fileContents);
+    return new Promise((res, rej) => loader.parse(fileContents, uri, res, rej));
   } catch ({ message }) {
     // Or model loader THREE.OBJLoader failed to parse fileContents
     throw new Error(

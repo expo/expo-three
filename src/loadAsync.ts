@@ -4,6 +4,7 @@ import { ProgressCallback } from './loading.types';
 import { loadTexture } from './loadTexture';
 import {
   loadDaeAsync,
+  loadGLTFAsync,
   loadObjAsync,
   loadMtlAsync,
   loadArrayBufferAsync,
@@ -70,13 +71,8 @@ export default async function loadAsync(
       const FBXLoader = loaderClassForExtension('fbx');
       const loader = new FBXLoader();
       return loader.parse(arrayBuffer, onAssetRequested);
-    } else if (url.match(/\.glb|gltf$/i)) {
-      const arrayBuffer = await loadArrayBufferAsync({ uri: url, onProgress });
-      const GLTFLoader = loaderClassForExtension('gltf');
-      const loader = new GLTFLoader();
-      return new Promise((res, rej) =>
-        loader.parse(arrayBuffer, onAssetRequested, res, rej)
-      );
+    } else if (url.match(/\.glb|gltf$/i)) { 
+      return await loadGLTFAsync({ asset: url, onAssetRequested });
     } else if (url.match(/\.x$/i)) {
       const XLoader = loaderClassForExtension('x');
 

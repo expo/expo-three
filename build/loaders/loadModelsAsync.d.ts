@@ -1,3 +1,4 @@
+export declare function loadGLTFAsync(options: any): Promise<any>;
 export declare function loadMtlAsync({ asset, onAssetRequested }: {
     asset: any;
     onAssetRequested: any;
