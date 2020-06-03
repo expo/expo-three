@@ -44,8 +44,6 @@ npx create-react-native-app -t with-react-three-fiber
 
 ### Installation
 
-[![NPM](https://nodei.co/npm/expo-three.png)](https://nodei.co/npm/expo-three/)
-
 > In `expo-three@5.0.0` Three.js is a **peer dependency**
 
 ```bash
