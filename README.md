@@ -64,6 +64,8 @@ Get a global instance of `three.js` from `expo-three`:
 import { THREE } from 'expo-three';
 ```
 
+> 🚨 You'll need to **use a physical device** as the iOS Simulators and Android emulators do not work well with Three.js + EXGL.
+
 Due to some issues with the **Metro bundler** you may need to manually define the global instance of Three.js. This is important because three.js doesn't fully use ECMAScript but rather mutates a single global instance of `THREE` with side-effects.
 
 ```js
