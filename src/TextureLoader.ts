@@ -2,14 +2,6 @@ import AssetUtils from 'expo-asset-utils';
 import { Platform } from 'react-native';
 import THREE from './Three';
 
-// JPEGs can't have an alpha channel, so memory can be saved by storing them as RGB.
-function formatFromURI(uri: string) {
-  const isJPEG =
-    uri.search(/\.jpe?g($|\?)/i) > 0 || uri.search(/^data:image\/jpeg/) === 0;
-
-  return isJPEG ? THREE.RGBFormat : THREE.RGBAFormat;
-}
-
 export default class ExpoTextureLoader extends THREE.TextureLoader {
   load(
     asset: any,
@@ -34,9 +26,6 @@ export default class ExpoTextureLoader extends THREE.TextureLoader {
 
       function parseAsset(image) {
         texture.image = image;
-
-        // JPEGs can't have an alpha channel, so memory can be saved by storing them as RGB.
-        texture.format = formatFromURI(nativeAsset.localUri);
         texture.needsUpdate = true;
 
         if (onLoad !== undefined) {
