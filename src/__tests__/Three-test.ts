@@ -10,7 +10,7 @@ it(`defines a global instance of three.js`, () => {
   // @ts-ignore
   require('..');
   expect(global.THREE).toBeDefined();
-  expect(global.THREE.suppressExpoWarnings).toBeDefined();
+  expect(global.THREE.suppressMetroWarnings).toBeDefined();
   if (Platform.OS === 'web') {
     // @ts-ignore
     expect(global.__expo_three_oldWarn).not.toBeDefined();

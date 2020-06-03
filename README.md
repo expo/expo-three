@@ -373,9 +373,9 @@ ExpoTHREE.utils.computeMeshNormals(mesh);
 
 ## THREE Extensions
 
-### `suppressExpoWarnings`
+### `suppressMetroWarnings`
 
-A function that suppresses EXGL compatibility warnings and logs them instead.
+A function that suppresses EXGL compatibility warnings and logs them instead. By default this is enabled on native because it can cause the Metro development server to slow down significantly.
 You will need to import the `ExpoTHREE.THREE` global instance to use this. By
 default this function will be activated on import.
 
@@ -383,7 +383,7 @@ default this function will be activated on import.
 
 ```js
 import { THREE } from 'expo-three';
-THREE.suppressExpoWarnings();
+THREE.suppressMetroWarnings();
 ```
 
 ---
