@@ -127,7 +127,7 @@ const uri = asset.localUri;
 
 ### Loading a texture
 
-After you have an asset loaded, you can create a texture from it:
+After you have an asset loaded, you can create a texture from it (this may not work for most image types):
 
 ```ts
 import { TextureLoader } from 'three';
@@ -141,7 +141,7 @@ await asset.downloadAsync();
 const texture = new TextureLoader().load(asset.localUri);
 ```
 
-`expo-three` provides a helper utility that can resolve the asset internally:
+`expo-three` provides a helper utility that can resolve the asset internally and make other modifications to support a wider variety of images:
 
 ```ts
 import { TextureLoader } from 'expo-three';
