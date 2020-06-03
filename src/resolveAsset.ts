@@ -1,37 +1,19 @@
-import { Asset } from 'expo-asset';
-import { resolveAsync } from 'expo-asset-utils';
-
-export default async function resolveAsset(
-  fileReference: any
-): Promise<Asset[]> {
-  let urls: Asset[] = [];
+// Also not implemented
+async function resolveAsset(fileReference): Promise<any[]> {
+  let urls: any[] = [];
   if (Array.isArray(fileReference)) {
     for (let file of fileReference) {
-      const asset = await resolveAsync(file);
-      urls.push(asset);
+      urls.push(file);
     }
   } else {
-    const asset = await resolveAsync(fileReference);
-    urls.push(asset);
+    urls.push(fileReference);
   }
   return urls;
 }
 
-export async function stringFromAsset(
-  asset: Asset | string
-): Promise<string | null> {
-  if (asset instanceof Asset) {
-    if (!asset.localUri) {
-      await asset.downloadAsync();
-    }
-    if (!asset.localUri) {
-      console.log(
-        "Error: You tried to download an Expo.Asset and for some reason it didn't cache... Known reasons are: it's an .mtl file"
-      );
-    }
-    return asset.localUri || asset.uri;
-  } else if (typeof asset === 'string') {
-    return asset;
-  }
-  return null;
+export async function stringFromAsset(asset): Promise<string | void> {
+  console.warn('ExpoTHREE.stringFromAsset: Not Implemented');
+  return '';
 }
+
+export default resolveAsset;
