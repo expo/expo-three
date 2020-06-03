@@ -127,7 +127,16 @@ const uri = asset.localUri;
 
 ### Loading a texture
 
-After you have an asset loaded, you can create a texture from it (this may not work for most image types):
+After you have an asset loaded, you can use it to create a Three.js Texture. `expo-three` provides a helper utility that can resolve the asset internally and make other modifications to support a wider variety of images:
+
+```ts
+import { TextureLoader } from 'expo-three';
+
+// This texture will be immediately ready but it'll load asynchronously
+const texture = new TextureLoader().load(require('./img.png'));
+```
+
+Optionally, you can create a texture from the local URI manually (this may not work for most image types):
 
 ```ts
 import { TextureLoader } from 'three';
@@ -139,15 +148,6 @@ const asset = Asset.fromModule(require('./img.png'));
 await asset.downloadAsync();
 // This texture will be immediately ready but it'll load asynchronously
 const texture = new TextureLoader().load(asset.localUri);
-```
-
-`expo-three` provides a helper utility that can resolve the asset internally and make other modifications to support a wider variety of images:
-
-```ts
-import { TextureLoader } from 'expo-three';
-
-// This texture will be immediately ready but it'll load asynchronously
-const texture = new TextureLoader().load(require('./img.png'));
 ```
 
 ### Loading an obj model
