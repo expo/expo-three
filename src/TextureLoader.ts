@@ -44,7 +44,6 @@ export default class ExpoTextureLoader extends THREE.TextureLoader {
         );
       } else {
         texture['isDataTexture'] = true; // Forces passing to `gl.texImage2D(...)` verbatim
-        texture.minFilter = THREE.LinearFilter; // Pass-through non-power-of-two
 
         parseAsset({
           data: nativeAsset,
