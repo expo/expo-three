@@ -34,8 +34,23 @@
   </a>
 </p>
 
-AR was moved to `expo-three-ar` in `expo-three@5.0.0`
+This package bridges [Three.js](https://threejs.org/) to [Expo GL](https://docs.expo.io/versions/latest/sdk/gl-view/) - a package which provides a WebGL interface for native OpenGL-ES in React. Largely this helps with abstracting the DOM parts away from Three.js.
 
+> AR was moved to `expo-three-ar` in `expo-three@5.0.0`
+
+## Quick Start
+
+Create a universal React project with `expo-three` setup:
+
+```sh
+npx create-react-native-app -t with-three
+```
+
+For a more declarative interface, you can use this package with [react-three-fiber](https://github.com/expo/examples/blob/master/with-react-three-fiber/README.md). You can bootstrap that with:
+
+```sh
+npx create-react-native-app -t with-react-three-fiber
+```
 
 ### Installation
 
@@ -44,15 +59,15 @@ AR was moved to `expo-three-ar` in `expo-three@5.0.0`
 > In `expo-three@5.0.0` Three.js is a **peer dependency**
 
 ```bash
-yarn add three expo-three
+yarn add three expo-three expo-gl
 ```
 
 ### Usage
 
-Import the library into your JavaScript file:
+Import the library into your project file:
 
 ```js
-import ExpoTHREE from 'expo-three';
+import { Renderer } from 'expo-three';
 ```
 
 Get a global instance of `three.js` from `expo-three`:
@@ -69,38 +84,105 @@ global.THREE = global.THREE || THREE;
 
 ## Creating a Renderer
 
-### `ExpoTHREE.Renderer({ gl: WebGLRenderingContext, width: number, height: number, pixelRatio: number, ...extras })`
-
-Given a `gl` from an
-[`Expo.GLView`](https://docs.expo.io/versions/latest/sdk/gl-view.html), return a
+Given a `gl` from a [`GLView`](https://docs.expo.io/versions/latest/sdk/gl-view.html), return a
 [`THREE.WebGLRenderer`](https://threejs.org/docs/#api/renderers/WebGLRenderer)
-that draws into it.
+that draws to it.
+
+```tsx
+import * as React from 'react';
+import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
+import { Renderer } from 'expo-three';
+
+export default function App() {
+  return (
+    <GLView
+      style={{ flex: 1 }}
+      onContextCreate={(gl: ExpoWebGLRenderingContext) => {
+        // Create a WebGLRenderer without a DOM element
+        const renderer = new Renderer({ gl });
+        renderer.setSize(gl.drawingBufferWidth, gl.drawingBufferHeight);
+      }}
+    />
+  );
+}
+```
+
+### Loading assets
+
+The Metro bundler cannot load arbitrary file types like (`.obj`, `.mtl`, `.dae`, etc..). In order to support them you must create a `./metro.config.js` in your project root, and add the file extensions you want to support.
+
+`metro.config.js`
 
 ```js
-const renderer = new ExpoTHREE.Renderer(props);
-or;
-/// A legacy alias for the extended renderer
-const renderer = ExpoTHREE.createRenderer(props);
-// Now just code some three.js stuff and add it to this! :D
+module.exports = {
+  resolver: {
+    assetExts: ['db', 'mp3', 'ttf', 'obj', 'png', 'jpg'],
+  },
+};
+```
+
+All assets require a local URI to be loaded. You can resolve a local URI with `expo-asset`.
+
+```ts
+import { Asset } from 'expo-asset';
+
+// Create an Asset from a resource
+const asset = Asset.fromModule(require('./image.png'));
+
+await asset.downloadAsync();
+
+// This is the local URI
+const uri = asset.localUri;
+```
+
+### Loading a texture
+
+After you have an asset loaded, you can create a texture from it:
+
+```ts
+import { TextureLoader } from 'three';
+import { Asset } from 'expo-asset';
+
+// Create an Asset from a resource
+const asset = Asset.fromModule(require('./img.png'));
+
+await asset.downloadAsync();
+// This texture will be immediately ready but it'll load asynchronously
+const texture = new TextureLoader().load(asset.localUri);
+```
+
+`expo-three` provides a helper utility that can resolve the asset internally:
+
+```ts
+import { TextureLoader } from 'expo-three';
+
+// This texture will be immediately ready but it'll load asynchronously
+const texture = new TextureLoader().load(require('./img.png'));
+```
+
+### Loading an obj model
+
+Be sure to add support for whatever model extension you wish to load to your `metro.config.js`, then you can load a model using the local URI:
+
+```ts
+// Import from jsm for smaller bundles and faster apps
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
+import { Asset } from 'expo-asset';
+
+const asset = Asset.fromModule(require('./model.obj'));
+await asset.downloadAsync();
+
+const loader = new OBJLoader();
+loader.load(asset.localUri, group => {
+  // Model loaded...
+});
 ```
 
 ### `ExpoTHREE.loadAsync()`
 
 A function that will asynchronously load files based on their extension.
 
-> **Notice**: Remember to update your `app.json` to bundle obscure file types!
-
-`app.json`
-
-```diff
-{
-  "expo": {
-    "packagerOpts": {
-+      "config": "metro.config.js"
-    },
-  }
-}
-```
+> **Notice**: Remember to update your `metro.config.js` to bundle obscure file types!
 
 `metro.config.js`
 
@@ -141,7 +223,7 @@ For a more predictable return value you should use one of the more specific mode
 
 ```js
 const texture = await ExpoTHREE.loadAsync(
-  'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png',
+  'https://www.google.com/images/branding/googlelogo/2x/googlelogo_color_272x92dp.png'
 );
 ```
 
@@ -158,16 +240,18 @@ const texture = await ExpoTHREE.loadAsync(require('./icon.png'));
 const obj = await ExpoTHREE.loadAsync(
   [require('./cartman.obj'), require('./cartman.mtl')],
   null,
-  imageName => resources[imageName],
+  imageName => resources[imageName]
 );
 const { scene } = await ExpoTHREE.loadAsync(
   resources['./kenny.dae'],
   onProgress,
-  resources,
+  resources
 );
 ```
 
 ### loadObjAsync({ asset, mtlAsset, materials, onAssetRequested, onMtlAssetRequested })
+
+> 🚨 **Deprecated:** Load OBJ files manually with the JS module `three/examples/jsm/loaders/OBJLoader`
 
 #### Props
 
@@ -186,6 +270,8 @@ const mesh = await loadObjAsync({ asset: 'https://www.members.com/chef.obj' });
 
 ### loadTextureAsync({ asset })
 
+> 🚨 **Deprecated:** Load textures manually with the JS module from `three`
+
 #### Props
 
 - `asset`: an `Expo.Asset` that could be evaluated using `AssetUtils.resolveAsync` if `localUri` is missing or the asset hasn't been downloaded yet.
@@ -198,6 +284,8 @@ const texture = await loadTextureAsync({ asset: require('./image.png') });
 ```
 
 ### loadMtlAsync({ asset, onAssetRequested })
+
+> 🚨 **Deprecated:** Load MTL files manually with the JS module `three/examples/jsm/loaders/MTLLoader`
 
 #### Props
 
@@ -212,6 +300,8 @@ const materials = await loadMtlAsync({
 ```
 
 ### loadDaeAsync({ asset, onAssetRequested, onProgress })
+
+> 🚨 **Deprecated:** Load DAE files manually with the JS module `three/examples/jsm/loaders/ColladaLoader`
 
 #### Props
 
@@ -230,6 +320,8 @@ const { scene } = await loadDaeAsync({
 ---
 
 ## `ExpoTHREE.utils`
+
+These are Three.js utilities that aren't required for using Three.js with Expo.
 
 ### `ExpoTHREE.utils.alignMesh()`
 
@@ -285,7 +377,7 @@ Used for smoothing imported geometry, specifically when imported from `.obj` mod
 
 #### Example
 
-````js
+```js
 ExpoTHREE.utils.computeMeshNormals(mesh);
 ```
 
@@ -299,12 +391,12 @@ A function that suppresses EXGL compatibility warnings and logs them instead.
 You will need to import the `ExpoTHREE.THREE` global instance to use this. By
 default this function will be activated on import.
 
-* `shouldSuppress`: boolean
+- `shouldSuppress`: boolean
 
 ```js
 import { THREE } from 'expo-three';
 THREE.suppressExpoWarnings();
-````
+```
 
 ---
 
@@ -314,7 +406,6 @@ Somewhat out of date
 
 - [Loading Text](https://github.com/EvanBacon/expo-three-text)
 - [three.js docs](https://threejs.org/docs/)
-
 - [Random Demos](https://github.com/EvanBacon/expo-three-demo)
 - [Game: Expo Sunset Cyberspace](https://github.com/EvanBacon/Sunset-Cyberspace)
 - [Game: Crossy Road](https://github.com/EvanBacon/Expo-Crossy-Road)
