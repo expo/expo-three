@@ -1,13 +1,3 @@
-<p>
-  <a aria-label="sponsored by expo" href="http://expo.io">
-    <img src="https://img.shields.io/badge/SPONSORED%20BY%20EXPO-4630EB.svg?style=for-the-badge" target="_blank" />
-  </a>
- 
- <a aria-label="Expo is free to use" href="https://github.com/expo/expo/blob/master/LICENSE" target="_blank">
-    <img align="right" alt="License: MIT" src="https://img.shields.io/badge/License-MIT-success.svg?style=for-the-badge&color=33CC12" target="_blank" />
-  </a>
-</p>
-
 <h1 align="center">Welcome to Expo & Three.JS 👋</h1>
 
 <p align="center">
