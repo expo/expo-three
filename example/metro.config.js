@@ -25,6 +25,7 @@ module.exports = {
   watchFolders: [root],
 
   resolver: {
+    assetExts: ['db', 'mp3', 'ttf', 'obj', 'mtl', 'png', 'jpg'],
     blacklistRE: blacklist([
       new RegExp(`^${escape(path.join(root, 'node_modules'))}\\/.*$`),
     ]),
