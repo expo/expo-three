@@ -20,8 +20,7 @@
     "lint": "expo-module lint",
     "prepare": "expo-module prepare",
     "prepublishOnly": "expo-module prepublishOnly",
-    "expo-module": "expo-module",
-    "sync-example": "cp -a build/ example/node_modules/expo-three/build/"
+    "expo-module": "expo-module"
   },
   "contributors": [
     "Evan Bacon <bacon@expo.io> (https://github.com/evanbacon)"
