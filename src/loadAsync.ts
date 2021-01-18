@@ -1,4 +1,4 @@
-import { uriAsync } from 'expo-asset-utils';
+import { resolveAsync } from 'expo-asset-utils';
 import resolveAsset, { stringFromAsset } from './resolveAsset';
 import { ProgressCallback } from './loading.types';
 import { loadTexture } from './loadTexture';
@@ -43,7 +43,7 @@ export default async function loadAsync(
     );
   }
   const asset = urls[0];
-  let url: string | null = await uriAsync(asset);
+  let url: string | null = (await resolveAsync(asset)).localUri;
 
   if (url == null) {
     throw new Error(

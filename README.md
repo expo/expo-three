@@ -245,7 +245,7 @@ const { scene } = await ExpoTHREE.loadAsync(
 
 #### Props
 
-- `asset`: a `obj` model reference that will be evaluated using `AssetUtils.uriAsync`
+- `asset`: a `obj` model reference that will be evaluated using `AssetUtils.resolveAsync`
 - `mtlAsset`: an optional prop that will be loaded using `loadMtlAsync()`
 - `onAssetRequested`: A callback that is used to evaluate urls found within the `asset` and optionally the `mtlAsset`. You can also just pass in a dictionary of key values if you know the assets required ahead of time.
 - `materials`: Optionally you can provide an array of materials returned from `loadMtlAsync()`
@@ -279,7 +279,7 @@ const texture = await loadTextureAsync({ asset: require('./image.png') });
 
 #### Props
 
-- `asset`: a `mtl` material reference that will be evaluated using `AssetUtils.uriAsync`
+- `asset`: a `mtl` material reference that will be evaluated using `AssetUtils.resolveAsync`
 - `onAssetRequested`: A callback that is used to evaluate urls found within the `asset`, optionally you can just pass in a dictionary of key values if you know the assets required ahead of time.
 
 ```js
@@ -295,7 +295,7 @@ const materials = await loadMtlAsync({
 
 #### Props
 
-- `asset`: a reference to a `dae` scene that will be evaluated using `AssetUtils.uriAsync`
+- `asset`: a reference to a `dae` scene that will be evaluated using `AssetUtils.resolveAsync`
 - `onAssetRequested`: A callback that is used to evaluate urls found within the `asset`, optionally you can just pass in a dictionary of key values if you know the assets required ahead of time.
 - `onProgress`: An experimental callback used to track loading progress.
 
