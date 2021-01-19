@@ -35,7 +35,7 @@ export default class ExpoTextureLoader extends THREE.TextureLoader {
 
       if (Platform.OS === 'web') {
         loader.load(
-          nativeAsset.localUri,
+          nativeAsset.localUri!,
           image => {
             parseAsset(image);
           },

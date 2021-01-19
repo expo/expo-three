@@ -5110,10 +5110,10 @@ expo-2d-context@^0.0.2:
     string-format "0.5.0"
     tess2 "^1.0.0"
 
-expo-asset-utils@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/expo-asset-utils/-/expo-asset-utils-1.2.0.tgz#df52f8e8c836c343ad713a0044db79be69cfe64b"
-  integrity sha512-06zVi5aXzyMq7SFiawxu2FUbpbVlxnE9W44cG4K5HyhLaqyRqss+o5MZMEGn8Ibd+008UiK7yCPy/bSpx2hVag==
+expo-asset-utils@~2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/expo-asset-utils/-/expo-asset-utils-2.0.0.tgz#6c262c14cd61297591d9fdcb122a52d51eee0f8f"
+  integrity sha512-hkstktApGwTKjF5Y7xWcbc86taJEPk/gUw+fwUbab9VELrDAW2K/wzVjW4BthlHOL8bwfoCs2h61XC6/lgnpRw==
 
 expo-asset@^8.0.0:
   version "8.0.0"
