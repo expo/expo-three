@@ -11,7 +11,7 @@ async function resolveAsset(fileReference): Promise<any[]> {
   return urls;
 }
 
-export async function stringFromAsset(asset): Promise<string | void> {
+export async function stringFromAsset(asset): Promise<string> {
   console.warn('ExpoTHREE.stringFromAsset: Not Implemented');
   return '';
 }

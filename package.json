@@ -1,6 +1,6 @@
 {
   "name": "expo-three",
-  "version": "5.5.1",
+  "version": "5.6.0",
   "sideEffects": true,
   "description": "Utilities for using THREE.js with Expo",
   "main": "build/index.js",
@@ -43,7 +43,7 @@
   "license": "MIT",
   "dependencies": {
     "@expo/browser-polyfill": "^0.1.0",
-    "expo-asset-utils": "^1.2.0"
+    "expo-asset-utils": "~2.0.0"
   },
   "peerDependencies": {
     "@unimodules/core": "*",
