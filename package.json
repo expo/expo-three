@@ -42,7 +42,7 @@
   "author": "Nikhilesh Sigatapu",
   "license": "MIT",
   "dependencies": {
-    "@expo/browser-polyfill": "^0.1.0",
+    "@expo/browser-polyfill": "^0.1.1",
     "expo-asset-utils": "~2.0.0"
   },
   "peerDependencies": {
