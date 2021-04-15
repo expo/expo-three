@@ -54,39 +54,18 @@ export default async function loadAsync(
   if (urls.length === 1) {
     if (url.match(/\.(jpeg|jpg|gif|png)$/)) {
       return loadTextureAsync({ asset });
-    } else if (url.match(/\.assimp$/i)) {
-      const arrayBuffer = await loadArrayBufferAsync({ uri: url, onProgress });
-      const AssimpLoader = loaderClassForExtension('assimp');
-      const loader = new AssimpLoader();
-      return loader.parse(arrayBuffer, onAssetRequested);
     } else if (url.match(/\.dae$/i)) {
       return loadDaeAsync({
         asset: url,
         onProgress,
         onAssetRequested,
       });
-    } else if (url.match(/\.fbx$/i)) {
-      const arrayBuffer = await loadArrayBufferAsync({ uri: url, onProgress });
-      const FBXLoader = loaderClassForExtension('fbx');
-      const loader = new FBXLoader();
-      return loader.parse(arrayBuffer, onAssetRequested);
     } else if (url.match(/\.(glb|gltf)$/i)) {
       const arrayBuffer = await loadArrayBufferAsync({ uri: url, onProgress });
       const GLTFLoader = loaderClassForExtension('gltf');
       const loader = new GLTFLoader();
       return new Promise((res, rej) =>
         loader.parse(arrayBuffer, onAssetRequested, res, rej)
-      );
-    } else if (url.match(/\.x$/i)) {
-      const XLoader = loaderClassForExtension('x');
-
-      const texLoader = {
-        path: onAssetRequested,
-        load: loadTexture,
-      };
-      const loader = new XLoader(undefined, texLoader);
-      return new Promise((res, rej) =>
-        loader.load([url, false], res, onProgress, rej)
       );
     } else if (url.match(/\.json$/i)) {
       throw new Error(

@@ -1,6 +1,6 @@
 {
   "name": "expo-three",
-  "version": "5.6.2",
+  "version": "5.7.0",
   "sideEffects": true,
   "description": "Utilities for using THREE.js with Expo",
   "main": "build/index.js",
@@ -50,7 +50,7 @@
     "expo-asset": "*",
     "expo-file-system": "*",
     "react-native": "*",
-    "three": "^0.117.1"
+    "three": "^0.127.0"
   },
   "devDependencies": {
     "@types/three": "^0.103.2",
