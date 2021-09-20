@@ -60,7 +60,7 @@
     "expo-constants": "^8.0.0",
     "expo-file-system": "^8.0.0",
     "expo-font": "^8.0.0",
-    "expo-module-scripts": "^1.2.0",
+    "expo-module-scripts": "^2.0.0",
     "jest": "^25.1.0",
     "jest-expo": "^37.0.0",
     "react": "^16.9.0",
