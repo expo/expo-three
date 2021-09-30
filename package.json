@@ -1,6 +1,6 @@
 {
   "name": "expo-three",
-  "version": "6.0.0",
+  "version": "6.0.1",
   "sideEffects": true,
   "description": "Utilities for using THREE.js with Expo",
   "main": "build/index.js",
@@ -55,9 +55,9 @@
   "devDependencies": {
     "@types/three": "^0.103.2",
     "eslint": "^6.8.0",
-    "expo-module-scripts": "^1.2.0",
-    "jest": "^25.1.0",
-    "jest-expo": "^43.0.0-beta.1",
+    "expo-asset": "~8.4.0",
+    "expo-file-system": "~13.0.0",
+    "expo-module-scripts": "^2.0.0",
     "prettier": "^1.19.1",
     "react": "^16.9.0",
     "react-dom": "^16.9.0",
