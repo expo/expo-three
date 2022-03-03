@@ -1,6 +1,6 @@
 {
   "name": "expo-three",
-  "version": "6.0.1",
+  "version": "6.1.0",
   "sideEffects": true,
   "description": "Utilities for using THREE.js with Expo",
   "main": "build/index.js",
