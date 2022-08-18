@@ -1,5 +1,6 @@
 import { resolveAsync } from 'expo-asset-utils';
-import { Platform } from 'react-native';
+import { Platform, Image } from 'react-native';
+
 import THREE from './Three';
 
 export default class ExpoTextureLoader extends THREE.TextureLoader {
@@ -15,7 +16,7 @@ export default class ExpoTextureLoader extends THREE.TextureLoader {
       );
     }
 
-    let texture = new THREE.Texture();
+    const texture = new THREE.Texture();
 
     const loader = new THREE.ImageLoader(this.manager);
     loader.setCrossOrigin(this.crossOrigin);
@@ -43,6 +44,17 @@ export default class ExpoTextureLoader extends THREE.TextureLoader {
           onError
         );
       } else {
+        if (!nativeAsset.width || !nativeAsset.height) {
+          const { width, height } = await new Promise((res, rej) => {
+            Image.getSize(
+              nativeAsset.localUri,
+              (width: number, height: number) => res({ width, height }),
+              rej
+            );
+          });
+          nativeAsset.width = width;
+          nativeAsset.height = height;
+        }
         texture['isDataTexture'] = true; // Forces passing to `gl.texImage2D(...)` verbatim
 
         parseAsset({
