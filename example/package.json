@@ -1,18 +1,19 @@
 {
   "dependencies": {
-    "expo": "^37.0.0",
-    "expo-gl": "^8.0.0",
-    "expo-three": "^5.4.0",
-    "react": "16.9.0",
-    "react-dom": "16.9.0",
-    "react-native": "https://github.com/expo/react-native/archive/unstable/sdk-37.tar.gz",
-    "react-native-web": "0.11.7",
-    "three": "^0.117.1"
+    "@types/react-native": "~0.69.1",
+    "expo": "^46.0.0",
+    "expo-asset": "~8.6.1",
+    "expo-file-system": "~14.1.0",
+    "expo-gl": "~11.4.0",
+    "expo-modules-core": "~0.11.3",
+    "expo-three": "^6.2.0",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "react-native": "0.69.6",
+    "react-native-web": "~0.18.7",
+    "three": "^0.143.0"
   },
   "devDependencies": {
-    "@babel/core": "7.0.0",
-    "@types/react": "^16.8.23",
-    "@types/react-native": "^0.57.65",
-    "typescript": "^3.4.5"
+    "@babel/core": "^7.18.6"
   }
 }
