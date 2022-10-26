@@ -1,6 +1,7 @@
 import '@expo/browser-polyfill';
 import './Three';
 
+import * as utils from './utils';
 import Renderer from './Renderer';
 
 export { default as loadAsync } from './loadAsync';
@@ -11,7 +12,7 @@ export { default as parseAsync } from './parseAsync';
 export { default as THREE } from './Three';
 export { default as TextureLoader } from './TextureLoader';
 
-export { Renderer };
+export { utils, Renderer };
 
 export * from './loaders/loadModelsAsync';
 export * from './loaders/loadTextureAsync';
