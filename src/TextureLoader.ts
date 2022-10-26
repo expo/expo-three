@@ -45,7 +45,7 @@ export default class ExpoTextureLoader extends THREE.TextureLoader {
         );
       } else {
         if (!nativeAsset.width || !nativeAsset.height) {
-          const { width, height } = await new Promise((res, rej) => {
+          const { width, height } = await new Promise<{ width: number, height: number }>((res, rej) => {
             Image.getSize(
               nativeAsset.localUri,
               (width: number, height: number) => res({ width, height }),

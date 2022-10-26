@@ -34,7 +34,7 @@ export async function loadBasicModelAsync(options: {
 export default async function loadAsync(
   res,
   onProgress?: ProgressCallback,
-  onAssetRequested = function() {}
+  onAssetRequested: (...args: any[]) => any = function() {}
 ) {
   let urls = await resolveAsset(res);
   if (!urls) {
