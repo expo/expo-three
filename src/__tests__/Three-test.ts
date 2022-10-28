@@ -1,6 +1,6 @@
 import { Platform } from 'expo-modules-core';
 
-declare var global: {
+declare let global: {
   THREE: any;
   __expo_three_oldWarn: any;
 };

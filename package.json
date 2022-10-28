@@ -50,19 +50,22 @@
     "expo-file-system": "*",
     "expo-modules-core": "*",
     "react-native": "*",
-    "three": "^0.127.0"
+    "three": "^0.145.0"
   },
   "devDependencies": {
-    "@types/three": "^0.103.2",
-    "eslint": "^6.8.0",
+    "@types/three": "^0.144.0",
     "expo-asset": "~8.4.0",
     "expo-file-system": "~13.0.0",
     "expo-module-scripts": "^2.0.0",
-    "prettier": "^1.19.1",
-    "react": "^16.9.0",
-    "react-dom": "^16.9.0",
-    "react-native": "0.64.2",
-    "react-native-web": "^0.11.0",
-    "three": "^0.117.1"
+    "prettier": "^2.7.1",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "react-native": "0.69.6",
+    "react-native-web": "~0.18.7",
+    "three": "^0.145.0",
+    "jest": "26"
+  },
+  "jest": {
+    "preset": "expo-module-scripts"
   }
 }

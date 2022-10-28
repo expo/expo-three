@@ -1,9 +1,9 @@
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
-import { Renderer, TextureLoader } from 'expo-three';
+import { Renderer, TextureLoader, loadAsync } from 'expo-three';
 import * as React from 'react';
 import {
   AmbientLight,
-  BoxBufferGeometry,
+  BoxGeometry,
   Fog,
   GridHelper,
   Mesh,
@@ -53,8 +53,23 @@ export default function App() {
         spotLight.lookAt(scene.position);
         scene.add(spotLight);
 
+        // Load and add a texture
         const cube = new IconMesh();
         scene.add(cube);
+
+        // Load and add an obj model
+        const model = {
+          '3d.obj': 'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/obj/walt/WaltHead.obj',
+          '3d.mtl': 'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/obj/walt/WaltHead.mtl'
+        };
+
+        const object = await loadAsync([model['3d.obj'], model['3d.mtl']], null, name => model[name]);
+
+        object.position.y += 2;
+        object.position.z -= 2;
+        object.scale.set(.02, .02, .02);
+
+        scene.add(object);
 
         camera.lookAt(cube.position);
 
@@ -79,7 +94,7 @@ export default function App() {
 class IconMesh extends Mesh {
   constructor() {
     super(
-      new BoxBufferGeometry(1.0, 1.0, 1.0),
+      new BoxGeometry(1.0, 1.0, 1.0),
       new MeshStandardMaterial({
         map: new TextureLoader().load(require('./assets/icon.png')),
         // color: 0xff0000

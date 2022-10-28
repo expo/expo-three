@@ -30,31 +30,9 @@ export function computeMeshNormals(mesh: THREE.Mesh) {
   mesh.traverse(async (child: any) => {
     if (child instanceof THREE.Mesh) {
       /// Smooth geometry
-      const temp = toGeometry(child.geometry);
-      temp.mergeVertices();
-      temp.computeVertexNormals();
-      temp.computeFaceNormals();
-
-      child.geometry = new THREE.BufferGeometry().fromGeometry(temp);
+      child.geometry.mergeVertices();
+      child.geometry.computeVertexNormals();
+      child.geometry.computeFaceNormals();
     }
   });
-}
-
-export function toBufferGeometry(
-  geometry: THREE.Geometry | THREE.BufferGeometry
-): THREE.BufferGeometry {
-  if (geometry instanceof THREE.BufferGeometry) {
-    return geometry;
-  }
-  const bufferGeometry = new THREE.BufferGeometry().fromGeometry(geometry);
-  return bufferGeometry;
-}
-
-export function toGeometry(
-  geometry: THREE.Geometry | THREE.BufferGeometry
-): THREE.Geometry {
-  if (geometry instanceof THREE.Geometry) {
-    return geometry;
-  }
-  return new THREE.Geometry().fromBufferGeometry(geometry);
 }

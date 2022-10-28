@@ -18,7 +18,7 @@
   <a aria-label="Follow @expo on Twitter" href="https://twitter.com/intent/follow?screen_name=expo" target="_blank">
     <img  alt="Twitter: expo" src="https://img.shields.io/twitter/follow/expo.svg?style=flat-square&label=Follow%20%40expo&logo=TWITTER&logoColor=FFFFFF&labelColor=00aced&logoWidth=15&color=lightgray" target="_blank" />
   </a>
- 
+
   <a aria-label="Follow Expo on Medium" href="https://blog.expo.io">
     <img align="right" alt="Medium: exposition" src="https://img.shields.io/badge/Learn%20more%20on%20our%20blog-lightgray.svg?style=flat-square" target="_blank" />
   </a>
@@ -44,7 +44,7 @@ npx create-react-native-app -t with-react-three-fiber
 
 ### Installation
 
-> In `expo-three@5.0.0` Three.js is a **peer dependency**
+> In `expo-three@5.0.0` and higher, Three.js is a **peer dependency**
 
 ```bash
 yarn add three expo-three expo-gl
@@ -413,5 +413,5 @@ Give a ⭐️ if this project helped you!
 
 ## 📝 License
 
-Copyright © 2019 [650 Industries](https://expo.io/about).<br />
+Copyright © 2019-2022 [650 Industries](https://expo.io/about).<br />
 This project is [MIT](https://github.com/Expo/expo-three/blob/master/LICENSE) licensed.

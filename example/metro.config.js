@@ -1,10 +1,10 @@
 /* eslint-env node */
 /* eslint-disable import/no-extraneous-dependencies */
 
-const path = require('path');
-const fs = require('fs');
-const blacklist = require('metro-config/src/defaults/blacklist');
 const escape = require('escape-string-regexp');
+const fs = require('fs');
+const exclusionList = require('metro-config/src/defaults/exclusionList');
+const path = require('path');
 
 const root = path.resolve(__dirname, '..');
 const pak = JSON.parse(
@@ -26,7 +26,7 @@ module.exports = {
 
   resolver: {
     assetExts: ['db', 'mp3', 'ttf', 'obj', 'mtl', 'png', 'jpg'],
-    blacklistRE: blacklist([
+    blacklistRE: exclusionList([
       new RegExp(`^${escape(path.join(root, 'node_modules'))}\\/.*$`),
     ]),
 
