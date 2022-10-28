@@ -58,18 +58,18 @@ export default function App() {
         scene.add(cube);
 
         // Load and add an obj model
-        // (add your own obj and mtl files to the assets folder)
-        // const model = {
-        //   '3d.obj': require('./assets/cube.obj'),
-        //   '3d.mtl': require('./assets/cube.mtl'),
-        // };
+        const model = {
+          '3d.obj': 'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/obj/walt/WaltHead.obj',
+          '3d.mtl': 'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/obj/walt/WaltHead.mtl'
+        };
 
-        // const object = await loadAsync([model['3d.obj'], model['3d.mtl']], null, name => model[name]);
+        const object = await loadAsync([model['3d.obj'], model['3d.mtl']], null, name => model[name]);
 
-        // object.position.y += 2;
-        // object.position.z -= 2;
+        object.position.y += 2;
+        object.position.z -= 2;
+        object.scale.set(.02, .02, .02);
 
-        // scene.add(object);
+        scene.add(object);
 
         camera.lookAt(cube.position);
 
