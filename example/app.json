@@ -1,0 +1,37 @@
+{
+  "name": "ExpoThreeExample",
+  "displayName": "ExpoThree",
+  "expo": {
+    "name": "ExpoThreeExample",
+    "slug": "ExpoThreeExample",
+    "scheme": "expothree",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "splash": {
+      "backgroundColor": "#000000"
+    },
+    "jsEngine": "hermes",
+    "assetBundlePatterns": ["**/*"],
+    "android": {
+      "package": "dev.expo.expothree.example",
+      "permissions": ["INTERNET"],
+      "softwareKeyboardLayoutMode": "adjustResize"
+    },
+    "ios": {
+      "bundleIdentifier": "dev.expo.expothree.example",
+      "supportsTablet": true,
+      "splash": {
+        "backgroundColor": "#000000"
+      }
+    },
+    "web": {
+      "splash": {
+        "backgroundColor": "#000000"
+      },
+      "bundler": "metro"
+    },
+    "experiments": {
+      "tsconfigPaths": true
+    }
+  }
+}

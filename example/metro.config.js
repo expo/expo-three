@@ -1,47 +1,16 @@
-/* eslint-env node */
-/* eslint-disable import/no-extraneous-dependencies */
+// Learn more https://docs.expo.io/guides/customizing-metro
+const { getDefaultConfig } = require('expo/metro-config');
 
-const escape = require('escape-string-regexp');
-const fs = require('fs');
-const exclusionList = require('metro-config/src/defaults/exclusionList');
-const path = require('path');
+/** @type {import('expo/metro-config').MetroConfig} */
+const config = getDefaultConfig(__dirname);
 
-const root = path.resolve(__dirname, '..');
-const pak = JSON.parse(
-  fs.readFileSync(path.join(root, 'package.json'), 'utf8')
-);
+config.resolver.assetExts.push('db', 'mp3', 'ttf', 'obj', 'png', 'jpg', 'mtl');
 
-const modules = [
-  '@babel/runtime',
-  '@expo/vector-icons',
-  ...Object.keys({
-    ...pak.dependencies,
-    ...pak.peerDependencies,
-  }),
-];
-
-module.exports = {
-  projectRoot: __dirname,
-  watchFolders: [root],
-
-  resolver: {
-    assetExts: ['db', 'mp3', 'ttf', 'obj', 'mtl', 'png', 'jpg'],
-    blacklistRE: exclusionList([
-      new RegExp(`^${escape(path.join(root, 'node_modules'))}\\/.*$`),
-    ]),
-
-    extraNodeModules: modules.reduce((acc, name) => {
-      acc[name] = path.join(__dirname, 'node_modules', name);
-      return acc;
-    }, {}),
+config.transformer.getTransformOptions = async () => ({
+  transform: {
+    experimentalImportSupport: false,
+    inlineRequires: true,
   },
+});
 
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
-  },
-};
+module.exports = config;

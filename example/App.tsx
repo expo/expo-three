@@ -1,5 +1,5 @@
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
-import { Renderer, TextureLoader, loadAsync } from 'expo-three';
+import { loadAsync, Renderer, TextureLoader } from 'expo-three';
 import * as React from 'react';
 import {
   AmbientLight,
@@ -15,80 +15,94 @@ import {
 } from 'three';
 
 export default function App() {
-  let timeout;
+  const timeoutRef = React.useRef<number>();
 
   React.useEffect(() => {
     // Clear the animation loop when the component unmounts
-    return () => clearTimeout(timeout);
+    return () => clearTimeout(timeoutRef.current);
   }, []);
 
-  return (
-    <GLView
-      style={{ flex: 1 }}
-      onContextCreate={async (gl: ExpoWebGLRenderingContext) => {
-        const { drawingBufferWidth: width, drawingBufferHeight: height } = gl;
-        const sceneColor = 0x6ad6f0;
+  const onContextCreate = async (gl: ExpoWebGLRenderingContext) => {
+    // removes the warning EXGL: gl.pixelStorei() doesn't support this parameter yet!
+    const pixelStorei = gl.pixelStorei.bind(gl);
+    gl.pixelStorei = function (...args) {
+      const [parameter] = args;
+      switch (parameter) {
+        case gl.UNPACK_FLIP_Y_WEBGL:
+          return pixelStorei(...args);
+      }
+    };
 
-        // Create a WebGLRenderer without a DOM element
-        const renderer = new Renderer({ gl });
-        renderer.setSize(width, height);
-        renderer.setClearColor(sceneColor);
+    const { drawingBufferWidth: width, drawingBufferHeight: height } = gl;
+    const sceneColor = 0x6ad6f0;
 
-        const camera = new PerspectiveCamera(70, width / height, 0.01, 1000);
-        camera.position.set(2, 5, 5);
+    // Create a WebGLRenderer without a DOM element
+    const renderer = new Renderer({ gl });
+    renderer.setSize(width, height);
+    renderer.setClearColor(sceneColor);
 
-        const scene = new Scene();
-        scene.fog = new Fog(sceneColor, 1, 10000);
-        scene.add(new GridHelper(10, 10));
+    const camera = new PerspectiveCamera(70, width / height, 0.01, 1000);
+    camera.position.set(2, 5, 5);
 
-        const ambientLight = new AmbientLight(0x101010);
-        scene.add(ambientLight);
+    const scene = new Scene();
+    scene.fog = new Fog(sceneColor, 1, 10000);
+    scene.add(new GridHelper(10, 10));
 
-        const pointLight = new PointLight(0xffffff, 2, 1000, 1);
-        pointLight.position.set(0, 200, 200);
-        scene.add(pointLight);
+    const ambientLight = new AmbientLight(0x101010);
+    scene.add(ambientLight);
 
-        const spotLight = new SpotLight(0xffffff, 0.5);
-        spotLight.position.set(0, 500, 100);
-        spotLight.lookAt(scene.position);
-        scene.add(spotLight);
+    const pointLight = new PointLight(0xffffff, 2, 1000, 1);
+    pointLight.position.set(0, 200, 200);
+    scene.add(pointLight);
 
-        // Load and add a texture
-        const cube = new IconMesh();
-        scene.add(cube);
+    const spotLight = new SpotLight(0xffffff, 0.5);
+    spotLight.position.set(0, 500, 100);
+    spotLight.lookAt(scene.position);
+    scene.add(spotLight);
 
-        // Load and add an obj model
-        const model = {
-          '3d.obj': 'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/obj/walt/WaltHead.obj',
-          '3d.mtl': 'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/obj/walt/WaltHead.mtl'
-        };
+    // Load and add a texture
+    const cube = new IconMesh();
+    scene.add(cube);
 
-        const object = await loadAsync([model['3d.obj'], model['3d.mtl']], null, name => model[name]);
+    // Load and add an obj model
+    const model: Record<string, string> = {
+      '3d.obj':
+        'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/obj/walt/WaltHead.obj',
+      '3d.mtl':
+        'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/obj/walt/WaltHead.mtl',
+    };
 
-        object.position.y += 2;
-        object.position.z -= 2;
-        object.scale.set(.02, .02, .02);
+    const object = await loadAsync(
+      [model['3d.obj'], model['3d.mtl']],
+      // @ts-ignore
+      null,
+      (name) => model[name]
+    );
 
-        scene.add(object);
+    object.position.y += 2;
+    object.position.z -= 2;
+    object.scale.set(0.02, 0.02, 0.02);
 
-        camera.lookAt(cube.position);
+    scene.add(object);
 
-        function update() {
-          cube.rotation.y += 0.05;
-          cube.rotation.x += 0.025;
-        }
+    camera.lookAt(cube.position);
 
-        // Setup an animation loop
-        const render = () => {
-          timeout = requestAnimationFrame(render);
-          update();
-          renderer.render(scene, camera);
-          gl.endFrameEXP();
-        };
-        render();
-      }}
-    />
-  );
+    function update() {
+      cube.rotation.y += 0.05;
+      cube.rotation.x += 0.025;
+    }
+
+    // Setup an animation loop
+    const render = () => {
+      timeoutRef.current = requestAnimationFrame(render);
+      update();
+      renderer.render(scene, camera);
+      gl.endFrameEXP();
+    };
+    render();
+  };
+
+  return <GLView style={{ flex: 1 }} onContextCreate={onContextCreate} />;
 }
 
 class IconMesh extends Mesh {
