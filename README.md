@@ -390,6 +390,19 @@ THREE.suppressMetroWarnings();
 
 ---
 
+## Running the example app
+
+Clone the repo and `cd expo-three` then run:
+
+```sh
+yarn
+yarn build
+# CMD+C to exit build watch mode
+cd example
+npx expo prebuild
+npx expo run:android # or npx expo run:ios
+```
+
 ## ⛓ Links
 
 Somewhat out of date

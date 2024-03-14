@@ -1,6 +1,6 @@
 {
   "name": "expo-three",
-  "version": "7.0.1",
+  "version": "7.0.0",
   "sideEffects": true,
   "description": "Utilities for using THREE.js with Expo",
   "main": "build/index.js",
@@ -20,7 +20,11 @@
     "lint": "expo-module lint",
     "prepare": "expo-module prepare",
     "prepublishOnly": "expo-module prepublishOnly",
-    "expo-module": "expo-module"
+    "expo-module": "expo-module",
+    "open:ios": "open -a \"Xcode\" example/ios",
+    "open:android": "open -a \"Android Studio\" example/android",
+    "android": "expo run:android",
+    "ios": "expo run:ios"
   },
   "contributors": [
     "Evan Bacon <bacon@expo.io> (https://github.com/evanbacon)"
@@ -42,29 +46,36 @@
   "author": "Nikhilesh Sigatapu",
   "license": "MIT",
   "dependencies": {
-    "@expo/browser-polyfill": "^1.0.1",
-    "expo-asset-utils": "~3.0.0"
+    "@expo/browser-polyfill": "^1.0.0",
+    "expo": "~50.0.11",
+    "expo-asset-utils": "~3.0.0",
+    "react": "18.2.0",
+    "react-native": "0.73.5"
   },
   "peerDependencies": {
+    "expo": "*",
     "expo-asset": "*",
     "expo-file-system": "*",
-    "expo-modules-core": "*",
     "react-native": "*",
-    "three": "^0.145.0"
+    "three": "^0.155.0"
   },
   "devDependencies": {
+    "@types/react": "^18.0.25",
+    "expo-module-scripts": "^3.4.1",
+    "expo-modules-core": "^1.11.10",
     "@types/three": "^0.144.0",
-    "@types/react": "~18.2.14",
     "expo-asset": "~9.0.2",
     "expo-file-system": "~16.0.8",
-    "expo-module-scripts": "^3.4.1",
+    "jest": "^29.2.1",
+    "jest-expo": "~50.0.1",
+    "jest-watch-typeahead": "^2.2.2",
+    "node-fetch": "2.6.1",
     "prettier": "^2.7.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "react-native": "0.73.4",
+    "react-native": "0.73.5",
     "react-native-web": "~0.19.6",
-    "three": "^0.145.0",
-    "jest": "26"
+    "three": "^0.155.0"
   },
   "jest": {
     "preset": "expo-module-scripts"

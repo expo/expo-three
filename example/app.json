@@ -1,34 +1,37 @@
 {
-  "name": "ExpoThreeExample",
-  "displayName": "ExpoThree",
   "expo": {
-    "name": "ExpoThreeExample",
-    "slug": "ExpoThreeExample",
-    "scheme": "expothree",
+    "name": "expo-three-example",
+    "slug": "expo-three-example",
     "version": "1.0.0",
     "orientation": "portrait",
+    "icon": "./assets/icon.png",
     "splash": {
-      "backgroundColor": "#000000"
+      "image": "./assets/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
     },
     "jsEngine": "hermes",
     "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "bundleIdentifier": "dev.expo.expothree.example",
+      "supportsTablet": true
+    },
     "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff"
+      },
       "package": "dev.expo.expothree.example",
       "permissions": ["INTERNET"],
       "softwareKeyboardLayoutMode": "adjustResize"
     },
-    "ios": {
-      "bundleIdentifier": "dev.expo.expothree.example",
-      "supportsTablet": true,
-      "splash": {
-        "backgroundColor": "#000000"
-      }
-    },
     "web": {
       "splash": {
-        "backgroundColor": "#000000"
+        "backgroundColor": "#FFFFFF"
       },
-      "bundler": "metro"
+      "bundler": "metro",
+
+      "favicon": "./assets/favicon.png"
     },
     "experiments": {
       "tsconfigPaths": true
