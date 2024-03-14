@@ -34,7 +34,7 @@ export async function loadBasicModelAsync(options: {
 export default async function loadAsync(
   res,
   onProgress?: ProgressCallback,
-  onAssetRequested: (...args: any[]) => any = function() {}
+  onAssetRequested: (...args: any[]) => any = function () {}
 ) {
   let urls = await resolveAsset(res);
   if (!urls) {
@@ -52,7 +52,7 @@ export default async function loadAsync(
   }
 
   if (urls.length === 1) {
-    if (url.match(/\.(jpeg|jpg|gif|png)$/)) {
+    if (url.match(/\.(jpeg|jpg|gif|png)(\?platform=(android|ios|web))?$/)) {
       return loadTextureAsync({ asset });
     } else if (url.match(/\.dae$/i)) {
       return loadDaeAsync({
@@ -60,7 +60,7 @@ export default async function loadAsync(
         onProgress,
         onAssetRequested,
       });
-    } else if (url.match(/\.(glb|gltf)$/i)) {
+    } else if (url.match(/\.(glb|gltf)(\?platform=(android|ios|web))?$/i)) {
       const arrayBuffer = await loadArrayBufferAsync({ uri: url, onProgress });
       const GLTFLoader = loaderClassForExtension('gltf');
       const loader = new GLTFLoader();
@@ -71,9 +71,9 @@ export default async function loadAsync(
       throw new Error(
         'loadAsync: Please use ExpoTHREE.parseAsync({json}) instead, json can be loaded in lots of different ways.'
       );
-    } else if (url.match(/\.obj$/i)) {
+    } else if (url.match(/\.obj(\?platform=(android|ios|web))?$/i)) {
       return loadObjAsync({ asset: url, onAssetRequested });
-    } else if (url.match(/\.mtl$/i)) {
+    } else if (url.match(/\.mtl(\?platform=(android|ios|web))?$/i)) {
       return loadMtlAsync({ asset: url, onAssetRequested });
     } else {
       const LoaderClass = loaderClassForUri(url);
@@ -87,13 +87,19 @@ export default async function loadAsync(
   } else if (urls.length === 2) {
     let urlB = await stringFromAsset(urls[1]);
     if (urlB != null) {
-      if (url.match(/\.mtl$/i) && urlB.match(/\.obj$/i)) {
+      if (
+        url.match(/\.mtl(\?platform=(android|ios|web))?$/i) &&
+        urlB.match(/\.obj(\?platform=(android|ios|web))?$/i)
+      ) {
         return loadObjAsync({
           asset: urlB,
           mtlAsset: url,
           onAssetRequested,
         });
-      } else if (url.match(/\.obj$/i) && urlB.match(/\.mtl$/i)) {
+      } else if (
+        url.match(/\.obj(\?platform=(android|ios|web))?$/i) &&
+        urlB.match(/\.mtl(\?platform=(android|ios|web))?$/i)
+      ) {
         return loadObjAsync({
           asset: url,
           mtlAsset: urlB,
