@@ -57,7 +57,7 @@
     "expo-asset": "*",
     "expo-file-system": "*",
     "react-native": "*",
-    "three": "^0.155.0"
+    "three": "^0.162.0"
   },
   "devDependencies": {
     "@types/react": "^18.0.25",
@@ -75,7 +75,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.73.5",
     "react-native-web": "~0.19.6",
-    "three": "^0.155.0"
+    "three": "^0.162.0"
   },
   "jest": {
     "preset": "expo-module-scripts"

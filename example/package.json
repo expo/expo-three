@@ -17,12 +17,12 @@
     "expo-module-scripts": "^3.4.1",
     "react": "18.2.0",
     "react-native": "0.73.5",
-    "three": "^0.154.0"
+    "three": "^0.162.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
     "@types/react": "~18.2.45",
-    "@types/three": "^0.154.0",
+    "@types/three": "^0.162.0",
     "ts-node": "^10.9.2",
     "typescript": "^5.1.3"
   },

@@ -5,7 +5,11 @@
     "paths": {
       "assets/*": ["./assets/*"],
       "expo-three": ["../src/index"],
-      "expo-three/*": ["../src/*"]
-    }
+      "expo-three/*": ["../src/*"],
+      "three": ["./node_modules/three"],
+      "three/*": ["./node_modules/three/*"]
+    },
+    "typeRoots": ["node_modules/@types", "../node_modules/@types"],
+    "types": ["three"]
   }
 }

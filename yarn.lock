@@ -9561,10 +9561,10 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
-three@^0.155.0:
-  version "0.155.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.155.0.tgz#cca9b8ad817830c8b4fdd8f0d9a12a2e413a2672"
-  integrity sha512-sNgCYmDijnIqkD/bMfk+1pHg3YzsxW7V2ChpuP6HCQ8NiZr3RufsXQr8M3SSUMjW4hG+sUk7YbyuY0DncaDTJQ==
+three@^0.162.0:
+  version "0.162.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.162.0.tgz#b15a511f1498e0c42d4d00bbb411c7527b06097e"
+  integrity sha512-xfCYj4RnlozReCmUd+XQzj6/5OjDNHBy5nT6rVwrOKGENAvpXe2z1jL+DZYaMu4/9pNsjH/4Os/VvS9IrH7IOQ==
 
 throat@^5.0.0:
   version "5.0.0"
