@@ -1,7 +1,13 @@
+// Fast refresh doesn't work very well with GLViews.
+// Always reload the entire component when the file changes:
+// https://reactnative.dev/docs/fast-refresh#fast-refresh-and-hooks
+// @refresh reset
+
 import { Asset } from 'expo-asset';
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
 import { loadAsync, Renderer, TextureLoader } from 'expo-three';
 import * as React from 'react';
+import { View } from 'react-native';
 import { MeshBasicMaterial } from 'three';
 import {
   AmbientLight,
@@ -15,7 +21,7 @@ import {
   SpotLight,
 } from 'three';
 
-export default function App() {
+function App() {
   const timeoutRef = React.useRef<number>();
 
   React.useEffect(() => {
@@ -73,9 +79,16 @@ export default function App() {
     spotLight.lookAt(scene.position);
     scene.add(spotLight);
 
-    // Load and add a texture
-    const cube = new IconMesh();
-    scene.add(cube);
+    // Load and add a texture from the web
+    const remoteCube = new RemoteIconMesh();
+    scene.add(remoteCube);
+
+    // Load and add a texture from the local assets
+    const localCube = new LocalIconMesh();
+    localCube.position.x -= 2;
+    localCube.position.y += 1;
+    localCube.position.z -= 2;
+    scene.add(localCube);
 
     // Load and add an obj model
     const model: Record<string, string> = {
@@ -98,11 +111,13 @@ export default function App() {
 
     scene.add(object);
 
-    camera.lookAt(cube.position);
+    camera.lookAt(remoteCube.position);
 
     function update() {
-      cube.rotation.y += 0.05;
-      cube.rotation.x += 0.025;
+      remoteCube.rotation.y += 0.05;
+      remoteCube.rotation.x += 0.025;
+
+      localCube.rotation.z += 0.05;
     }
 
     // Setup an animation loop
@@ -116,34 +131,52 @@ export default function App() {
   };
 
   return (
-    <GLView
-      style={{ flex: 1 }}
-      onContextCreate={onContextCreate}
-      enableExperimentalWorkletSupport
-    />
+    <View style={{ flex: 1 }}>
+      <GLView
+        style={{ flex: 1 }}
+        onContextCreate={onContextCreate}
+        enableExperimentalWorkletSupport
+      />
+    </View>
   );
 }
 
+// A basic cube with geometry and material
 class IconMesh extends Mesh {
   constructor() {
     super();
-    this.geometry = new BoxGeometry(1.0, 1.0, 1.0);
+    this.geometry = new BoxGeometry(1, 1, 1);
+  }
+}
 
-    // Example of loading a texture from the web:
-    // loadAsync(
-    //   'https://github.com/expo/expo/blob/main/apps/bare-expo/assets/splash.png?raw=true'
-    // ).then((texture) => {
-    //   console.log('loadAsync texture', texture);
-    //   this.material = new MeshBasicMaterial({ map: texture });
-    // });
-
-    // Example of loading a local asset:
-    const asset = Asset.fromModule(require('./assets/icon.png'));
-    const loader = new TextureLoader();
-    asset.downloadAsync().then((downloadedAsset) => {
-      loader.load(asset.localUri, (texture) => {
-        this.material = new MeshBasicMaterial({ map: texture });
-      });
+// Example of loading a texture from the web:
+class RemoteIconMesh extends IconMesh {
+  constructor() {
+    super();
+    loadAsync(
+      'https://github.com/expo/expo/blob/main/apps/bare-expo/assets/splash.png?raw=true'
+    ).then((texture) => {
+      this.material = new MeshBasicMaterial({ map: texture });
     });
   }
 }
+
+// Example of loading a local asset:
+class LocalIconMesh extends IconMesh {
+  constructor() {
+    super();
+    const asset = Asset.fromModule(require('./assets/icon.png'));
+    const loader = new TextureLoader();
+    asset.downloadAsync().then(() => {
+      try {
+        loader.load(asset.localUri, (texture) => {
+          this.material = new MeshBasicMaterial({ map: texture });
+        });
+      } catch (error) {
+        console.error(error);
+      }
+    });
+  }
+}
+
+export default App;
