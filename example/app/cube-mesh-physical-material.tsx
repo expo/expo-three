@@ -21,6 +21,7 @@ import {
   SpotLight,
   MeshPhysicalMaterial,
 } from 'three';
+import { LoadingView } from '../components/LoadingView';
 
 function ThreeScene() {
   const [isLoading, setIsLoading] = React.useState(true);
@@ -93,22 +94,7 @@ function ThreeScene() {
   return (
     <View style={{ flex: 1 }}>
       <GLView style={{ flex: 1 }} onContextCreate={onContextCreate} />
-      {isLoading && (
-        <View
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 20,
-          }}
-        >
-          <ActivityIndicator />
-          <Text>Loading...</Text>
-        </View>
-      )}
+      {isLoading && <LoadingView />}
     </View>
   );
 }
