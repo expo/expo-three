@@ -158,7 +158,7 @@ function App() {
   );
 }
 
-// A basic cube with geometry and material
+// A basic cube with geometry
 class IconMesh extends Mesh {
   constructor() {
     super();
