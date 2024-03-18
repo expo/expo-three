@@ -6,11 +6,11 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 
+import { Picker } from '@react-native-picker/picker';
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
 import { loadAsync, Renderer } from 'expo-three';
 import * as THREE from 'three';
 import { LoadingView } from '../components/LoadingView';
-import { Picker } from '@react-native-picker/picker';
 
 /*
 
@@ -34,6 +34,12 @@ export default function ThreeScene() {
   const [isLoading, setIsLoading] = useState(true);
   const [animatedState, setAnimatedState] = useState(ANIMATION_STATES[0]);
   const [actions, setActions] = useState<Record<string, any>>({});
+
+  const timeoutRef = useRef<number>();
+  useEffect(() => {
+    // Clear the animation loop when the component unmounts
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
 
   function fadeToAction(name: string, duration: number) {
     const previousAction = actions[animatedState]; // grab our previous action before we update state to the new one
@@ -142,8 +148,8 @@ export default function ThreeScene() {
 
       if (mixer) mixer.update(dt);
 
-      requestAnimationFrame(animate);
       renderer.render(scene, camera);
+      timeoutRef.current = requestAnimationFrame(animate);
       gl.endFrameEXP();
     }
     animate();
