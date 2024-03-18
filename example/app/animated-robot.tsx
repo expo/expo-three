@@ -1,5 +1,10 @@
+// Fast refresh doesn't work very well with GLViews.
+// Always reload the entire component when the file changes:
+// https://reactnative.dev/docs/fast-refresh#fast-refresh-and-hooks
+// @refresh reset
+
 import React, { useEffect, useRef, useState } from 'react';
-import { Button, View } from 'react-native';
+import { View } from 'react-native';
 
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
 import { loadAsync, Renderer } from 'expo-three';
