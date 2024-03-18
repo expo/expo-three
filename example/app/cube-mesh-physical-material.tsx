@@ -26,6 +26,12 @@ import { LoadingView } from '../components/LoadingView';
 function ThreeScene() {
   const [isLoading, setIsLoading] = React.useState(true);
 
+  const timeoutRef = React.useRef<number>();
+  React.useEffect(() => {
+    // Clear the animation loop when the component unmounts
+    return () => clearTimeout(timeoutRef.current);
+  }, []);
+
   const onContextCreate = async (gl: ExpoWebGLRenderingContext) => {
     // removes the warning EXGL: gl.pixelStorei() doesn't support this parameter yet!
     const pixelStorei = gl.pixelStorei.bind(gl);
@@ -82,7 +88,7 @@ function ThreeScene() {
         setIsLoading(false);
       }
 
-      requestAnimationFrame(render);
+      timeoutRef.current = requestAnimationFrame(render);
       cube.rotation.x += 0.01;
       cube.rotation.y += 0.01;
       renderer.render(scene, camera);

@@ -23,9 +23,9 @@ import {
 import { LoadingView } from '../components/LoadingView';
 
 function App() {
-  const timeoutRef = React.useRef<number>();
   const [isLoading, setIsLoading] = React.useState(true);
 
+  const timeoutRef = React.useRef<number>();
   React.useEffect(() => {
     // Clear the animation loop when the component unmounts
     return () => clearTimeout(timeoutRef.current);
