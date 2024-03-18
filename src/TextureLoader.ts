@@ -8,7 +8,7 @@ export default class ExpoTextureLoader extends THREE.TextureLoader {
     asset: any,
     onLoad?: (texture: THREE.Texture) => void,
     onProgress?: (event: ProgressEvent) => void,
-    onError?: (event: ErrorEvent) => void
+    onError?: (event: unknown) => void
   ): THREE.Texture {
     if (!asset) {
       throw new Error(
