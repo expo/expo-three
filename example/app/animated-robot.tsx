@@ -10,6 +10,7 @@ import { Picker } from '@react-native-picker/picker';
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
 import { loadAsync, Renderer } from 'expo-three';
 import * as THREE from 'three';
+import OrbitControlsView from 'expo-three-orbit-controls';
 import { LoadingView } from '../components/LoadingView';
 
 /*
@@ -34,6 +35,7 @@ export default function ThreeScene() {
   const [isLoading, setIsLoading] = useState(true);
   const [animatedState, setAnimatedState] = useState(ANIMATION_STATES[0]);
   const [actions, setActions] = useState<Record<string, any>>({});
+  const cameraRef = useRef<THREE.Camera>();
 
   const timeoutRef = useRef<number>();
   useEffect(() => {
@@ -73,15 +75,15 @@ export default function ThreeScene() {
     };
 
     const renderer = new Renderer({ gl });
-    let camera = new THREE.PerspectiveCamera(
+    let cam = new THREE.PerspectiveCamera(
       75,
       gl.drawingBufferWidth / gl.drawingBufferHeight,
       0.25,
       100
     );
-    camera.position.z = 5;
-    camera.position.set(-5, 3, 10);
-    camera.lookAt(0, 2, 0);
+    cam.position.set(7, 3, 10);
+    cam.lookAt(0, 2, 0);
+    cameraRef.current = cam;
 
     const scene = new THREE.Scene();
     scene.background = new THREE.Color(0xe0e0e0);
@@ -148,8 +150,8 @@ export default function ThreeScene() {
 
       if (mixer) mixer.update(dt);
 
-      renderer.render(scene, camera);
       timeoutRef.current = requestAnimationFrame(animate);
+      cameraRef.current && renderer.render(scene, cameraRef.current);
       gl.endFrameEXP();
     }
     animate();
@@ -159,7 +161,9 @@ export default function ThreeScene() {
 
   return (
     <View style={{ flex: 1 }}>
-      <GLView style={{ flex: 1 }} onContextCreate={onContextCreate} />
+      <OrbitControlsView style={{ flex: 1 }} camera={cameraRef.current}>
+        <GLView style={{ flex: 1 }} onContextCreate={onContextCreate} />
+      </OrbitControlsView>
       {isLoading && <LoadingView />}
       {!isLoading && (
         <View style={{ position: 'absolute', top: 0, left: 0, right: 0 }}>
