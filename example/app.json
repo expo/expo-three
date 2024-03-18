@@ -30,9 +30,8 @@
       "splash": {
         "backgroundColor": "#FFFFFF"
       },
-      "bundler": "metro",
-
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/favicon.png",
+      "bundler": "webpack"
     },
     "experiments": {
       "tsconfigPaths": true

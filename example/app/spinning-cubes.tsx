@@ -7,7 +7,7 @@ import { Asset } from 'expo-asset';
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
 import { loadAsync, Renderer, TextureLoader } from 'expo-three';
 import * as React from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { Platform, View } from 'react-native';
 import { MeshBasicMaterial } from 'three';
 import {
   AmbientLight,
@@ -23,7 +23,6 @@ import {
 
 function App() {
   const timeoutRef = React.useRef<number>();
-  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
     // Clear the animation loop when the component unmounts
@@ -99,18 +98,20 @@ function App() {
         'https://raw.githubusercontent.com/mrdoob/three.js/dev/examples/models/obj/walt/WaltHead.mtl',
     };
 
-    const object = await loadAsync(
-      [model['3d.obj'], model['3d.mtl']],
-      // @ts-ignore
-      null,
-      (name) => model[name]
-    );
+    if (Platform.OS !== 'web') {
+      const object = await loadAsync(
+        [model['3d.obj'], model['3d.mtl']],
+        // @ts-ignore
+        null,
+        (name) => model[name]
+      );
 
-    object.position.y += 2;
-    object.position.z -= 2;
-    object.scale.set(0.02, 0.02, 0.02);
+      object.position.y += 2;
+      object.position.z -= 2;
+      object.scale.set(0.02, 0.02, 0.02);
 
-    scene.add(object);
+      scene.add(object);
+    }
 
     camera.lookAt(remoteCube.position);
 
@@ -123,10 +124,6 @@ function App() {
 
     // Setup an animation loop
     const render = () => {
-      if (isLoading) {
-        setIsLoading(false);
-      }
-
       timeoutRef.current = requestAnimationFrame(render);
       update();
       renderer.render(scene, camera);
@@ -137,23 +134,11 @@ function App() {
 
   return (
     <View style={{ flex: 1 }}>
-      <GLView style={{ flex: 1 }} onContextCreate={onContextCreate} />
-      {isLoading && (
-        <View
-          style={{
-            position: 'absolute',
-            top: 0,
-            left: 0,
-            right: 0,
-            justifyContent: 'center',
-            alignItems: 'center',
-            padding: 20,
-          }}
-        >
-          <ActivityIndicator />
-          <Text>Loading...</Text>
-        </View>
-      )}
+      <GLView
+        style={{ flex: 1 }}
+        onContextCreate={onContextCreate}
+        enableExperimentalWorkletSupport
+      />
     </View>
   );
 }
@@ -171,7 +156,7 @@ class RemoteIconMesh extends IconMesh {
   constructor() {
     super();
     loadAsync(
-      'https://github.com/expo/expo/blob/main/apps/bare-expo/assets/splash.png?raw=true'
+      'https://raw.githubusercontent.com/expo/expo/main/apps/bare-expo/assets/splash.png'
     ).then((texture) => {
       this.material = new MeshBasicMaterial({ map: texture });
     });
@@ -182,7 +167,7 @@ class RemoteIconMesh extends IconMesh {
 class LocalIconMesh extends IconMesh {
   constructor() {
     super();
-    const asset = Asset.fromModule(require('../assets/icon.png'));
+    const asset = Asset.fromModule(require('./assets/icon.png'));
     const loader = new TextureLoader();
     asset.downloadAsync().then(() => {
       try {

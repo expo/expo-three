@@ -69,12 +69,13 @@ export const getUrlExtension = (url: string): string => {
  */
 export const matchUrlExtensions = (
   url: string,
-  extensions: string[] | string
+  extensions: string[]
 ): boolean => {
   const urlExtension = getUrlExtension(url);
 
-  // Return true if the URL extension is included in the provided list of extensions
-  return Array.isArray(extensions)
-    ? extensions.includes(urlExtension)
-    : extensions === urlExtension;
+  return extensions.includes(urlExtension);
+};
+
+export const matchUrlExtension = (url: string, extension: string): boolean => {
+  return matchUrlExtensions(url, [extension]);
 };

@@ -15,7 +15,7 @@ import {
   loaderClassForExtension,
   loaderClassForUri,
 } from './loaderClassForExtension';
-import { matchUrlExtensions } from './utils';
+import { matchUrlExtension, matchUrlExtensions } from './utils';
 
 export async function loadBasicModelAsync(options: {
   uri: string;
@@ -55,7 +55,7 @@ export default async function loadAsync(
   if (urls.length === 1) {
     if (matchUrlExtensions(url, ['jpeg', 'jpg', 'gif', 'png'])) {
       return loadTextureAsync({ asset });
-    } else if (matchUrlExtensions(url, ['dae'])) {
+    } else if (matchUrlExtension(url, 'dae')) {
       return loadDaeAsync({
         asset: url,
         onProgress,
@@ -68,13 +68,14 @@ export default async function loadAsync(
       return new Promise((res, rej) =>
         loader.parse(arrayBuffer, onAssetRequested, res, rej)
       );
-    } else if (matchUrlExtensions(url, ['json'])) {
+    } else if (matchUrlExtension(url, 'json')) {
       throw new Error(
         'loadAsync: Please use ExpoTHREE.parseAsync({json}) instead, json can be loaded in lots of different ways.'
       );
-    } else if (matchUrlExtensions(url, ['obj'])) {
+    } else if (matchUrlExtension(url, 'obj')) {
+      console.log('loading obj');
       return loadObjAsync({ asset: url, onAssetRequested });
-    } else if (matchUrlExtensions(url, ['mtl'])) {
+    } else if (matchUrlExtension(url, 'mtl')) {
       return loadMtlAsync({ asset: url, onAssetRequested });
     } else {
       const LoaderClass = loaderClassForUri(url);
@@ -88,18 +89,15 @@ export default async function loadAsync(
   } else if (urls.length === 2) {
     let urlB = await stringFromAsset(urls[1]);
     if (urlB != null) {
-      if (
-        matchUrlExtensions(url, ['mtl']) &&
-        matchUrlExtensions(urlB, ['obj'])
-      ) {
+      if (matchUrlExtension(url, 'mtl') && matchUrlExtension(urlB, 'obj')) {
         return loadObjAsync({
           asset: urlB,
           mtlAsset: url,
           onAssetRequested,
         });
       } else if (
-        matchUrlExtensions(url, ['obj']) &&
-        matchUrlExtensions(urlB, ['mtl'])
+        matchUrlExtension(url, 'obj') &&
+        matchUrlExtension(urlB, 'mtl')
       ) {
         return loadObjAsync({
           asset: url,
