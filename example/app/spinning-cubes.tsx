@@ -7,7 +7,7 @@ import { Asset } from 'expo-asset';
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
 import { loadAsync, Renderer, TextureLoader } from 'expo-three';
 import * as React from 'react';
-import { View } from 'react-native';
+import { ActivityIndicator, Text, View } from 'react-native';
 import { MeshBasicMaterial } from 'three';
 import {
   AmbientLight,
@@ -23,6 +23,7 @@ import {
 
 function App() {
   const timeoutRef = React.useRef<number>();
+  const [isLoading, setIsLoading] = React.useState(true);
 
   React.useEffect(() => {
     // Clear the animation loop when the component unmounts
@@ -122,6 +123,10 @@ function App() {
 
     // Setup an animation loop
     const render = () => {
+      if (isLoading) {
+        setIsLoading(false);
+      }
+
       timeoutRef.current = requestAnimationFrame(render);
       update();
       renderer.render(scene, camera);
@@ -132,11 +137,23 @@ function App() {
 
   return (
     <View style={{ flex: 1 }}>
-      <GLView
-        style={{ flex: 1 }}
-        onContextCreate={onContextCreate}
-        enableExperimentalWorkletSupport
-      />
+      <GLView style={{ flex: 1 }} onContextCreate={onContextCreate} />
+      {isLoading && (
+        <View
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            right: 0,
+            justifyContent: 'center',
+            alignItems: 'center',
+            padding: 20,
+          }}
+        >
+          <ActivityIndicator />
+          <Text>Loading...</Text>
+        </View>
+      )}
     </View>
   );
 }
@@ -165,7 +182,7 @@ class RemoteIconMesh extends IconMesh {
 class LocalIconMesh extends IconMesh {
   constructor() {
     super();
-    const asset = Asset.fromModule(require('./assets/icon.png'));
+    const asset = Asset.fromModule(require('../assets/icon.png'));
     const loader = new TextureLoader();
     asset.downloadAsync().then(() => {
       try {
