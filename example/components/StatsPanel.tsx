@@ -129,5 +129,11 @@ export const useSceneStats = () => {
     [sceneStats, currentFPS]
   );
 
-  return { StatsPanel, calculateSceneStats, mark };
+  return __DEV__
+    ? { StatsPanel, calculateSceneStats, mark }
+    : {
+        StatsPanel: () => <></>,
+        calculateSceneStats: (_scene: THREE.Scene) => null,
+        mark: () => null,
+      };
 };
