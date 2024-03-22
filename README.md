@@ -116,13 +116,8 @@ All assets require a local URI to be loaded. You can resolve a local URI with `e
 ```ts
 import { Asset } from 'expo-asset';
 
-// Create an Asset from a resource
-const asset = Asset.fromModule(require('./image.png'));
-
-await asset.downloadAsync();
-
-// This is the local URI
-const uri = asset.localUri;
+// Create an Asset from a local resource
+const [{ localUri }] = await Asset.loadAsync(require('./image.png'));
 ```
 
 ### Loading a texture
@@ -143,11 +138,10 @@ import { TextureLoader } from 'three';
 import { Asset } from 'expo-asset';
 
 // Create an Asset from a resource
-const asset = Asset.fromModule(require('./img.png'));
+const [{ localUri }] = await Asset.loadAsync(require('./img.png'));
 
-await asset.downloadAsync();
 // This texture will be immediately ready but it'll load asynchronously
-const texture = new TextureLoader().load(asset.localUri);
+const texture = new TextureLoader().load(localUri);
 ```
 
 ### Loading an obj model
@@ -159,11 +153,10 @@ Be sure to add support for whatever model extension you wish to load to your `me
 import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader';
 import { Asset } from 'expo-asset';
 
-const asset = Asset.fromModule(require('./model.obj'));
-await asset.downloadAsync();
+const [{ localUri }] = await Asset.loadAsync(require('./model.obj'));
 
 const loader = new OBJLoader();
-loader.load(asset.localUri, group => {
+loader.load(localUri, group => {
   // Model loaded...
 });
 ```
@@ -389,6 +382,19 @@ THREE.suppressMetroWarnings();
 ```
 
 ---
+
+## Running the example app
+
+Clone the repo and `cd expo-three` then run:
+
+```sh
+yarn
+yarn build
+# CMD+C to exit build watch mode
+cd example
+npx expo prebuild
+npx expo run:android # or npx expo run:ios
+```
 
 ## ⛓ Links
 

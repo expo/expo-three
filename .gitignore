@@ -3,3 +3,4 @@ secret/
 /.expo
 yarn-error.log
 build/
+.DS_Store
