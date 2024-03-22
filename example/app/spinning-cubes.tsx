@@ -170,11 +170,10 @@ class RemoteIconMesh extends IconMesh {
 class LocalIconMesh extends IconMesh {
   constructor() {
     super();
-    const asset = Asset.fromModule(require('../assets/icon.png'));
     const loader = new TextureLoader();
-    asset.downloadAsync().then(() => {
+    Asset.loadAsync(require('../assets/icon.png')).then(([{ localUri }]) => {
       try {
-        loader.load(asset.localUri, (texture) => {
+        loader.load(localUri, (texture) => {
           this.material = new MeshBasicMaterial({ map: texture });
         });
       } catch (error) {
