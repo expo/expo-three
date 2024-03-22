@@ -53,6 +53,7 @@
   "peerDependencies": {
     "expo": "*",
     "expo-asset": "*",
+    "expo-gl": "*",
     "expo-file-system": "*",
     "react-native": "*",
     "three": "^0.162.0"
