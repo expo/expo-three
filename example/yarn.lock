@@ -1587,10 +1587,10 @@
     "@babel/helper-validator-identifier" "^7.19.1"
     to-fast-properties "^2.0.0"
 
-"@expo/browser-polyfill@^1.0.0":
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/@expo/browser-polyfill/-/browser-polyfill-1.0.0.tgz#2d93ae0feb3ccc90b78a98f277f8f8ed8bcbd37d"
-  integrity sha512-hwlfansWtt1F/ZUitu6vrGRF5Th2LhBn2HHPxvz3U/MFxKG5XI4TA6SM1bJW2Q2iR2bsIddzz1nNwcf0Sjg1hA==
+"@expo/browser-polyfill@^1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@expo/browser-polyfill/-/browser-polyfill-1.0.1.tgz#6bcc53f041bbe1f09e60582e1c1c66c767c51634"
+  integrity sha512-0K6USycVKDj/k9Gr2UYa+7MiCjb0f2NznsE4LX11H85vQMJma5JS3a2oe6lxCfleY9hDcQ/9zKCYS8O6crsv3A==
   dependencies:
     expo-2d-context "^0.0.3"
     fbemitter "^2.1.1"
@@ -3671,12 +3671,12 @@ expo-modules-core@0.11.7, expo-modules-core@~0.11.3:
     compare-versions "^3.4.0"
     invariant "^2.2.4"
 
-expo-three@^6.2.0:
-  version "6.2.0"
-  resolved "https://registry.yarnpkg.com/expo-three/-/expo-three-6.2.0.tgz#35319161d4706ed6f4f4fc63cb75c9ef4406bb5f"
-  integrity sha512-NkQul+AIu9KSKbz2OKz+ZHMdi0hwsyYQDPdlEQ9x3UWNpDIZDX4q5JPl210xqnwYEwOrfbV0vtJ20HLy5Sa4ww==
+expo-three@^7.0.1:
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/expo-three/-/expo-three-7.0.1.tgz#689688b529b8443fe6c1324000c0714858e37c55"
+  integrity sha512-B8OyGwjQZ+NbGBMT3zqe2ngV7mI147yJL8eR56y9SQLrsEkv8+DiMpm3f88r7/LJoFXKGg8mmMrK09hMvRqGHg==
   dependencies:
-    "@expo/browser-polyfill" "^1.0.0"
+    "@expo/browser-polyfill" "^1.0.1"
     expo-asset-utils "~3.0.0"
 
 expo@^46.0.0:
@@ -7028,10 +7028,10 @@ thenify-all@^1.0.0:
   dependencies:
     any-promise "^1.0.0"
 
-three@^0.143.0:
-  version "0.143.0"
-  resolved "https://registry.yarnpkg.com/three/-/three-0.143.0.tgz#1455bca132cc2b20beb7f41d313e10c29e5ed9df"
-  integrity sha512-oKcAGYHhJ46TGEuHjodo2n6TY2R6lbvrkp+feKZxqsUL/WkH7GKKaeu6RHeyb2Xjfk2dPLRKLsOP0KM2VgT8Zg==
+three@^0.145.0:
+  version "0.145.0"
+  resolved "https://registry.yarnpkg.com/three/-/three-0.145.0.tgz#a613d71e75effc2aed88be630027ca01e2b6502e"
+  integrity sha512-EKoHQEtEJ4CB6b2BGMBgLZrfwLjXcSUfoI/MiIXUuRpeYsfK5aPWbYhdtIVWOH+x6X0TouldHKHBuc/LAiFzAw==
 
 throat@^5.0.0:
   version "5.0.0"
