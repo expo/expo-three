@@ -1,7 +1,7 @@
 import React, { useCallback, useRef, useState } from 'react';
 import { Text, View, ViewProps } from 'react-native';
 
-import * as THREE from 'three';
+import { THREE } from 'expo-three';
 
 /**
  * Custom hook that provides scene statistics and FPS calculation for a THREE.js scene.

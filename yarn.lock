@@ -3910,6 +3910,13 @@ expo-file-system@~16.0.0, expo-file-system@~16.0.8:
   resolved "https://registry.yarnpkg.com/expo-file-system/-/expo-file-system-16.0.8.tgz#13c79a8e06e42a8e76e9297df6920597a011d989"
   integrity sha512-yDbVT0TUKd7ewQjaY5THum2VRFx2n/biskGhkUmLh3ai21xjIVtaeIzHXyv9ir537eVgt4ReqDNWi7jcXjdUcA==
 
+expo-gl@^13.6.0:
+  version "13.6.0"
+  resolved "https://registry.yarnpkg.com/expo-gl/-/expo-gl-13.6.0.tgz#b93c7dd2df8f2afe3823b043c37f898adda8ee92"
+  integrity sha512-hhRC2ZTDpc2YoElojutJTOYQsjSxX68lgL+2TSgWRrrvUXFeua1Ohz5DL/0iNCeoabs1earf/4qhxIdozkrhMA==
+  dependencies:
+    invariant "^2.2.4"
+
 expo-module-scripts@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/expo-module-scripts/-/expo-module-scripts-3.4.1.tgz#e3dd944d81b6daf9f6f0bde2329b7cf15336a397"

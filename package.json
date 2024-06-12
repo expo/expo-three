@@ -62,6 +62,7 @@
     "@types/three": "^0.165.0",
     "expo-asset": "~9.0.2",
     "expo-file-system": "~16.0.8",
+    "expo-gl": "^13.6.0",
     "expo-module-scripts": "^3.4.1",
     "expo-modules-core": "^1.11.10",
     "jest": "^29.2.1",

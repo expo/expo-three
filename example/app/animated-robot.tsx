@@ -8,8 +8,7 @@ import { View } from 'react-native';
 
 import { Picker } from '@react-native-picker/picker';
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
-import { loadAsync, Renderer } from 'expo-three';
-import * as THREE from 'three';
+import { loadAsync, Renderer, THREE } from 'expo-three';
 import OrbitControlsView from 'expo-three-orbit-controls';
 import { LoadingView } from '../components/LoadingView';
 

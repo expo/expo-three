@@ -3,22 +3,15 @@
 // https://reactnative.dev/docs/fast-refresh#fast-refresh-and-hooks
 // @refresh reset
 
-import { Asset } from 'expo-asset';
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
-import { loadAsync, Renderer, TextureLoader } from 'expo-three';
+import { Renderer } from 'expo-three';
 import * as React from 'react';
-import { ActivityIndicator, Text, View } from 'react-native';
+import { View } from 'react-native';
 import * as THREE from 'three';
 import {
-  AmbientLight,
   BoxGeometry,
-  Fog,
-  GridHelper,
-  Mesh,
   PerspectiveCamera,
-  PointLight,
   Scene,
-  SpotLight,
   MeshPhysicalMaterial,
 } from 'three';
 import { LoadingView } from '../components/LoadingView';

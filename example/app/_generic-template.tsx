@@ -1,3 +1,10 @@
+/**
+ * This is a generic template for a 3D scene using Expo and Three.js.
+ * To create a new example, copy this file and modify the `onContextCreate` function.
+ *
+ * It comes with a loading view, stats panel, and orbit controls.
+ */
+
 // Fast refresh doesn't work very well with GLViews.
 // Always reload the entire component when the file changes:
 // https://reactnative.dev/docs/fast-refresh#fast-refresh-and-hooks
@@ -7,7 +14,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { View } from 'react-native';
 
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
-import { loadAsync, Renderer, THREE } from 'expo-three';
+import { Renderer, THREE } from 'expo-three';
 import OrbitControlsView from 'expo-three-orbit-controls';
 import { LoadingView } from '../components/LoadingView';
 import { useSceneStats } from '../components/StatsPanel';
@@ -29,6 +36,7 @@ export default function ThreeScene() {
 
   const onContextCreate = async (gl: ExpoWebGLRenderingContext) => {
     setIsLoading(true);
+    clockRef.current = new THREE.Clock();
 
     // removes the warning EXGL: gl.pixelStorei() doesn't support this parameter yet!
     const pixelStorei = gl.pixelStorei.bind(gl);
@@ -55,8 +63,6 @@ export default function ThreeScene() {
     sceneRef.current.background = new THREE.Color(0xe0e0e0);
     sceneRef.current.fog = new THREE.Fog(0xe0e0e0, 20, 100);
 
-    clockRef.current = new THREE.Clock();
-
     // lights
     const hemiLight = new THREE.HemisphereLight(0xffffff, 0x8d8d8d, 3);
     hemiLight.position.set(0, 20, 0);
@@ -67,49 +73,27 @@ export default function ThreeScene() {
     sceneRef.current.add(dirLight);
 
     // ground
-    const mesh = new THREE.Mesh(
+    // https://threejs.org/docs/#api/en/geometries/PlaneGeometry
+    // Delete this if you don't need a ground plane
+    const groundMesh = new THREE.Mesh(
       new THREE.PlaneGeometry(2000, 2000),
       new THREE.MeshPhongMaterial({ color: 0xcbcbcb, depthWrite: false })
     );
-    mesh.rotation.x = -Math.PI / 2;
-    sceneRef.current.add(mesh);
+    groundMesh.rotation.x = -Math.PI / 2;
+    sceneRef.current.add(groundMesh);
 
+    // grid
+    // https://threejs.org/docs/#api/en/helpers/GridHelper
+    // Delete this if you don't need a grid
     const grid = new THREE.GridHelper(200, 40, 0x000000, 0x000000);
     grid.material.opacity = 0.2;
     grid.material.transparent = true;
     sceneRef.current.add(grid);
 
-    // load GLB model
-    const model = await loadAsync(
-      'https://raw.githubusercontent.com/mrdoob/three.js/master/examples/models/gltf/Flower/Flower.glb'
-    );
+    // Add the rest of your objects here:
+    //
 
-    // Loop through 500 instances of the model and add it to the scene:
-    const LOOPS = 500;
-    for (let i = 0; i < LOOPS; i++) {
-      const instance = model.scene.clone();
-
-      // Calculate the hue value for the rainbow effect
-      const hue = i / LOOPS;
-
-      // Change the color of the flower
-      instance.traverse((object: THREE.Mesh) => {
-        if (object.isMesh && object.name === 'Blossom') {
-          const material = new THREE.MeshStandardMaterial();
-          material.color.setHSL(hue, 1, 0.5); // Full saturation and 50% lightness for vivid colors
-          object.material = material;
-        }
-      });
-
-      instance.scale.setScalar(2);
-      // Start in the center and then plot the flowers in a spiral pattern
-      const angle = i * 0.1;
-      const z = Math.sin(angle) * i * 0.1 * 0.2;
-      const x = Math.cos(angle) * i * 0.1 * 0.2;
-      instance.position.set(x, 0, z);
-      sceneRef.current.add(instance);
-    }
-
+    // Start the animation loop
     function animate() {
       timeoutRef.current = requestAnimationFrame(animate);
 
