@@ -89,6 +89,19 @@ export default function ThreeScene() {
     const LOOPS = 500;
     for (let i = 0; i < LOOPS; i++) {
       const instance = model.scene.clone();
+
+      // Calculate the hue value for the rainbow effect
+      const hue = i / LOOPS;
+
+      // Change the color of the flower
+      instance.traverse((object: THREE.Mesh) => {
+        if (object.isMesh && object.name === 'Blossom') {
+          const material = new THREE.MeshStandardMaterial();
+          material.color.setHSL(hue, 1, 0.5); // Full saturation and 50% lightness for vivid colors
+          object.material = material;
+        }
+      });
+
       instance.scale.setScalar(2);
       // Start in the center and then plot the flowers in a spiral pattern
       const angle = i * 0.1;
