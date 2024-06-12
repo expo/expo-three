@@ -1,6 +1,6 @@
 {
   "name": "expo-three",
-  "version": "7.0.0",
+  "version": "7.0.1",
   "sideEffects": true,
   "description": "Utilities for using THREE.js with Expo",
   "main": "build/index.js",
@@ -46,8 +46,7 @@
   "author": "Nikhilesh Sigatapu",
   "license": "MIT",
   "dependencies": {
-    "@expo/browser-polyfill": "^1.0.0",
-    "expo": "~50.0.13",
+    "@expo/browser-polyfill": "^1.0.1",
     "expo-asset-utils": "~3.0.0"
   },
   "peerDependencies": {
