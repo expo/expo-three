@@ -7,6 +7,8 @@ const SCENES: { name: string; href: string }[] = [
   { name: 'Cube with Physical Material', href: '/cube-mesh-physical-material' },
   { name: 'Animated Robot (Skinning & Morphing)', href: '/animated-robot' },
   { name: 'Field of Flowers', href: '/flower-field' },
+  { name: 'Interactive Buffergeometry', href: '/interactive-buffergeometry' },
+  { name: 'GCode Loader 🚢', href: '/gcode-loader' },
 ];
 
 export default function Page() {
