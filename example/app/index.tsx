@@ -3,6 +3,7 @@ import { Stack, Link } from 'expo-router';
 
 // add new scenes here
 const SCENES: { name: string; href: string }[] = [
+  { name: 'Spinning Cubes', href: '/spinning-cubes' },
   { name: 'Cube with Physical Material', href: '/cube-mesh-physical-material' },
   { name: 'Animated Robot (Skinning & Morphing)', href: '/animated-robot' },
   { name: 'Field of Flowers', href: '/flower-field' },
