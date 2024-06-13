@@ -9,6 +9,7 @@ const SCENES: { name: string; href: string }[] = [
   { name: 'Field of Flowers', href: '/flower-field' },
   { name: 'Interactive Buffergeometry', href: '/interactive-buffergeometry' },
   { name: 'GCode Loader 🚢', href: '/gcode-loader' },
+  { name: 'Head model with material', href: '/head-model' },
 ];
 
 export default function Page() {
