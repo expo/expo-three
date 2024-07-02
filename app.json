@@ -1,0 +1,14 @@
+{
+  "expo": {
+    "name": "expo-three",
+    "slug": "expo-three",
+    "version": "7.0.1",
+    "description": "Utilities for using THREE.js with Expo",
+    "sdkVersion": "50.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ]
+  }
+}

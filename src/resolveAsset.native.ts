@@ -4,9 +4,9 @@ import { resolveAsync } from 'expo-asset-utils';
 export default async function resolveAsset(
   fileReference: any
 ): Promise<Asset[]> {
-  let urls: Asset[] = [];
+  const urls: Asset[] = [];
   if (Array.isArray(fileReference)) {
-    for (let file of fileReference) {
+    for (const file of fileReference) {
       const asset = await resolveAsync(file);
       urls.push(asset);
     }

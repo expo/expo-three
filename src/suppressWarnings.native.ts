@@ -1,10 +1,10 @@
-declare var global: any;
+declare let global: any;
 
 const suppressMetroWarnings = (shouldSuppress: boolean = true) => {
   if (shouldSuppress) {
     global.__expo_three_oldWarn = global.__expo_three_oldWarn || console.warn;
-    global.console.warn = str => {
-      let tst = (str || '') + '';
+    global.console.warn = (str) => {
+      const tst = (str || '') + '';
       if (
         tst.startsWith('THREE.WebGLRenderer:') ||
         tst.startsWith('THREE.WebGLShader: gl.getShader') ||

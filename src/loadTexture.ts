@@ -1,5 +1,5 @@
-import { loadTextureAsync } from './loaders/loadTextureAsync';
 import THREE from './Three';
+import { loadTextureAsync } from './loaders/loadTextureAsync';
 import parseAssetCallback from './loaders/parseAssetCallback';
 
 export function loadTexture(url, onLoad, onProgress, onError) {

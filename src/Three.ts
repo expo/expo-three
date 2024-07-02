@@ -1,7 +1,8 @@
 import * as THREE from 'three';
+
 import suppressMetroWarnings from './suppressWarnings';
 
-declare var global: any;
+declare let global: any;
 
 global.THREE = global.THREE || THREE;
 

@@ -1,14 +1,29 @@
-import { Platform } from 'expo-modules-core';
+import { Platform } from 'react-native';
 
 declare let global: {
   THREE: any;
   __expo_three_oldWarn: any;
 };
 
-it(`defines a global instance of three.js`, () => {
+// Mock the Loader classes:
+const loaders = ['ColladaLoader', 'MTLLoader', 'OBJLoader', 'GLTFLoader'];
+for (const loader of loaders) {
+  jest.mock(`three/examples/jsm/loaders/${loader}`, () => ({
+    default: jest.fn(),
+  }));
+}
+jest.mock(`@expo/browser-polyfill`, () => {
+  return {
+    __esModule: true,
+    default: jest.fn(),
+  };
+});
+
+it(`defines a global instance of three.js`, async () => {
   expect(global.THREE).not.toBeDefined();
-  // @ts-ignore
-  require('..');
+
+  await import('..');
+
   expect(global.THREE).toBeDefined();
   expect(global.THREE.suppressMetroWarnings).toBeDefined();
   if (Platform.OS === 'web') {

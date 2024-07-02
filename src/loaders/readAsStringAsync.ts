@@ -1,9 +1,9 @@
-import { Platform } from 'react-native';
 import { readAsStringAsync } from 'expo-file-system';
+import { Platform } from 'react-native';
 
 import THREE from '../Three';
 
-declare var global: any;
+declare let global: any;
 
 export default async function readFromFileSystemAsStringAsync(
   localUri: string
@@ -17,7 +17,7 @@ export default async function readFromFileSystemAsStringAsync(
     return new Promise((resolve, reject) =>
       loader.load(
         localUri,
-        async value => {
+        async (value) => {
           // @ts-ignore
           resolve(await value);
         },

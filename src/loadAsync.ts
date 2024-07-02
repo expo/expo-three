@@ -1,7 +1,9 @@
 import { resolveAsync } from 'expo-asset-utils';
-import resolveAsset, { stringFromAsset } from './resolveAsset';
-import { ProgressCallback } from './loading.types';
-import { loadTexture } from './loadTexture';
+
+import {
+  loaderClassForExtension,
+  loaderClassForUri,
+} from './loaderClassForExtension';
 import {
   loadDaeAsync,
   loadObjAsync,
@@ -9,12 +11,10 @@ import {
   loadArrayBufferAsync,
 } from './loaders/loadModelsAsync';
 import './polyfillTextureLoader.fx';
-
 import { loadTextureAsync } from './loaders/loadTextureAsync';
-import {
-  loaderClassForExtension,
-  loaderClassForUri,
-} from './loaderClassForExtension';
+import { ProgressCallback } from './loading.types';
+import resolveAsset, { stringFromAsset } from './resolveAsset';
+import { matchUrlExtension, matchUrlExtensions } from './utils';
 
 export async function loadBasicModelAsync(options: {
   uri: string;
@@ -34,16 +34,16 @@ export async function loadBasicModelAsync(options: {
 export default async function loadAsync(
   res,
   onProgress?: ProgressCallback,
-  onAssetRequested: (...args: any[]) => any = function() {}
+  onAssetRequested: (...args: any[]) => any = function () {}
 ) {
-  let urls = await resolveAsset(res);
+  const urls = await resolveAsset(res);
   if (!urls) {
     throw new Error(
       `ExpoTHREE.loadAsync: Cannot parse undefined assets. Please pass valid resources for: ${res}.`
     );
   }
   const asset = urls[0];
-  let url: string | null = (await resolveAsync(asset)).localUri;
+  const url: string | null = (await resolveAsync(asset)).localUri;
 
   if (url == null) {
     throw new Error(
@@ -52,28 +52,29 @@ export default async function loadAsync(
   }
 
   if (urls.length === 1) {
-    if (url.match(/\.(jpeg|jpg|gif|png)$/)) {
+    if (matchUrlExtensions(url, ['jpeg', 'jpg', 'gif', 'png'])) {
       return loadTextureAsync({ asset });
-    } else if (url.match(/\.dae$/i)) {
+    } else if (matchUrlExtension(url, 'dae')) {
       return loadDaeAsync({
         asset: url,
         onProgress,
         onAssetRequested,
       });
-    } else if (url.match(/\.(glb|gltf)$/i)) {
+    } else if (matchUrlExtensions(url, ['glb', 'gltf'])) {
       const arrayBuffer = await loadArrayBufferAsync({ uri: url, onProgress });
       const GLTFLoader = loaderClassForExtension('gltf');
       const loader = new GLTFLoader();
       return new Promise((res, rej) =>
         loader.parse(arrayBuffer, onAssetRequested, res, rej)
       );
-    } else if (url.match(/\.json$/i)) {
+    } else if (matchUrlExtension(url, 'json')) {
       throw new Error(
         'loadAsync: Please use ExpoTHREE.parseAsync({json}) instead, json can be loaded in lots of different ways.'
       );
-    } else if (url.match(/\.obj$/i)) {
+    } else if (matchUrlExtension(url, 'obj')) {
+      console.log('loading obj');
       return loadObjAsync({ asset: url, onAssetRequested });
-    } else if (url.match(/\.mtl$/i)) {
+    } else if (matchUrlExtension(url, 'mtl')) {
       return loadMtlAsync({ asset: url, onAssetRequested });
     } else {
       const LoaderClass = loaderClassForUri(url);
@@ -85,15 +86,18 @@ export default async function loadAsync(
       });
     }
   } else if (urls.length === 2) {
-    let urlB = await stringFromAsset(urls[1]);
+    const urlB = await stringFromAsset(urls[1]);
     if (urlB != null) {
-      if (url.match(/\.mtl$/i) && urlB.match(/\.obj$/i)) {
+      if (matchUrlExtension(url, 'mtl') && matchUrlExtension(urlB, 'obj')) {
         return loadObjAsync({
           asset: urlB,
           mtlAsset: url,
           onAssetRequested,
         });
-      } else if (url.match(/\.obj$/i) && urlB.match(/\.mtl$/i)) {
+      } else if (
+        matchUrlExtension(url, 'obj') &&
+        matchUrlExtension(urlB, 'mtl')
+      ) {
         return loadObjAsync({
           asset: url,
           mtlAsset: urlB,
