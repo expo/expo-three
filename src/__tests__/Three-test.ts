@@ -1,4 +1,4 @@
-import { Platform } from 'expo-modules-core';
+import { Platform } from 'react-native';
 
 declare let global: {
   THREE: any;

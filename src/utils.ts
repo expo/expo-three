@@ -4,7 +4,7 @@ export function alignMesh(mesh: THREE.Mesh, axis = { x: 0.5, y: 0.5, z: 0.5 }) {
   const nAxis = axis || {};
   const box = new THREE.Box3().setFromObject(mesh);
 
-  let size = new THREE.Vector3();
+  const size = new THREE.Vector3();
   box.getSize(size);
   const min = { x: -box.min.x, y: -box.min.y, z: -box.min.z };
 
@@ -15,7 +15,7 @@ export function alignMesh(mesh: THREE.Mesh, axis = { x: 0.5, y: 0.5, z: 0.5 }) {
 }
 
 export function scaleLongestSideToSize(mesh: THREE.Mesh, size: number) {
-  let sizedVector = new THREE.Vector3();
+  const sizedVector = new THREE.Vector3();
   new THREE.Box3().setFromObject(mesh).getSize(sizedVector);
 
   const { x: width, y: height, z: depth } = sizedVector;

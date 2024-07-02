@@ -1,7 +1,9 @@
 import { resolveAsync } from 'expo-asset-utils';
-import resolveAsset, { stringFromAsset } from './resolveAsset';
-import { ProgressCallback } from './loading.types';
-import { loadTexture } from './loadTexture';
+
+import {
+  loaderClassForExtension,
+  loaderClassForUri,
+} from './loaderClassForExtension';
 import {
   loadDaeAsync,
   loadObjAsync,
@@ -9,12 +11,9 @@ import {
   loadArrayBufferAsync,
 } from './loaders/loadModelsAsync';
 import './polyfillTextureLoader.fx';
-
 import { loadTextureAsync } from './loaders/loadTextureAsync';
-import {
-  loaderClassForExtension,
-  loaderClassForUri,
-} from './loaderClassForExtension';
+import { ProgressCallback } from './loading.types';
+import resolveAsset, { stringFromAsset } from './resolveAsset';
 import { matchUrlExtension, matchUrlExtensions } from './utils';
 
 export async function loadBasicModelAsync(options: {
@@ -37,14 +36,14 @@ export default async function loadAsync(
   onProgress?: ProgressCallback,
   onAssetRequested: (...args: any[]) => any = function () {}
 ) {
-  let urls = await resolveAsset(res);
+  const urls = await resolveAsset(res);
   if (!urls) {
     throw new Error(
       `ExpoTHREE.loadAsync: Cannot parse undefined assets. Please pass valid resources for: ${res}.`
     );
   }
   const asset = urls[0];
-  let url: string | null = (await resolveAsync(asset)).localUri;
+  const url: string | null = (await resolveAsync(asset)).localUri;
 
   if (url == null) {
     throw new Error(
@@ -87,7 +86,7 @@ export default async function loadAsync(
       });
     }
   } else if (urls.length === 2) {
-    let urlB = await stringFromAsset(urls[1]);
+    const urlB = await stringFromAsset(urls[1]);
     if (urlB != null) {
       if (matchUrlExtension(url, 'mtl') && matchUrlExtension(urlB, 'obj')) {
         return loadObjAsync({

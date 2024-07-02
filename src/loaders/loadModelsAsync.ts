@@ -40,13 +40,8 @@ export async function loadObjAsync(options: {
   mtlAsset?: any;
   materials?: any;
 }): Promise<any> {
-  const {
-    asset,
-    onAssetRequested,
-    onMtlAssetRequested,
-    mtlAsset,
-    materials,
-  } = options;
+  const { asset, onAssetRequested, onMtlAssetRequested, mtlAsset, materials } =
+    options;
   let nextMaterials = materials;
   if (nextMaterials == null && mtlAsset != null) {
     nextMaterials = await loadMtlAsync({
@@ -95,7 +90,7 @@ export async function loadDaeAsync({
   return new Promise((res, rej) =>
     new FileLoader().load(
       uri!,
-      text => {
+      (text) => {
         // @ts-ignore
         const loader = new ColladaLoader();
         const parsedResult = (loader.parse as any)(text, onAssetRequested);
