@@ -1,5 +1,5 @@
-import { FlatList, Text, View } from 'react-native';
 import { Stack, Link } from 'expo-router';
+import { FlatList, Text, View } from 'react-native';
 
 // add new scenes here
 const SCENES: { name: string; href: string }[] = [
@@ -10,7 +10,7 @@ const SCENES: { name: string; href: string }[] = [
   { name: 'Interactive Buffergeometry', href: '/interactive-buffergeometry' },
   { name: 'GCode Loader 🚢', href: '/gcode-loader' },
   { name: 'Head model with material', href: '/head-model' },
-  { name: 'Bouncing Balls', href: '/bouncing-balls' },
+  { name: 'Bouncing Balls w/ Image Picker', href: '/bouncing-balls' },
 ];
 
 export default function Page() {

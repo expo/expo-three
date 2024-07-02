@@ -3,12 +3,13 @@
 // https://reactnative.dev/docs/fast-refresh#fast-refresh-and-hooks
 // @refresh reset
 
-import React, { useEffect, useRef, useState } from 'react';
+import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
+import * as ImagePicker from 'expo-image-picker';
+import { Renderer, THREE, TextureLoader } from 'expo-three';
+import OrbitControlsView from 'expo-three-orbit-controls';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { View, Text, Pressable, ViewStyle } from 'react-native';
 
-import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
-import { Renderer, THREE } from 'expo-three';
-import OrbitControlsView from 'expo-three-orbit-controls';
 import { LoadingView } from '../components/LoadingView';
 import { useSceneStats } from '../components/StatsPanel';
 
@@ -16,6 +17,7 @@ export default function ThreeScene() {
   const [isLoading, setIsLoading] = useState(true);
   const [ballCount, setBallCount] = useState(1);
   const cameraRef = useRef<THREE.Camera>();
+  const [image, setImage] = useState<string | null>(null);
 
   const { calculateSceneStats, StatsPanel, mark } = useSceneStats();
 
@@ -29,11 +31,42 @@ export default function ThreeScene() {
     return () => clearTimeout(timeoutRef.current);
   }, []);
 
+  // Asks the user to pick a photo from their library
+  const pickImage = async () => {
+    // No permissions request is necessary for launching the image library
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    });
+
+    console.log(result);
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
+  };
+
+  // Use a memoized material for the balls: either a color or an image
+  const ballMaterial = useMemo(() => {
+    const texture = image
+      ? new TextureLoader().load(
+          image,
+          (t) => console.log(t),
+          (event: ProgressEvent) => console.log('event:', event),
+          (error) => console.log('error:', error)
+        )
+      : null;
+    const ballMaterial = new THREE.MeshLambertMaterial({
+      map: texture,
+      color: 0xcccccc,
+    });
+    return ballMaterial;
+  }, [image]);
+
   useEffect(() => {
     if (sceneRef.current) {
       updateBalls();
     }
-  }, [ballCount]);
+  }, [ballCount, ballMaterial]);
 
   const onContextCreate = async (gl: ExpoWebGLRenderingContext) => {
     setIsLoading(true);
@@ -50,7 +83,7 @@ export default function ThreeScene() {
     };
 
     const renderer = new Renderer({ gl });
-    let cam = new THREE.PerspectiveCamera(
+    const cam = new THREE.PerspectiveCamera(
       80,
       gl.drawingBufferWidth / gl.drawingBufferHeight,
       0.1,
@@ -136,7 +169,6 @@ export default function ThreeScene() {
     const radius = 3;
     const ballGeometry = new THREE.SphereGeometry(0.3, 32, 16);
     ballGeometry.translate(0, 0.3, 0);
-    const ballMaterial = new THREE.MeshLambertMaterial({ color: 0xcccccc });
 
     // Add new balls if ballCount increased
     while (ballsRef.current.length < ballCount) {
@@ -161,6 +193,10 @@ export default function ThreeScene() {
 
       ball.position.x = radius * Math.cos(s);
       ball.position.z = radius * Math.sin(s);
+
+      if (ball.material !== ballMaterial) {
+        ball.material = ballMaterial;
+      }
     }
   };
 
@@ -171,6 +207,12 @@ export default function ThreeScene() {
       </OrbitControlsView>
       <Text>Ball count: {ballCount}</Text>
       <View style={{ flexDirection: 'row', justifyContent: 'center' }}>
+        <Pressable
+          onPress={image ? () => setImage(null) : pickImage}
+          style={$button}
+        >
+          <Text>{image ? 'Clear Image' : 'Pick Image'}</Text>
+        </Pressable>
         <Pressable onPress={() => setBallCount(ballCount + 1)} style={$button}>
           <Text>Add ball</Text>
         </Pressable>

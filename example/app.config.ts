@@ -23,6 +23,7 @@ module.exports = ({ config }: ConfigContext): Partial<ExpoConfig> => {
       'expo-asset',
       require('./plugins/withFlipperDisabled').withFlipperDisabled,
       require('./plugins/withBuildProperties').withBuildProperties,
+      require('./plugins/withImagePicker').withImagePicker,
     ],
   };
 };
