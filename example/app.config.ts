@@ -20,6 +20,7 @@ module.exports = ({ config }: ConfigContext): Partial<ExpoConfig> => {
     plugins: [
       ...existingPlugins,
       'expo-router',
+      'expo-asset',
       require('./plugins/withFlipperDisabled').withFlipperDisabled,
       require('./plugins/withBuildProperties').withBuildProperties,
     ],

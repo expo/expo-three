@@ -7,7 +7,7 @@ import { Asset } from 'expo-asset';
 import { ExpoWebGLRenderingContext, GLView } from 'expo-gl';
 import { loadAsync, Renderer, TextureLoader } from 'expo-three';
 import * as React from 'react';
-import { Platform, ActivityIndicator, Text, View } from 'react-native';
+import { View } from 'react-native';
 import { MeshBasicMaterial } from 'three';
 import {
   AmbientLight,
