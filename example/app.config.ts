@@ -7,6 +7,11 @@ import { ConfigContext, ExpoConfig } from '@expo/config';
 require('ts-node/register');
 
 /**
+ * If the new architecture is enabled or not.
+ */
+const NEW_ARCH_ENABLED = false;
+
+/**
  * @param config ExpoConfig coming from the static config app.json if it exists
  *
  * You can read more about Expo's Configuration Resolution Rules here:
@@ -21,9 +26,27 @@ module.exports = ({ config }: ConfigContext): Partial<ExpoConfig> => {
       ...existingPlugins,
       'expo-router',
       'expo-asset',
-      require('./plugins/withFlipperDisabled').withFlipperDisabled,
-      require('./plugins/withBuildProperties').withBuildProperties,
-      require('./plugins/withImagePicker').withImagePicker,
+      [
+        'expo-build-properties',
+        {
+          android: {
+            kotlinVersion: '1.8.0',
+            targetSdkVersion: 33,
+            newArchEnabled: NEW_ARCH_ENABLED,
+          },
+          ios: {
+            deploymentTarget: '14.0',
+            newArchEnabled: NEW_ARCH_ENABLED,
+            flipper: false,
+          },
+        },
+      ],
+      [
+        'expo-image-picker',
+        {
+          photosPermission: 'The app accesses your photos.',
+        },
+      ],
     ],
   };
 };

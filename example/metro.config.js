@@ -23,11 +23,6 @@ config.resolver.extraNodeModules = {
   'expo-three': '..',
 };
 
-config.resolver.assetExts.push('png');
-config.resolver.sourceExts = config.resolver.sourceExts.filter(
-  (ext) => ext !== 'png'
-);
-
 config.watchFolders = [path.resolve(__dirname, '..')];
 
 config.transformer.getTransformOptions = async () => ({
