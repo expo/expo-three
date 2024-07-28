@@ -20,26 +20,17 @@ on:
 jobs:
   test:
     name: Check Universal Module
-    strategy:
-      matrix:
-        # Run tests with all of these node versions/systems :]
-        # node-version: [8.x, 10.x, 12.x]
-        node-version: [10.x]
-        # os: [ubuntu-latest, windows-latest, macOS-latest]
-        os: [ubuntu-latest]
-    runs-on: ${{ matrix.os }}
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v1
-      - name: Use Node.js ${{ matrix.node-version }}
-        uses: actions/setup-node@v1
+      - name: Checkout
+        uses: actions/checkout@v4
         with:
-          node-version: ${{ matrix.node-version }}
-      - name: Install Node Dependencies
-        run: |
-          npm install
-        env:
-          CI: true
+          fetch-depth: 1
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Install dependencies
+        run: yarn
       - name: Check Package
         run: ./scripts/module-scripts-check-package.sh
-        env:
-          CI: true
