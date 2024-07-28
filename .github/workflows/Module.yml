@@ -3,18 +3,19 @@
 name: Check Universal Module
 
 on:
-  # https://help.github.com/en/articles/workflow-syntax-for-github-actions#onpushpull_requestpaths
-  # More helpful: https://help.github.com/en/articles/events-that-trigger-workflows#webhook-events
+  workflow_dispatch: {}
   push:
     branches:
       # If this isn't defined then all PR tests will be run twice
       - master
     paths:
       - '*'
+      - '.github/workflows/Module.yml'
       - '!*.md'
   pull_request:
     paths:
       - '*'
+      - '.github/workflows/Module.yml'
       - '!*.md'
 
 jobs:
