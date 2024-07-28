@@ -1,8 +1,8 @@
 // Also not implemented
 async function resolveAsset(fileReference): Promise<any[]> {
-  let urls: any[] = [];
+  const urls: any[] = [];
   if (Array.isArray(fileReference)) {
-    for (let file of fileReference) {
+    for (const file of fileReference) {
       urls.push(file);
     }
   } else {

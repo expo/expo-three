@@ -1,47 +1,35 @@
-/* eslint-env node */
-/* eslint-disable import/no-extraneous-dependencies */
-
-const escape = require('escape-string-regexp');
-const fs = require('fs');
-const exclusionList = require('metro-config/src/defaults/exclusionList');
+// Learn more https://docs.expo.io/guides/customizing-metro
+const { getDefaultConfig } = require('expo/metro-config');
 const path = require('path');
 
-const root = path.resolve(__dirname, '..');
-const pak = JSON.parse(
-  fs.readFileSync(path.join(root, 'package.json'), 'utf8')
-);
+/** @type {import('expo/metro-config').MetroConfig} */
+const config = getDefaultConfig(__dirname);
 
-const modules = [
-  '@babel/runtime',
-  '@expo/vector-icons',
-  ...Object.keys({
-    ...pak.dependencies,
-    ...pak.peerDependencies,
-  }),
+// npm v7+ will install ../node_modules/react and ../node_modules/react-native because of peerDependencies.
+// To prevent the incompatible react-native between ./node_modules/react-native and ../node_modules/react-native,
+// excludes the one from the parent folder when bundling.
+config.resolver.blockList = [
+  ...Array.from(config.resolver.blockList ?? []),
+  new RegExp(path.resolve('..', 'node_modules', 'react')),
+  new RegExp(path.resolve('..', 'node_modules', 'react-native')),
 ];
 
-module.exports = {
-  projectRoot: __dirname,
-  watchFolders: [root],
+config.resolver.nodeModulesPaths = [
+  path.resolve(__dirname, './node_modules'),
+  path.resolve(__dirname, '../node_modules'),
+];
 
-  resolver: {
-    assetExts: ['db', 'mp3', 'ttf', 'obj', 'mtl', 'png', 'jpg'],
-    blacklistRE: exclusionList([
-      new RegExp(`^${escape(path.join(root, 'node_modules'))}\\/.*$`),
-    ]),
-
-    extraNodeModules: modules.reduce((acc, name) => {
-      acc[name] = path.join(__dirname, 'node_modules', name);
-      return acc;
-    }, {}),
-  },
-
-  transformer: {
-    getTransformOptions: async () => ({
-      transform: {
-        experimentalImportSupport: false,
-        inlineRequires: true,
-      },
-    }),
-  },
+config.resolver.extraNodeModules = {
+  'expo-three': '..',
 };
+
+config.watchFolders = [path.resolve(__dirname, '..')];
+
+config.transformer.getTransformOptions = async () => ({
+  transform: {
+    experimentalImportSupport: false,
+    inlineRequires: true,
+  },
+});
+
+module.exports = config;

@@ -8,7 +8,7 @@ export default class ExpoTextureLoader extends THREE.TextureLoader {
     asset: any,
     onLoad?: (texture: THREE.Texture) => void,
     onProgress?: (event: ProgressEvent) => void,
-    onError?: (event: ErrorEvent) => void
+    onError?: (event: unknown) => void
   ): THREE.Texture {
     if (!asset) {
       throw new Error(
@@ -37,7 +37,7 @@ export default class ExpoTextureLoader extends THREE.TextureLoader {
       if (Platform.OS === 'web') {
         loader.load(
           nativeAsset.localUri!,
-          image => {
+          (image) => {
             parseAsset(image);
           },
           onProgress,
@@ -45,9 +45,12 @@ export default class ExpoTextureLoader extends THREE.TextureLoader {
         );
       } else {
         if (!nativeAsset.width || !nativeAsset.height) {
-          const { width, height } = await new Promise<{ width: number, height: number }>((res, rej) => {
+          const { width, height } = await new Promise<{
+            width: number;
+            height: number;
+          }>((res, rej) => {
             Image.getSize(
-              nativeAsset.localUri,
+              nativeAsset.localUri!,
               (width: number, height: number) => res({ width, height }),
               rej
             );

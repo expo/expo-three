@@ -17,7 +17,7 @@ export default class CubeTexture extends THREE.CubeTexture {
   }) => {
     const nextDirections = options.directions || CubeTexture.format.coord_s;
 
-    for (let direction of nextDirections) {
+    for (const direction of nextDirections) {
       const asset = await parseAssetCallback(
         direction,
         options.assetForDirection
