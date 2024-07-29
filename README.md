@@ -99,17 +99,25 @@ export default function App() {
 
 ### Loading assets
 
-The Metro bundler cannot load arbitrary file types like (`.obj`, `.mtl`, `.dae`, etc..). In order to support them you must create a `./metro.config.js` in your project root, and add the file extensions you want to support.
-
-`metro.config.js`
+The Metro bundler cannot load arbitrary file types like (`.obj`, `.mtl`, `.dae`, etc..). In order to support them you must customize metro config and add the file extensions that you want to support.
+Run `npx expo customize metro.config.js` and add following line to your `.metro.config.js` file. Make sure to add file types that you would like to support.
 
 ```js
-module.exports = {
-  resolver: {
-    assetExts: ['db', 'mp3', 'ttf', 'obj', 'png', 'jpg'],
-  },
-};
+config.resolver.assetExts.push("db", "mp3", "ttf", "obj", "png", "jpg", "mtl");
 ```
+
+Example after the edit:
+```js
+// Learn more https://docs.expo.io/guides/customizing-metro
+const { getDefaultConfig } = require("expo/metro-config");
+
+/** @type {import('expo/metro-config').MetroConfig} */
+const config = getDefaultConfig(__dirname);
+config.resolver.assetExts.push("db", "mp3", "ttf", "obj", "png", "jpg", "mtl");
+
+module.exports = config;
+```
+
 
 All assets require a local URI to be loaded. You can resolve a local URI with `expo-asset`.
 
@@ -166,16 +174,6 @@ loader.load(localUri, group => {
 A function that will asynchronously load files based on their extension.
 
 > **Notice**: Remember to update your `metro.config.js` to bundle obscure file types!
-
-`metro.config.js`
-
-```js
-module.exports = {
-  resolver: {
-    assetExts: ['db', 'mp3', 'ttf', 'obj', 'png', 'jpg'],
-  },
-};
-```
 
 #### Props
 
