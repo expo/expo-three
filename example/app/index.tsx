@@ -1,4 +1,5 @@
 import { Stack, Link } from 'expo-router';
+import { THREE } from 'expo-three';
 import { FlatList, Text, View } from 'react-native';
 
 // add new scenes here
@@ -42,6 +43,19 @@ export default function Page() {
           </Link>
         )}
       />
+      <View
+        style={{
+          alignItems: 'center',
+          padding: 16,
+          borderTopColor: '#cccccc',
+          borderTopWidth: 1,
+        }}
+      >
+        <Text>
+          THREE.js version:
+          <Text style={{ fontWeight: 'bold' }}> 0.{THREE.REVISION}</Text>
+        </Text>
+      </View>
     </>
   );
 }

@@ -55,11 +55,11 @@
     "expo-file-system": "*",
     "expo-gl": "*",
     "react-native": "*",
-    "three": "^0.166.0"
+    "three": "0.167.0"
   },
   "devDependencies": {
     "@types/react": "~18.2.45",
-    "@types/three": "^0.166.0",
+    "@types/three": "0.167.0",
     "babel-plugin-module-resolver": "^5.0.2",
     "eslint": "8.17.0",
     "eslint-config-prettier": "8.5.0",
@@ -82,7 +82,7 @@
     "react-dom": "18.2.0",
     "react-native": "0.73.6",
     "react-native-web": "~0.19.12",
-    "three": "^0.166.0"
+    "three": "0.167.0"
   },
   "jest": {
     "preset": "expo-module-scripts"
